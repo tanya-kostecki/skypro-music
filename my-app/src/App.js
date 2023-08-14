@@ -19,7 +19,7 @@ function App() {
                         <a href="#" className="menu__link">Главное</a>
                       </li>
                       <li className="menu__item">
-                        <a href="#" class="menu__link">Мой плейлист</a>
+                        <a href="#" className="menu__link">Мой плейлист</a>
                       </li>
                       <li className="menu__item">
                         <a href="../signin.html" className="menu__link">Войти</a>
