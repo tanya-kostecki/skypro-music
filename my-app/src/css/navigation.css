@@ -30,9 +30,8 @@
 
 .nav__menu {
     display: block;
-    /* visibility: visible; 
-    added */
-    display: none;
+    visibility: visible; 
+    /* display: none; */
 }
   
 .logo__image {
