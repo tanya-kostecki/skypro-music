@@ -1,5 +1,5 @@
 import React from 'react'
-export function createTrackPlayer() {
+export function TrackPlayer() {
   return (
     <div className="player__track-play track-play">
       <div className="track-play__contain">

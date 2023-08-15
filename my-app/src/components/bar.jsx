@@ -1,17 +1,17 @@
 import React from 'react'
-import { createTrackPlayer } from './player.jsx'
-import { createPlayerControls } from './player-controls.jsx'
+import { TrackPlayer } from './track-player.jsx'
+import { PlayerControls } from './player-controls.jsx'
 
-export function createBar() {
+export function Bar() {
   return (
     <div className="bar">
       <div className="bar__content">
         <div className="bar__player-progress"></div>
         <div className="bar__player-block">
           <div className="bar__player player">
-            {createPlayerControls()}
+            {<PlayerControls />}
 
-            {createTrackPlayer()}
+            {<TrackPlayer/>}
           </div>
           <div className="bar__volume-block volume">
             <div className="volume__content">

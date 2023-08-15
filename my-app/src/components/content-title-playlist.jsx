@@ -1,5 +1,5 @@
 import React from 'react'
-export function createContentTitlePlaylist() {
+export function ContentTitlePlaylist() {
   return (
     <div className="content__title playlist-title">
       <div className="playlist-title__col col01">Трек</div>

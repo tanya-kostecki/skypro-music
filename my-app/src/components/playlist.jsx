@@ -1,6 +1,7 @@
 import React from 'react'
 import { PlaylistItem } from './playlist-item-component'
-export function createPlaylist() {
+
+export function Playlist() {
   return (
     <div className="content__playlist playlist">
       <PlaylistItem
@@ -77,7 +78,7 @@ export function createPlaylist() {
           time: '5:20',
         }}
       />
-      
+
       <PlaylistItem
         track={{
           title: 'Mucho Bien',
@@ -90,7 +91,7 @@ export function createPlaylist() {
           time: '3:41',
         }}
       />
-      
+
       <PlaylistItem
         track={{
           title: 'Knives in Cherries',
@@ -102,7 +103,7 @@ export function createPlaylist() {
           time: '1:48',
         }}
       />
-      
+
       <PlaylistItem
         track={{
           title: 'How Deep Is Your Love',
@@ -114,7 +115,7 @@ export function createPlaylist() {
           time: '3:32',
         }}
       />
-      
+
       <PlaylistItem
         track={{
           title: 'Morena',

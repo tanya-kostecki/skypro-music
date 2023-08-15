@@ -1,5 +1,5 @@
 import React from 'react'
-export function createPlayerControls() {
+export function PlayerControls() {
   return (
     <div className="player__controls">
       <div className="player__btn-prev">

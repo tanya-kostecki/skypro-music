@@ -1,18 +1,18 @@
 import './App.css'
 import React from 'react'
-import { createBar } from './components/bar.jsx'
-import { createNavigation } from './components/navigation.jsx'
-import { createPlaylist } from './components/playlist.jsx'
-import { createSidebar } from './components/sidebar.jsx'
-import { createCenterBlockFilter } from './components/centerblock-filter.jsx'
-import { createContentTitlePlaylist } from './components/content-title-playlist.jsx'
+import { Bar } from './components/bar.jsx'
+import { CreateNavigation } from './components/navigation.jsx'
+import { Playlist } from './components/playlist.jsx'
+import { Sidebar } from './components/sidebar.jsx'
+import { CenterBlockFilter } from './components/centerblock-filter.jsx'
+import { ContentTitlePlaylist } from './components/content-title-playlist.jsx'
 
 function App() {
   return (
     <div className="wrapper">
       <div className="container">
         <main className="main">
-          {createNavigation()}
+          {<CreateNavigation />}
           <div className="main__centerblock centerblock">
             <div className="centerblock__search search">
               <svg className="search__svg">
@@ -26,15 +26,15 @@ function App() {
               />
             </div>
             <h2 className="centerblock__h2">Треки</h2>
-           {createCenterBlockFilter()}
+            {<CenterBlockFilter />}
             <div className="centerblock__content">
-              {createContentTitlePlaylist()}
-              {createPlaylist()}
+              {<ContentTitlePlaylist />}
+              {<Playlist />}
             </div>
           </div>
-          {createSidebar()}
+          {<Sidebar />}
         </main>
-        {createBar()}
+        {<Bar/>}
         <footer className="footer"></footer>
       </div>
     </div>

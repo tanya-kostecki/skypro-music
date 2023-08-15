@@ -1,5 +1,5 @@
 import React from 'react'
-export function createCenterBlockFilter() {
+export function CenterBlockFilter() {
   return (
     <div className="centerblock__filter filter">
       <div className="filter__title">Искать по:</div>
