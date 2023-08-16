@@ -1,9 +1,10 @@
 import React from 'react'
 import { PlaylistItem } from './playlist-item-component'
+import { SkeletonPlaylistItems } from './skeleton-component'
 
-export function Playlist() {
+const PLaylistAllItems = () => {
   return (
-    <div className="content__playlist playlist">
+    <div className="content__playlist-items">
       <PlaylistItem
         track={{
           title: 'Guilt',
@@ -130,3 +131,10 @@ export function Playlist() {
     </div>
   )
 }
+
+export const Playlist = ({ isLoading }) => {
+  return <div className="content__playlist playlist">
+    {isLoading ? <SkeletonPlaylistItems/> : <PLaylistAllItems/>}
+  </div>
+}
+
