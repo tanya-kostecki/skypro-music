@@ -3,45 +3,51 @@ import { useState } from 'react'
 
 const PerformerListFilter = () => {
   return (
-    <ul className="filter__performer-list_ul">
-      <li className="filter__performer">Nero</li>
-      <li className="filter__performer">Dynoro, Outwork, Mr. Gee</li>
-      <li className="filter__performer">Ali Backgor</li>
-      <li className="filter__performer">Стоункат, Psychopath</li>
-      <li className="filter__performer">Jaded, Will Clarke, AR/CO</li>
-      <li className="filter__performer">Blue Fountain, Zeds Dead</li>
-      <li className="filter__performer">
-        HYBIT, Mr. Black, Offer Nissim, Hi Profile
-      </li>
-      <li className="filter__performer">minthaze</li>
-      <li className="filter__performer">Calvin Harris, Disciples</li>
-      <li className="filter__performer">Tom Boxer</li>
-    </ul>
+    <div className="filter__scroll">
+      <ul className="filter__text-list_ul">
+        <li className="filter__text">Nero</li>
+        <li className="filter__text">Dynoro, Outwork, Mr. Gee</li>
+        <li className="filter__text">Ali Backgor</li>
+        <li className="filter__text">Стоункат, Psychopath</li>
+        <li className="filter__text">Jaded, Will Clarke, AR/CO</li>
+        <li className="filter__text">Blue Fountain, Zeds Dead</li>
+        <li className="filter__text">
+          HYBIT, Mr. Black, Offer Nissim, Hi Profile
+        </li>
+        <li className="filter__text">minthaze</li>
+        <li className="filter__text">Calvin Harris, Disciples</li>
+        <li className="filter__text">Tom Boxer</li>
+      </ul>
+    </div>
   )
 }
 
 const YearListFilter = () => {
   return (
-    <ul className="filter__year-list_ul">
-      <li className="filter__year">По умолчанию</li>
-      <li className="filter__year">Сначала новые</li>
-      <li className="filter__year">Сначала старые</li>
-    </ul>
+    <div className="filter__scroll">
+      <ul className="filter__text-list_ul">
+        <li className="filter__text">По умолчанию</li>
+        <li className="filter__text">Сначала новые</li>
+        <li className="filter__text">Сначала старые</li>
+      </ul>
+    </div>
   )
 }
 
 const GenreListFilter = () => {
   return (
-    <ul className="filter__genre-list_ul">
-      <li className="filter__genre">Хип-хоп</li>
-      <li className="filter__genre">Поп-музыка</li>
-      <li className="filter__genre">Техно</li>
-      <li className="filter__genre">Инди</li>
-      <li className="filter__genre">Рок-музыка</li>
-      <li className="filter__genre">Кантри</li>
-      <li className="filter__genre">Джаз</li>
-      <li className="filter__genre">Классическая</li>
-    </ul>
+    <div className="filter__scroll">
+      <ul className="filter__text-list_ul">
+        <li className="filter__text">Хип-хоп</li>
+        <li className="filter__text">Поп-музыка</li>
+        <li className="filter__text">Техно</li>
+        <li className="filter__text">Инди</li>
+        <li className="filter__text">Рок-музыка</li>
+        <li className="filter__text">Кантри</li>
+        <li className="filter__text">Джаз</li>
+        <li className="filter__text">Классическая</li>
+      </ul>
+    </div>
   )
 }
 
@@ -71,28 +77,36 @@ export function CenterBlockFilter() {
   return (
     <div className="centerblock__filter filter">
       <div className="filter__title">Искать по:</div>
-      <div
-        className="filter__button button-author _btn-text"
-        onClick={togglePerformerCategory}
-      >
-        исполнителю
-      </div>
-      <div
-        className="filter__button button-year _btn-text"
-        onClick={toggleYearCategory}
-      >
-        году выпуска
-      </div>
-      <div
-        className="filter__button button-genre _btn-text"
-        onClick={toggleGenreCategory}
-      >
-        жанру
-      </div>
-      <div className="filter__scroll">
+      <div className="filter__block">
+        <div className="filter__items">
+          <div
+            className="filter__button button-author _btn-text"
+            onClick={togglePerformerCategory}
+          >
+            исполнителю
+          </div>
           {performerFilter ? <PerformerListFilter /> : null}
+        </div>
+
+        <div className="filter__items">
+          <div
+            className="filter__button button-year _btn-text"
+            onClick={toggleYearCategory}
+          >
+            году выпуска
+          </div>
           {yearFilter ? <YearListFilter /> : null}
+        </div>
+
+        <div className="filter__items">
+          <div
+            className="filter__button button-genre _btn-text"
+            onClick={toggleGenreCategory}
+          >
+            жанру
+          </div>
           {genreFilter ? <GenreListFilter /> : null}
+        </div>
       </div>
     </div>
   )
