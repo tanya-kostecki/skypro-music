@@ -65,15 +65,15 @@ const SkeletonPlaylistItemPattern = () => {
 export const SkeletonPlaylistItems = () => {
   return (
     <div className="content__playlist-items">
-      <SkeletonPlaylistItemPattern />
-      <SkeletonPlaylistItemPattern />
-      <SkeletonPlaylistItemPattern />
-      <SkeletonPlaylistItemPattern />
-      <SkeletonPlaylistItemPattern />
-      <SkeletonPlaylistItemPattern />
-      <SkeletonPlaylistItemPattern />
-      <SkeletonPlaylistItemPattern />
-      <SkeletonPlaylistItemPattern />
+      <SkeletonPlaylistItemPattern/>
+      <SkeletonPlaylistItemPattern/>
+      <SkeletonPlaylistItemPattern/>
+      <SkeletonPlaylistItemPattern/>
+      <SkeletonPlaylistItemPattern/>
+      <SkeletonPlaylistItemPattern/>
+      <SkeletonPlaylistItemPattern/>
+      <SkeletonPlaylistItemPattern/>
+      <SkeletonPlaylistItemPattern/>
     </div>
   )
 }

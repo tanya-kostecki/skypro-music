@@ -33,3 +33,12 @@
 .filter__button:not(:last-child) {
     margin-right: 10px;
 }
+
+/* .filter__scroll {
+    box-sizing: border-box;
+    width: 248px;
+    height: 305px;
+    padding: 34px;
+    border-radius: 12px;
+    gap: 10px;
+} */

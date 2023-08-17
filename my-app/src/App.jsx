@@ -8,7 +8,7 @@ import { Footer } from './components/footer'
 function App() {
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
-    const changeState = () => setIsLoading(false)
+    const changeState = () => setIsLoading(!isLoading)
     const timer =setTimeout(changeState, 5000)
 
     return () => clearTimeout(timer)
