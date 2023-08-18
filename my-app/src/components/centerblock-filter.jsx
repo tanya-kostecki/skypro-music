@@ -57,19 +57,19 @@ export function CenterBlockFilter() {
   const [genreFilter, setGenreFilter] = useState(false)
 
   const togglePerformerCategory = () => {
-    setPerformerFilter(!performerFilter)
+    setPerformerFilter((prev) => !prev)
     setYearFilter(false)
     setGenreFilter(false)
   }
 
   const toggleYearCategory = () => {
-    setYearFilter(!yearFilter)
+    setYearFilter((prev) => !prev)
     setPerformerFilter(false)
     setGenreFilter(false)
   }
 
   const toggleGenreCategory = () => {
-    setGenreFilter(!genreFilter)
+    setGenreFilter((prev) => !prev)
     setPerformerFilter(false)
     setYearFilter(false)
   }
@@ -80,7 +80,9 @@ export function CenterBlockFilter() {
       <div className="filter__block">
         <div className="filter__items">
           <div
-            className="filter__button button-author _btn-text"
+            className={`filter__button button-author _btn-text ${
+              performerFilter ? 'filter-active' : null
+            }`}
             onClick={togglePerformerCategory}
           >
             исполнителю
@@ -90,7 +92,9 @@ export function CenterBlockFilter() {
 
         <div className="filter__items">
           <div
-            className="filter__button button-year _btn-text"
+            className={`filter__button button-year _btn-text ${
+              yearFilter ? 'filter-active' : null
+            }`}
             onClick={toggleYearCategory}
           >
             году выпуска
@@ -100,7 +104,9 @@ export function CenterBlockFilter() {
 
         <div className="filter__items">
           <div
-            className="filter__button button-genre _btn-text"
+            className={`filter__button button-genre _btn-text ${
+              genreFilter ? 'filter-active' : null
+            }`}
             onClick={toggleGenreCategory}
           >
             жанру

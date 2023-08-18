@@ -21,6 +21,7 @@
 }
   
 .filter__button {
+    position: relative;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -30,23 +31,19 @@
     padding: 6px 20px;
 }
 
-.filter__items {
-    position: relative
-}
-
-.filter__button:not(:last-child) {
+/* .filter__button:not(:last-child) {
     margin-right: 10px;
-}
+} Чтобы кнопки фильтров не передвигались*/
 
 .filter__scroll {
     position: absolute;
     box-sizing: border-box;
+    overflow: hidden;
     margin-top: 10px;
     width: 248px;
     height: 305px;
     padding: 34px;
     background-color: #313131;
-    overflow: hidden;
     border-radius: 12px;
 }
 
@@ -59,7 +56,6 @@
     list-style: none;
     overflow-y: scroll;
     scrollbar-color: gray;
-
 }
 
 .filter__text-list_ul::-webkit-scrollbar {
@@ -95,4 +91,9 @@
 .filter__block {
     display: flex;
     gap: 10px;
+}
+
+.filter-active {
+    border-color: #b672ff;
+    color: #b672ff;
 }
