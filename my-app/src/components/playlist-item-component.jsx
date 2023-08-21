@@ -1,3 +1,4 @@
+import React from 'react'
 export function PlaylistItem({ track }) {
   return (
     <div className="playlist__item">
@@ -10,7 +11,8 @@ export function PlaylistItem({ track }) {
           </div>
           <div className="track__title-text">
             <a className="track__title-link" href={track.titleLink}>
-              {track.title} <span className="track__title-span">{track.titleSpan}</span>
+              {track.title}
+              <span className="track__title-span">{track.titleSpan}</span>
             </a>
           </div>
         </div>

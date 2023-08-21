@@ -1,8 +1,10 @@
 import React from 'react'
 import { PlaylistItem } from './playlist-item-component'
-export function createPlaylist() {
+import { SkeletonPlaylistItems } from './skeleton-component'
+
+const PLaylistAllItems = () => {
   return (
-    <div className="content__playlist playlist">
+    <div className="content__playlist-items">
       <PlaylistItem
         track={{
           title: 'Guilt',
@@ -77,7 +79,7 @@ export function createPlaylist() {
           time: '5:20',
         }}
       />
-      
+
       <PlaylistItem
         track={{
           title: 'Mucho Bien',
@@ -90,7 +92,7 @@ export function createPlaylist() {
           time: '3:41',
         }}
       />
-      
+
       <PlaylistItem
         track={{
           title: 'Knives in Cherries',
@@ -102,7 +104,7 @@ export function createPlaylist() {
           time: '1:48',
         }}
       />
-      
+
       <PlaylistItem
         track={{
           title: 'How Deep Is Your Love',
@@ -114,7 +116,7 @@ export function createPlaylist() {
           time: '3:32',
         }}
       />
-      
+
       <PlaylistItem
         track={{
           title: 'Morena',
@@ -129,3 +131,10 @@ export function createPlaylist() {
     </div>
   )
 }
+
+export const Playlist = ({ isLoading }) => {
+  return <div className="content__playlist playlist">
+    {isLoading ? <SkeletonPlaylistItems/> : <PLaylistAllItems/>}
+  </div>
+}
+
