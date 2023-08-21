@@ -1,4 +1,4 @@
-import { CreateNavigation } from "./navigation"
+import { CreateNavigation } from "./NavMenu/navigation"
 import { CenterBlockFilter } from "./centerblock-filter"
 import { ContentTitlePlaylist } from "./content-title-playlist"
 import { Playlist } from "./playlist"
