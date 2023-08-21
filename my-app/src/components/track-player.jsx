@@ -1,5 +1,5 @@
 import React from 'react'
-import { SkeletonTrackPlayer } from './skeleton-component'
+import { SkeletonTrackPlayer } from './skeleton/skeleton-component'
 
 const TrackPlayerLoaded = () => {
   return (

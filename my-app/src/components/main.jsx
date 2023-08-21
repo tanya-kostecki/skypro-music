@@ -1,8 +1,8 @@
 import { CreateNavigation } from "./NavMenu/navigation"
 import { CenterBlockFilter } from "./centerblock-filter"
 import { ContentTitlePlaylist } from "./content-title-playlist"
-import { Playlist } from "./playlist"
-import { Sidebar } from "./sidebar"
+import { Playlist } from "./playlist/playlist"
+import { Sidebar } from "./sidebar/sidebar"
 
 export function Main({ isLoading }) {
   return (
