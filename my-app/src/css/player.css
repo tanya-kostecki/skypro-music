@@ -6,6 +6,7 @@
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
     flex-direction: row;
+    /*  */
 }
   
 .track-play__contain {
@@ -18,6 +19,7 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    /*  */
 }
 
 .track-play__image {
@@ -38,6 +40,7 @@
     -ms-grid-row-span: 2;
     -ms-grid-column: 1;
     grid-area: image;
+    /*  */
 }
   
 .track-play__svg {
@@ -45,6 +48,7 @@
     height: 17px;
     fill: transparent;
     stroke: #4e4e4e;
+    /*  */
 }
 
 .track-play__author {
@@ -52,6 +56,7 @@
     -ms-grid-column: 2;
     grid-area: author;
     min-width: 49px;
+    /*  */
 }
   
 .track-play__author-link {
@@ -61,6 +66,7 @@
     line-height: 24px;
     color: #ffffff;
     white-space: nowrap;
+    /*  */
 }
   
 .track-play__album {
@@ -68,6 +74,7 @@
     -ms-grid-column: 2;
     grid-area: album;
     min-width: 49px;
+    /*  */
 }
 
 .track-play__album-link {
@@ -76,6 +83,7 @@
     font-size: 13px;
     line-height: 24px;
     color: #ffffff;
+    /*  */
 }
   
 .track-play__like-dis {
@@ -90,22 +98,28 @@
     -ms-flex-align: center;
     align-items: center;
     margin-left: 26%;
+    /*  */
 }
 
 .track-play__like,
 .track-play__dislike {
   padding: 5px;
+  /*  */
 }
+
+
 
 .track-play__like-svg {
   width: 14px;
   height: 12px;
   fill: transparent;
   stroke: #696969;
+  /*  */
 }
 
 .track-play__dislike {
   margin-left: 28.5px;
+  /*  */
 }
 
 .track-play__dislike-svg {
@@ -113,8 +127,10 @@
   height: 13px;
   fill: transparent;
   stroke: #696969;
+  /*  */
 }
 
+/* глобальные стили */
 ._btn-icon:active .track-play__like-svg,
 ._btn-icon:active .track-play__dislike-svg {
   fill: #696969;

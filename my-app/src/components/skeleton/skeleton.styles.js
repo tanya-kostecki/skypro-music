@@ -4,6 +4,7 @@ import {
   TrackAuthor,
   TrackAlbum,
 } from '../playlist/playlist.styles'
+import { SidebarItem } from '../sidebar/sidebar.styles'
 
 export const animation = keyframes`
   from {
@@ -27,5 +28,9 @@ export const LoadingTrackAuthor = styled(TrackAuthor)`
 `
 
 export const LoadingTrackAlbum = styled(TrackAlbum)`
+  animation: skeleton 1s infinite alternate;
+`
+//
+export const LoadingSidebarItem = styled(SidebarItem)`
   animation: skeleton 1s infinite alternate;
 `

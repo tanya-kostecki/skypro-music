@@ -1,6 +1,6 @@
 import React from 'react'
-import { TrackPlayer } from './track-player.jsx'
-import { PlayerControls } from './player-controls.jsx'
+import { TrackPlayer } from './track-player/track-player'
+import { PlayerControls } from './player-controls/player-controls'
 
 const barVolume = (
   <div className="bar__volume-block volume">

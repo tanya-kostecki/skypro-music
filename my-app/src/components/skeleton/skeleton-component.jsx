@@ -1,6 +1,10 @@
 import * as S from '../playlist/playlist.styles'
 import * as L from './skeleton.styles'
+import * as Sidebar from './skeleton.styles'
+import { SidebarList } from '../sidebar/sidebar.styles'
 
+//TODO: разделить этот файл на несколько компонентов,
+// чтобы без L & Sidebar
 function Skeleton({ width, height }) {
   const style = {
     width: width,
@@ -28,17 +32,17 @@ export const SkeletonTrackPlayer = () => {
 
 export const SkeletonSidebarList = () => {
   return (
-    <div className="sidebar__list">
-      <div className="sidebar__item loading">
+    <SidebarList>
+      <Sidebar.LoadingSidebarItem>
         <Skeleton width="250px" height="150px" />
-      </div>
-      <div className="sidebar__item loading">
+      </Sidebar.LoadingSidebarItem>
+      <Sidebar.LoadingSidebarItem>
         <Skeleton width="250px" height="150px" />
-      </div>
-      <div className="sidebar__item loading">
+      </Sidebar.LoadingSidebarItem>
+      <Sidebar.LoadingSidebarItem>
         <Skeleton width="250px" height="150px" />
-      </div>
-    </div>
+      </Sidebar.LoadingSidebarItem>
+    </SidebarList>
   )
 }
 

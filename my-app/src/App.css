@@ -1,7 +1,5 @@
 /* style.css */
-@import url('./css/sidebar.css');
 @import url('./css/player.css');
-@import url('./css/player-controls.css');
 @import url('./css/bar.css');
 @import url('./css/centerblock-filter.css');
 @import url('./css/content-title-playlist.css');
