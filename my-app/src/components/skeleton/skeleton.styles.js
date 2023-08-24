@@ -5,8 +5,14 @@ import {
   TrackAlbum,
 } from '../playlist/playlist.styles'
 import { SidebarItem } from '../sidebar/sidebar.styles'
+import {
+  TrackPlayAlbum,
+  TrackPlayAuthor,
+  TrackPlayImage,
+} from '../track-player/track-player.styles'
+import { css } from 'styled-components'
 
-export const animation = keyframes`
+const animation = keyframes`
   from {
     opacity: 1;
   }
@@ -14,23 +20,15 @@ export const animation = keyframes`
     opacity: 0.2;
   }
 `
-
-export const LoadingTrackTitleImage = styled(TrackTitleImage)`
-  animation: skeleton 1s infinite alternate;
+const animatedSkeleton = css`
+  animation: ${animation} 1s infinite alternate;
 `
 
-export const LoadingTrackTitleText = styled.div`
-  animation: skeleton 1s infinite alternate;
-`
-
-export const LoadingTrackAuthor = styled(TrackAuthor)`
-  animation: skeleton 1s infinite alternate;
-`
-
-export const LoadingTrackAlbum = styled(TrackAlbum)`
-  animation: skeleton 1s infinite alternate;
-`
-//
-export const LoadingSidebarItem = styled(SidebarItem)`
-  animation: skeleton 1s infinite alternate;
-`
+export const LoadingTrackTitleImage = styled(TrackTitleImage)`${animatedSkeleton}`
+export const LoadingTrackTitleText = styled.div`${animatedSkeleton}`
+export const LoadingTrackAuthor = styled(TrackAuthor)`${animatedSkeleton}`
+export const LoadingTrackAlbum = styled(TrackAlbum)`${animatedSkeleton}`
+export const LoadingSidebarItem = styled(SidebarItem)`${animatedSkeleton}`
+export const LoadingTrackPlayImage = styled(TrackPlayImage)`${animatedSkeleton}`
+export const LoadingTrackPlayAuthor = styled(TrackPlayAuthor)`${animatedSkeleton}`
+export const LoadingTrackPlayAlbum = styled(TrackPlayAlbum)`${animatedSkeleton}`

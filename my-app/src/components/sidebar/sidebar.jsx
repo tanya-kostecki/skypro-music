@@ -1,5 +1,5 @@
 import React from 'react'
-import { SkeletonSidebarList } from '../skeleton/skeleton-component'
+import { SkeletonSidebarList } from '../skeleton/skeleton-sidebar'
 import * as S from './sidebar.styles'
 
 const SidebarListLoaded = () => {
