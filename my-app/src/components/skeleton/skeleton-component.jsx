@@ -1,8 +1,6 @@
 import * as S from '../playlist/playlist.styles'
 import * as L from './skeleton.styles'
 
-//TODO: разделить этот файл на несколько компонентов,
-// чтобы без L & Sidebar (probably not a good idea)
 export function Skeleton({ width, height }) {
   const style = {
     width: width,
@@ -17,7 +15,7 @@ const SkeletonPlaylistItemPattern = () => {
     <S.PlaylistItem>
       <S.PlaylistTrack>
         <S.TrackTitle>
-          <L.LoadingTrackTitleImage className="loading">
+          <L.LoadingTrackTitleImage>
             <Skeleton width="51px" height="51px" />
           </L.LoadingTrackTitleImage>
           <L.LoadingTrackTitleText>

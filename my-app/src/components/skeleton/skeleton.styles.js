@@ -24,10 +24,23 @@ const animatedSkeleton = css`
   animation: ${animation} 1s infinite alternate;
 `
 
-export const LoadingTrackTitleImage = styled(TrackTitleImage)`${animatedSkeleton}`
-export const LoadingTrackTitleText = styled.div`${animatedSkeleton}`
-export const LoadingTrackAuthor = styled(TrackAuthor)`${animatedSkeleton}`
-export const LoadingTrackAlbum = styled(TrackAlbum)`${animatedSkeleton}`
+export const LoadingTrackTitleImage = styled(TrackTitleImage)`
+  ${animatedSkeleton}
+`
+export const LoadingTrackTitleText = styled.div`
+  ${animatedSkeleton}
+  width: 356px
+`
+export const LoadingTrackAuthor = styled(TrackAuthor)`
+  ${animatedSkeleton};
+  width: 271px;
+`
+
+export const LoadingTrackAlbum = styled(TrackAlbum)`
+  ${animatedSkeleton}
+  width: 305px;
+`
+
 export const LoadingSidebarItem = styled(SidebarItem)`${animatedSkeleton}`
 export const LoadingTrackPlayImage = styled(TrackPlayImage)`${animatedSkeleton}`
 export const LoadingTrackPlayAuthor = styled(TrackPlayAuthor)`${animatedSkeleton}`
