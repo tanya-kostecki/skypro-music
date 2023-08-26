@@ -1,9 +1,10 @@
-import './App.css'
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Bar } from './components/bar.jsx'
-import { Main } from './components/main'
+import { Bar } from './components/bar/bar'
+import { Main } from './components/main/main'
 import { Footer } from './components/footer'
+import { Wrapper, Container } from './app.styles'
+import GlobalStyle from './app.styles'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -15,13 +16,14 @@ function App() {
   }, [])
 
   return (
-    <div className="wrapper">
-      <div className="container">
-        <Main isLoading={isLoading}/>
-        <Bar isLoading={isLoading}/>
-        <Footer/>
-      </div>
-    </div>
+    <Wrapper>
+      <GlobalStyle/>
+      <Container>
+        <Main isLoading={isLoading} />
+        <Bar isLoading={isLoading} />
+        <Footer />
+      </Container>
+    </Wrapper>
   )
 }
 

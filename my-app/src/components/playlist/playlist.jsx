@@ -1,6 +1,7 @@
 import React from 'react'
 import { PlaylistItem } from './playlist-item-component'
-import { SkeletonPlaylistItems } from './skeleton-component'
+import { SkeletonPlaylistItems } from '../skeleton/skeleton-component' 
+import * as S from './playlist.styles'
 
 const PLaylistAllItems = () => {
   return (
@@ -133,8 +134,9 @@ const PLaylistAllItems = () => {
 }
 
 export const Playlist = ({ isLoading }) => {
-  return <div className="content__playlist playlist">
-    {isLoading ? <SkeletonPlaylistItems/> : <PLaylistAllItems/>}
-  </div>
+  return (
+    <S.ContentPlaylist className="playlist">
+      {isLoading ? <SkeletonPlaylistItems /> : <PLaylistAllItems />}
+    </S.ContentPlaylist>
+  )
 }
-
