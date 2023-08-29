@@ -1,15 +1,14 @@
 import React from 'react'
-import { Wrapper, Container } from './app.styles'
 import GlobalStyle from './app.styles'
 import { AppRoutes } from './routes'
-import { MainPage } from './pages/main'
+import { useState } from 'react'
 
 function App() {
+  const [token, setToken] = useState(false)
   
-
   return (
     <div>
-      <AppRoutes />
+      <AppRoutes token={token} setToken={setToken} />
       <GlobalStyle />
     </div>
   )
