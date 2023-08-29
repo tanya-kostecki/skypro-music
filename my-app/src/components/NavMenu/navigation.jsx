@@ -1,5 +1,6 @@
 import React from 'react'
 import * as S from './NavMenu.styles'
+import { NavLink } from 'react-router-dom'
 
 export const CreateNavigation = () => {
   const [visible, setVisibility] = React.useState(false)
@@ -21,13 +22,16 @@ export const CreateNavigation = () => {
         <S.NavMenu>
           <S.MenuList>
             <S.MenuItem>
-              <S.MenuLink href="#">Главное</S.MenuLink>
+              <NavLink to="/"><S.MenuLink href="#">Главное</S.MenuLink></NavLink>
+              
             </S.MenuItem>
             <S.MenuItem>
-              <S.MenuLink href="#">Мой плейлист</S.MenuLink>
+              <NavLink to="/favourites"><S.MenuLink href="#">Мой плейлист</S.MenuLink></NavLink>
+              
             </S.MenuItem>
             <S.MenuItem>
-              <S.MenuLink href="../signin.html">Войти</S.MenuLink>
+              <NavLink to="/login"><S.MenuLink href="../signin.html">Выйти</S.MenuLink></NavLink>
+              
             </S.MenuItem>
           </S.MenuList>
         </S.NavMenu>
