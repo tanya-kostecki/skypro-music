@@ -1,18 +1,21 @@
-import { Link } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
+import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { LoginBlock, RegisterLink } from './index.styles'
 
 export const Login = ({ setToken }) => {
-    const navigate = useNavigate()
-    const handleLogin = () => {
-        navigate("/", { replace: true })
-        setToken(true)
-    }
+  const navigate = useNavigate()
+  const handleLogin = () => {
+    navigate('/', { replace: true })
+    setToken(true)
+  }
 
   return (
-    <div>
+    <LoginBlock>
       <h1>Login page</h1>
       <button onClick={handleLogin}>Войти</button>
-      <Link to="/register">Зарегистироваться</Link>
-    </div>
+      <NavLink to="/register">
+        <RegisterLink>Зарегистироваться</RegisterLink>
+      </NavLink>
+    </LoginBlock>
   )
 }
