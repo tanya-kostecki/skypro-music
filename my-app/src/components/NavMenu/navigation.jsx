@@ -8,6 +8,7 @@ export const CreateNavigation = () => {
 
   const handleLogOut = (token) => {
     localStorage.removeItem('token', token)
+    window.location.reload()
   }
 
   return (

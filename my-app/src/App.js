@@ -6,8 +6,6 @@ import { useState } from 'react'
 function App() {
   const initialToken = localStorage.getItem('token', '')
   const [token, setToken] = useState(initialToken)
-  // const [token, setToken] = useState(false)
-
   
   return (
     <div>
