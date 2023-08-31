@@ -6,6 +6,10 @@ export const CreateNavigation = () => {
   const [visible, setVisibility] = React.useState(false)
   const toggleVisibility = () => setVisibility(!visible)
 
+  const handleLogOut = (token) => {
+    localStorage.removeItem('token', token)
+  }
+
   return (
     <S.MainNav>
       <S.NavLogo>
@@ -30,7 +34,7 @@ export const CreateNavigation = () => {
               
             </S.MenuItem>
             <S.MenuItem>
-              <NavLink to="/login"><S.MenuLink href="../signin.html">Выйти</S.MenuLink></NavLink>
+              <NavLink to="/login"><S.MenuLink href="../signin.html" onClick={handleLogOut}>Выйти</S.MenuLink></NavLink>
               
             </S.MenuItem>
           </S.MenuList>

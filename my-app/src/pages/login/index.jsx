@@ -4,7 +4,10 @@ import { LoginBlock, RegisterLink } from './index.styles'
 
 export const Login = ({ setToken }) => {
   const navigate = useNavigate()
-  const handleLogin = () => {
+
+
+  const handleLogin = (token) => {
+    localStorage.setItem('token', token)
     navigate('/', { replace: true })
     setToken(true)
   }

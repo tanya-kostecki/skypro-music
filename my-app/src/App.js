@@ -4,7 +4,10 @@ import { AppRoutes } from './routes'
 import { useState } from 'react'
 
 function App() {
-  const [token, setToken] = useState(false)
+  const initialToken = localStorage.getItem('token', '')
+  const [token, setToken] = useState(initialToken)
+  // const [token, setToken] = useState(false)
+
   
   return (
     <div>
