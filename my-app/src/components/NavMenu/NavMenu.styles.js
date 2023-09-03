@@ -34,6 +34,7 @@ export const NavBurger = styled.div`
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  cursor: pointer;
 `
 
 export const BurgerLine = styled.span`
