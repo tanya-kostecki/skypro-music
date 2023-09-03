@@ -1,14 +1,15 @@
 import React from 'react'
 import * as S from './NavMenu.styles'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export const CreateNavigation = () => {
   const [visible, setVisibility] = React.useState(false)
   const toggleVisibility = () => setVisibility(!visible)
 
-  const handleLogOut = (token) => {
-    localStorage.removeItem('token', token)
-    window.location.reload()
+  const handleLogOut = () => {
+    localStorage.removeItem('token', 'token')
+   
+    // window.location.reload()
   }
 
   return (
@@ -27,16 +28,16 @@ export const CreateNavigation = () => {
         <S.NavMenu>
           <S.MenuList>
             <S.MenuItem>
-              <NavLink to="/"><S.MenuLink href="#">Главное</S.MenuLink></NavLink>
+            <Link to="/"><S.MenuLink href="#">Главное</S.MenuLink></Link>
               
             </S.MenuItem>
             <S.MenuItem>
-              <NavLink to="/favourites"><S.MenuLink href="#">Мой плейлист</S.MenuLink></NavLink>
+            <Link to="/favourites"><S.MenuLink href="#">Мой плейлист</S.MenuLink></Link>
               
             </S.MenuItem>
             <S.MenuItem>
-              <NavLink to="/login"><S.MenuLink href="../signin.html" onClick={handleLogOut}>Выйти</S.MenuLink></NavLink>
-              
+            <Link to="/login"><S.MenuLink href="../signin.html" onClick={handleLogOut}>Выйти</S.MenuLink></Link>
+  
             </S.MenuItem>
           </S.MenuList>
         </S.NavMenu>
