@@ -1,14 +1,15 @@
 import React from 'react'
 import * as S from './NavMenu.styles'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 export const CreateNavigation = () => {
-  const [visible, setVisibility] = React.useState(false)
+  const [visible, setVisibility] = useState(false)
   const toggleVisibility = () => setVisibility(!visible)
 
   const handleLogOut = () => {
     localStorage.removeItem('token', 'token')
-
+   
     // window.location.reload()
   }
 

@@ -10,13 +10,32 @@ import { ProtectedRoute } from './components/protected-route'
 export const AppRoutes = ({ token, setToken }) => {
   return (
     <Routes>
-      <Route path="/login" element={<Login setToken={setToken} />}></Route>
+      <Route path="/login" element={<Login setToken={setToken}/>}></Route>
       <Route path="/register" element={<Register />}></Route>
-      <Route element={<ProtectedRoute token={token} />}>
-        <Route path="/" element={<MainPage />}></Route>
-        <Route path="/favourites" element={<Favourites/>}></Route>
-        <Route path="/category/:id" element={<Category/>}></Route>
-      </Route>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute isAllowed={token}>
+            <MainPage />
+          </ProtectedRoute>
+        }
+      ></Route>
+      <Route
+        path="/favourites"
+        element={
+          <ProtectedRoute isAllowed={token}>
+            <Favourites />
+          </ProtectedRoute>
+        }
+      ></Route>
+      <Route
+        path="/category/:id"
+        element={
+          <ProtectedRoute isAllowed={token}>
+            <Category />
+          </ProtectedRoute>
+        }
+      ></Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
   )
