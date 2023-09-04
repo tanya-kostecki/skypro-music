@@ -16,7 +16,7 @@ export const AppRoutes = ({ token, setToken }) => {
         path="/"
         element={
           <ProtectedRoute isAllowed={token}>
-            <MainPage />
+            <MainPage setToken={setToken}/>
           </ProtectedRoute>
         }
       ></Route>

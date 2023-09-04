@@ -5,11 +5,11 @@ import { Playlist } from '../playlist/playlist'
 import { Sidebar } from '../sidebar/sidebar'
 import * as S from './main.styles'
 
-export function Main({ isLoading }) {
+export function Main({ isLoading, setToken }) {
   return (
     <S.MainMain>
-      {<CreateNavigation />}
-      <S.MainCenterblock className="centerblock">
+      {<CreateNavigation setToken={setToken}/>}
+      <S.MainCenterblock className="cterblock">
         <S.CenterblockSearch className="search">
           <S.SearchSvg>
             <use xlinkHref="img/icon/sprite.svg#icon-search"></use>

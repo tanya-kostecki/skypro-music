@@ -4,7 +4,7 @@ import { Bar } from '../../components/bar/bar'
 import { Footer } from '../../components/footer'
 import { useState, useEffect } from 'react'
 
-export const MainPage = () => {
+export const MainPage = ({setToken}) => {
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
     const changeState = () => setIsLoading(!isLoading)
@@ -16,7 +16,7 @@ export const MainPage = () => {
   return (
     <Wrapper>
       <Container>
-        <Main isLoading={isLoading}/>
+        <Main isLoading={isLoading} setToken={setToken}/>
         <Bar isLoading={isLoading} />
         <Footer />
       </Container>
