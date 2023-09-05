@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { PLAYLISTS } from "../../sidebar-constants"
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from "react"
 
 export const Category = ({ setToken }) => {
     const params = useParams()
@@ -17,7 +18,10 @@ export const Category = ({ setToken }) => {
     } else {
         const navigate = useNavigate()
         navigate('/login', { replace: true })
-        setToken(false)
+        
+        useEffect(() => {
+          setToken(false)
+        }, [])
     }
     
 }

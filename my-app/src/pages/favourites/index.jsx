@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 export const Favourites = ({ setToken }) => {
   if (localStorage.getItem('token', 'token')) {
@@ -10,6 +11,9 @@ export const Favourites = ({ setToken }) => {
   } else {
     const navigate = useNavigate()
     navigate('/login', { replace: true })
-    setToken(false)
+    
+    useEffect(() => {
+      setToken(false)
+    }, [])
   }
 }

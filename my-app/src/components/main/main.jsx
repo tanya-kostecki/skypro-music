@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { CreateNavigation } from "../NavMenu/navigation"
 import { CenterBlockFilter } from '../centerblock-filter/centerblock-filter'
 import { ContentTitlePlaylist } from '../content-title-playlist/content-title-playlist'
@@ -35,6 +36,9 @@ export function Main({ isLoading, setToken }) {
   } else {
     const navigate = useNavigate()
     navigate('/login', { replace: true })
-    setToken(false)
+    
+    useEffect(() => {
+      setToken(false)
+    }, [])
   } 
 }
