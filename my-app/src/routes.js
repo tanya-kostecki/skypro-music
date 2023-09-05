@@ -24,7 +24,7 @@ export const AppRoutes = ({ token, setToken }) => {
         path="/favourites"
         element={
           <ProtectedRoute isAllowed={token}>
-            <Favourites />
+            <Favourites setToken={setToken}/>
           </ProtectedRoute>
         }
       ></Route>
@@ -32,7 +32,7 @@ export const AppRoutes = ({ token, setToken }) => {
         path="/category/:id"
         element={
           <ProtectedRoute isAllowed={token}>
-            <Category />
+            <Category setToken={setToken}/>
           </ProtectedRoute>
         }
       ></Route>
