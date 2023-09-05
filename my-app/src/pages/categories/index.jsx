@@ -17,10 +17,10 @@ export const Category = ({ setToken }) => {
       )
     } else {
         const navigate = useNavigate()
-        navigate('/login', { replace: true })
         
         useEffect(() => {
           setToken(false)
+          navigate('/login', { replace: true })
         }, [])
     }
     

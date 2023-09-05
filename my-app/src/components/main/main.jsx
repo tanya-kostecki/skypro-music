@@ -35,10 +35,10 @@ export function Main({ isLoading, setToken }) {
     )
   } else {
     const navigate = useNavigate()
-    navigate('/login', { replace: true })
     
     useEffect(() => {
       setToken(false)
+      navigate('/login', { replace: true })
     }, [])
   } 
 }

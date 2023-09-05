@@ -10,10 +10,10 @@ export const Favourites = ({ setToken }) => {
     )
   } else {
     const navigate = useNavigate()
-    navigate('/login', { replace: true })
     
     useEffect(() => {
       setToken(false)
+      navigate('/login', { replace: true })
     }, [])
   }
 }
