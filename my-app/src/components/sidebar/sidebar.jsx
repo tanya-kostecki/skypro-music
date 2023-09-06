@@ -1,36 +1,27 @@
 import React from 'react'
 import { SkeletonSidebarList } from '../skeleton/skeleton-sidebar'
 import * as S from './sidebar.styles'
+import { PLAYLISTS } from '../../sidebar-constants'
+import { Link } from 'react-router-dom'
 
-const SidebarListLoaded = () => {
+const CategoryItems = ({ playlists }) => {
   return (
     <S.SidebarList>
-      <S.SidebarItem>
-        <S.SidebarLink href="#">
-          <S.SidebarImage
-            src="img/playlist01.png"
-            alt="day's playlist"
-          />
-        </S.SidebarLink>
-      </S.SidebarItem>
-      <S.SidebarItem>
-        <S.SidebarLink href="#">
-          <S.SidebarImage
-            src="img/playlist02.png"
-            alt="day's playlist"
-          />
-        </S.SidebarLink>
-      </S.SidebarItem>
-      <S.SidebarItem>
-        <S.SidebarLink href="#">
-          <S.SidebarImage
-            src="img/playlist03.png"
-            alt="day's playlist"
-          />
-        </S.SidebarLink>
-      </S.SidebarItem>
+      {playlists.map((playlist) => (
+        <S.SidebarItem key={playlist.id}>
+          <Link to={`/category/${playlist.id}`}>
+            <S.SidebarLink href={playlist.href}>
+              <S.SidebarImage src={playlist.src} alt={playlist.alt} />
+            </S.SidebarLink>
+          </Link>
+        </S.SidebarItem>
+      ))}
     </S.SidebarList>
   )
+}
+
+const SidebarListLoaded = () => {
+  return <CategoryItems playlists={PLAYLISTS}></CategoryItems>
 }
 
 export function Sidebar({ isLoading }) {
