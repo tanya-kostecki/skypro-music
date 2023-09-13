@@ -10,7 +10,7 @@ export const MainPage = ({ setToken }) => {
   const [tracks, setTracks] = useState()
   const [error, setError] = useState(null)
 
-  const [playerTrack, setPlayerTrack] = useState(null)
+  const [track, setTrack] = useState(null)
 
   useEffect(() => {
     setIsLoading(true)
@@ -32,10 +32,10 @@ export const MainPage = ({ setToken }) => {
           setToken={setToken}
           tracks={tracks}
           error={error}
-          setPlayerTrack={setPlayerTrack}
+          setTrack={setTrack}
         />
-        {playerTrack ? (
-          <Bar isLoading={isLoading} playerTrack={playerTrack} />
+        {track ? (
+          <Bar isLoading={isLoading} track={track} />
         ) : null}
         <Footer />
       </Container>

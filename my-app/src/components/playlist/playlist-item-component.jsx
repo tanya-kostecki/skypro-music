@@ -1,12 +1,16 @@
 import React from 'react'
 import * as S from './playlist.styles'
 
-export function PlaylistItem({ tracks }) {
+export function PlaylistItem({ tracks, setTrack }) {
+  const showPlayer = (track) => {
+    setTrack(track)
+  }
+
   return (
     <>
       {tracks?.map((track) => (
           <S.PlaylistItem key={track.id}>
-            <S.PlaylistTrack >
+            <S.PlaylistTrack onClick={() => showPlayer(track)}>
               <S.TrackTitle>
                 <S.TrackTitleImage>
                   <S.TrackTitleSvg alt="music">
