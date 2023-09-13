@@ -1,20 +1,7 @@
 import React from 'react'
 import * as S from './playlist.styles'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { getAllTracks } from '../../api'
-import { TRACKS } from './constants'
 
-export function PlaylistItem() {
-  const [tracks, setTracks] = useState()
-
-  useEffect(() => {
-    getAllTracks().then((tracks) => {
-      setTracks(tracks)
-    })
-  }, [])
-
-
+export function PlaylistItem({ tracks }) {
   return (
     <>
       {tracks?.map((track) => (

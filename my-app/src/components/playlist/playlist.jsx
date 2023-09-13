@@ -11,10 +11,13 @@ const PLaylistAllItems = ({ tracks }) => {
   )
 }
 
-export const Playlist = ({ isLoading }) => {
+export const Playlist = ({ isLoading, tracks, error }) => {
+  if (error) {
+    return <p style={ { "font-size": "24px" } }>Произошла ошибка, попробуйте позже: {error}</p>
+  }
   return (
     <S.ContentPlaylist className="playlist">
-      {isLoading ? <SkeletonPlaylistItems /> : <PLaylistAllItems />}
+      {isLoading ? <SkeletonPlaylistItems /> : <PLaylistAllItems tracks={tracks} />}
     </S.ContentPlaylist>
   )
 }
