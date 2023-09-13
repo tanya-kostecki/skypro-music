@@ -10,6 +10,8 @@ export const MainPage = ({ setToken }) => {
   const [tracks, setTracks] = useState()
   const [error, setError] = useState(null)
 
+  const [playerTrack, setPlayerTrack] = useState(null)
+
   useEffect(() => {
     setIsLoading(true)
     getAllTracks().then((tracks) => {
@@ -25,8 +27,16 @@ export const MainPage = ({ setToken }) => {
   return (
     <Wrapper>
       <Container>
-        <Main isLoading={isLoading} setToken={setToken} tracks={tracks} error={error} />
-        <Bar isLoading={isLoading} />
+        <Main
+          isLoading={isLoading}
+          setToken={setToken}
+          tracks={tracks}
+          error={error}
+          setPlayerTrack={setPlayerTrack}
+        />
+        {playerTrack ? (
+          <Bar isLoading={isLoading} playerTrack={playerTrack} />
+        ) : null}
         <Footer />
       </Container>
     </Wrapper>
