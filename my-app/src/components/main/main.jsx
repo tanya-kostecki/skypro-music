@@ -7,7 +7,7 @@ import { Sidebar } from '../sidebar/sidebar'
 import * as S from './main.styles'
 import { useNavigate } from "react-router-dom"
 
-export function Main({ isLoading, setToken, tracks, error, setTrack }) {
+export function Main({ isLoading, setToken, getTracks, error, setTrack }) {
   if (localStorage.getItem('token', 'token')) {
     return (
       <S.MainMain>
@@ -25,7 +25,7 @@ export function Main({ isLoading, setToken, tracks, error, setTrack }) {
             <ContentTitlePlaylist isLoading={isLoading} />
             <Playlist
               isLoading={isLoading}
-              tracks={tracks}
+              getTracks={getTracks}
               error={error}
               setTrack={setTrack}
             />
