@@ -2,7 +2,7 @@ import React from 'react'
 import { SkeletonTrackPlayer } from '../skeleton/skeleton-trackplayer'
 import *as S from './track-player.styles'
 
-const TrackPlayerLoaded = () => {
+const TrackPlayerLoaded = ({ track }) => {
   return (
     <S.TrackPlayContain>
       <S.TrackPlayImage>
@@ -12,22 +12,22 @@ const TrackPlayerLoaded = () => {
       </S.TrackPlayImage>
       <S.TrackPlayAuthor>
         <S.TrackPlayAuthorLink href="http://">
-          Ты та...
+          {track.name}
         </S.TrackPlayAuthorLink>
       </S.TrackPlayAuthor>
       <S.TrackPlayAlbum>
         <S.TrackPlayAlbumLink href="http://">
-          Баста
+          {track.author}
         </S.TrackPlayAlbumLink>
       </S.TrackPlayAlbum>
     </S.TrackPlayContain>
   )
 }
 
-export function TrackPlayer({ isLoading }) {
+export function TrackPlayer({ isLoading, track }) {
   return (
     <S.PlayerTrackPlay className="track-play">
-      {isLoading ? <SkeletonTrackPlayer /> : <TrackPlayerLoaded />}
+      {isLoading ? <SkeletonTrackPlayer /> : <TrackPlayerLoaded track={track}/>}
       <S.TrackPlayLikeDis>
         <S.TrackPlayLikeBtn className="_btn-icon">
           <S.TrackPlayLikeSvg className="track-play__like-svg" alt="like">

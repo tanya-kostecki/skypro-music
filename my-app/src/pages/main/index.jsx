@@ -3,21 +3,40 @@ import { Main } from '../../components/main/main'
 import { Bar } from '../../components/bar/bar'
 import { Footer } from '../../components/footer'
 import { useState, useEffect } from 'react'
+import { getAllTracks } from '../../api'
 
 export const MainPage = ({ setToken }) => {
   const [isLoading, setIsLoading] = useState(true)
-  useEffect(() => {
-    const changeState = () => setIsLoading((prev) => !prev)
-    const timer = setTimeout(changeState, 100)
+  const [getTracks, setGetTracks] = useState()
+  const [error, setError] = useState(null)
 
-    return () => clearTimeout(timer)
+  const [track, setTrack] = useState(null)
+
+  useEffect(() => {
+    setIsLoading(true)
+    getAllTracks()
+      .then((tracks) => {
+        setGetTracks(tracks)
+        setIsLoading(false)
+        setError(null)
+      })
+      .catch((error) => {
+        setError(error.message)
+        setIsLoading(false)
+      })
   }, [])
 
   return (
     <Wrapper>
       <Container>
-        <Main isLoading={isLoading} setToken={setToken} />
-        <Bar isLoading={isLoading} />
+        <Main
+          isLoading={isLoading}
+          setToken={setToken}
+          getTracks={getTracks}
+          error={error}
+          setTrack={setTrack}
+        />
+        {track ? <Bar isLoading={isLoading} track={track} /> : null}
         <Footer />
       </Container>
     </Wrapper>

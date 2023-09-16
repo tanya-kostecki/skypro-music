@@ -7,38 +7,39 @@ import { Sidebar } from '../sidebar/sidebar'
 import * as S from './main.styles'
 import { useNavigate } from "react-router-dom"
 
-export function Main({ isLoading, setToken }) {
+export function Main({ isLoading, setToken, getTracks, error, setTrack }) {
   if (localStorage.getItem('token', 'token')) {
     return (
       <S.MainMain>
-        {<CreateNavigation setToken={setToken}/>}
+        <CreateNavigation setToken={setToken} />
         <S.MainCenterblock className="cterblock">
           <S.CenterblockSearch className="search">
             <S.SearchSvg>
               <use xlinkHref="img/icon/sprite.svg#icon-search"></use>
             </S.SearchSvg>
-            <S.SearchText
-              type="search"
-              placeholder="Поиск"
-              name="search"
-            />
+            <S.SearchText type="search" placeholder="Поиск" name="search" />
           </S.CenterblockSearch>
           <S.CenterblockH2>Треки</S.CenterblockH2>
-          {<CenterBlockFilter isLoading={isLoading} />}
+          <CenterBlockFilter isLoading={isLoading} />
           <S.CenterblockContent>
-            {<ContentTitlePlaylist isLoading={isLoading} />}
-            {<Playlist isLoading={isLoading} />}
+            <ContentTitlePlaylist isLoading={isLoading} />
+            <Playlist
+              isLoading={isLoading}
+              getTracks={getTracks}
+              error={error}
+              setTrack={setTrack}
+            />
           </S.CenterblockContent>
         </S.MainCenterblock>
-        {<Sidebar isLoading={isLoading} />}
+        <Sidebar isLoading={isLoading} />
       </S.MainMain>
     )
   } else {
     const navigate = useNavigate()
-    
+
     useEffect(() => {
       setToken(false)
       navigate('/login', { replace: true })
     }, [])
-  } 
+  }
 }

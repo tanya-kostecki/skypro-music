@@ -23,7 +23,7 @@ const barVolume = (
 )
 
 
-export function Bar({ isLoading }) {
+export function Bar({ isLoading, track }) {
   return (
     <S.Bar>
       <S.BarContent>
@@ -32,7 +32,7 @@ export function Bar({ isLoading }) {
           <S.BarPlayer className="player">
             {<PlayerControls isLoading={isLoading} />}
 
-            {<TrackPlayer isLoading={isLoading} />}
+            {<TrackPlayer isLoading={isLoading} track={track}/>}
           </S.BarPlayer>
           {barVolume}
         </S.BarPlayerBlock>
