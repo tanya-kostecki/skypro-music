@@ -32,10 +32,16 @@ export function PlayerControls({
 
   const toggleLoop = isLoop ? handleStopLoop : handleLoop
 
+  const notReady = () => {
+    audioRef.current.pause()
+    setIsPlaying(false)
+    alert('Еще не реализовано')
+  }
+
   return (
     <S.PlayerControls>
       <S.PlayerBtnPrev>
-        <S.PlayerBtnPrevSvg alt="prev">
+        <S.PlayerBtnPrevSvg alt="prev" onClick={notReady}>
           <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
         </S.PlayerBtnPrevSvg>
       </S.PlayerBtnPrev>
@@ -57,7 +63,7 @@ export function PlayerControls({
           )}
         </S.PlayerBtnPlaySvg>
       </S.PlayerBtnPlay>
-      <S.PlayerBtnNext>
+      <S.PlayerBtnNext onClick={notReady}>
         <S.PlayerBtnNextSvg alt="next">
           <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
         </S.PlayerBtnNextSvg>
@@ -86,7 +92,7 @@ export function PlayerControls({
           </S.PlayerBtnRepeatSvg>
         )}
       </S.PlayerBtnRepeat>
-      <S.PlayerBtnShuffle className="_btn-icon">
+      <S.PlayerBtnShuffle className="_btn-icon" onClick={notReady}>
         <S.PlayerBtnShuffleSvg alt="shuffle">
           <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
         </S.PlayerBtnShuffleSvg>

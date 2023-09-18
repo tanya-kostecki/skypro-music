@@ -60,17 +60,14 @@ export const StyledProgressInput = styled.input`
 
 export default function ProgressBar({
   audioRef,
-  currentTime,
   setCurrentTime,
-  duration,
-  setDuration,
   setAudioProgress,
   audioProgress
 }) {
 
-  useEffect(() => {
-    setDuration(audioRef.current.duration)
-  })
+  // useEffect(() => {
+  //   setDuration(audioRef.current.duration)
+  // })
 
   const handleTime = () => {
     setCurrentTime(audioRef.current.currentTime)

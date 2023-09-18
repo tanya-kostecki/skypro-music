@@ -11,15 +11,13 @@ export function Bar({ isLoading, track }) {
 
   const [audioProgress, setAudioProgress] = useState(0)
 
-  const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(0)
+  const [currentTime, setCurrentTime] = useState('00 : 00')
 
   const audioRef = useRef(null)
 
   const [currentVolume, setCurrentVolume] = useState(1)
 
-  const [musicTotalLength, setMusicTotalLength] = useState('00 : 00')
-  const [musicCurrentTime, setMusicCurrentTime] = useState('00 : 00')
+  const [duration, setDuration] = useState('00 : 00')
 
   const handleVolume = (event) => {
     audioRef.current.volume = event.target.value
@@ -32,14 +30,14 @@ export function Bar({ isLoading, track }) {
     let totalLength = `${totalMinutes < 10 ? `0${totalMinutes}` : totalMinutes} : ${
       totalSeconds < 10 ? `0${totalSeconds}` : totalSeconds
     }`;
-    setMusicTotalLength(totalLength)
+    setDuration(totalLength)
 
     let currentMin = Math.floor(audioRef.current.currentTime / 60);
     let currentSec = Math.floor(audioRef.current.currentTime % 60);
     let currentPlay = `${currentMin < 10 ? `0${currentMin}` : currentMin} : ${
       currentSec < 10 ? `0${currentSec}` : currentSec
     }`;
-    setMusicCurrentTime(currentPlay)
+    setCurrentTime(currentPlay)
 
     const progress = parseInt(
       (audioRef.current.currentTime / audioRef.current.duration) * 100,
@@ -50,8 +48,8 @@ export function Bar({ isLoading, track }) {
   return (
     <S.Bar>
       <div className="musicTimerDiv" style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 20px 0 20px'}}>
-        <p className="musicCurrentTime">{musicCurrentTime}</p>
-        <p className="musicTotalLength">{`/ ${musicTotalLength}`}</p>
+        <p className="musicCurrentTime">{currentTime}</p>
+        <p className="musicTotalLength">{`/ ${duration}`}</p>
       </div>
       <audio
         controls
@@ -66,8 +64,8 @@ export function Bar({ isLoading, track }) {
           audioRef={audioRef}
           currentTime={currentTime}
           setCurrentTime={setCurrentTime}
-          duration={duration}
-          setDuration={setDuration}
+          // duration={duration}
+          // setDuration={setDuration}
           setAudioProgress={setAudioProgress}
           audioProgress={audioProgress}
         />
