@@ -18,12 +18,29 @@ export function Bar({ isLoading, track }) {
 
   const [currentVolume, setCurrentVolume] = useState(1)
 
+  const [musicTotalLength, setMusicTotalLength] = useState('00 : 00')
+  const [musicCurrentTime, setMusicCurrentTime] = useState('00 : 00')
+
   const handleVolume = (event) => {
     audioRef.current.volume = event.target.value
     setCurrentVolume(event.target.value)
   }
 
   const handleAudioUpdate = () => {
+    let totalMinutes = Math.floor(audioRef.current.duration / 60);
+    let totalSeconds = Math.floor(audioRef.current.duration % 60);
+    let totalLength = `${totalMinutes < 10 ? `0${totalMinutes}` : totalMinutes} : ${
+      totalSeconds < 10 ? `0${totalSeconds}` : totalSeconds
+    }`;
+    setMusicTotalLength(totalLength)
+
+    let currentMin = Math.floor(audioRef.current.currentTime / 60);
+    let currentSec = Math.floor(audioRef.current.currentTime % 60);
+    let currentPlay = `${currentMin < 10 ? `0${currentMin}` : currentMin} : ${
+      currentSec < 10 ? `0${currentSec}` : currentSec
+    }`;
+    setMusicCurrentTime(currentPlay)
+
     const progress = parseInt(
       (audioRef.current.currentTime / audioRef.current.duration) * 100,
     )
@@ -32,6 +49,10 @@ export function Bar({ isLoading, track }) {
 
   return (
     <S.Bar>
+      <div className="musicTimerDiv" style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 20px 0 20px'}}>
+        <p className="musicCurrentTime">{musicCurrentTime}</p>
+        <p className="musicTotalLength">{`/ ${musicTotalLength}`}</p>
+      </div>
       <audio
         controls
         ref={audioRef}
