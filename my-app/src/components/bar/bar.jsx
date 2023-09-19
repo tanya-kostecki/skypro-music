@@ -39,9 +39,7 @@ export function Bar({ isLoading, track }) {
     }`
     setCurrentTime(currentPlay)
 
-    const progress = parseInt(
-      (audioRef.current.currentTime / audioRef.current.duration) * 100,
-    )
+    const progress = (audioRef.current.currentTime / audioRef.current.duration) * 100
     setAudioProgress(isNaN(progress) ? 0 : progress)
   }
 
