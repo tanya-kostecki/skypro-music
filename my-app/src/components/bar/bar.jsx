@@ -52,6 +52,12 @@ export function Bar({ isLoading, track }) {
 
   useEffect(handleStart, [track])
 
+  const endTrack = () => {
+    if (!isLoop) {
+      setIsPlaying(false)
+    }
+  }
+
   return (
     <S.Bar>
       <div
@@ -71,6 +77,7 @@ export function Bar({ isLoading, track }) {
         ref={audioRef}
         style={{ display: 'none' }}
         onTimeUpdate={handleAudioUpdate}
+        onEnded={endTrack}
       >
         <source src={track.track_file} type="audio/mpeg" />
       </audio>
