@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import { styled } from 'styled-components'
-import { useEffect } from 'react'
 
 export const StyledProgressInput = styled.input`
   --progress-height: 8px;
@@ -60,30 +58,9 @@ export const StyledProgressInput = styled.input`
 
 export default function ProgressBar({
   audioRef,
-  setCurrentTime,
   setAudioProgress,
   audioProgress
 }) {
-
-  // useEffect(() => {
-  //   setDuration(audioRef.current.duration)
-  // })
-
-  const handleTime = () => {
-    setCurrentTime(audioRef.current.currentTime)
-  }
-
-  useEffect(() => {
-    audioRef.current.addEventListener('handleTime', handleTime)
-    return () => {
-      audioRef.current.removeEventListener('handleTime', handleTime)
-    }
-  }, [])
-
-  // const handleSeekBar = (event) => {
-  //   audioRef.current.currentTime = event.target.value
-  //   setCurrentTime(event.target.value)
-  // }
 
   const handleSeekBar = (event) => {
     setAudioProgress(event.target.value)
@@ -93,9 +70,6 @@ export default function ProgressBar({
   return (
     <StyledProgressInput
       type="range"
-      // min={0}
-      // max={duration}
-      // value={currentTime}
       value={audioProgress}
       step={0.01}
       onChange={handleSeekBar}

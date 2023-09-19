@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as S from './player-controls.styles'
 
 export function PlayerControls({
@@ -7,11 +7,8 @@ export function PlayerControls({
   audioRef,
   isLoop,
   setIsLoop,
+  handleStart
 }) {
-  const handleStart = () => {
-    audioRef.current.play()
-    setIsPlaying(true)
-  }
 
   const handleStop = () => {
     audioRef.current.pause()

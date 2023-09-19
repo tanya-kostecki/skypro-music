@@ -11,13 +11,13 @@ export function Bar({ isLoading, track }) {
 
   const [audioProgress, setAudioProgress] = useState(0)
 
-  const [currentTime, setCurrentTime] = useState('00 : 00')
+  const [duration, setDuration] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
 
   const audioRef = useRef(null)
 
   const [currentVolume, setCurrentVolume] = useState(1)
 
-  const [duration, setDuration] = useState('00 : 00')
 
   const handleVolume = (event) => {
     audioRef.current.volume = event.target.value
@@ -25,18 +25,18 @@ export function Bar({ isLoading, track }) {
   }
 
   const handleAudioUpdate = () => {
-    let totalMinutes = Math.floor(audioRef.current.duration / 60);
-    let totalSeconds = Math.floor(audioRef.current.duration % 60);
-    let totalLength = `${totalMinutes < 10 ? `0${totalMinutes}` : totalMinutes} : ${
-      totalSeconds < 10 ? `0${totalSeconds}` : totalSeconds
-    }`;
+    let totalMinutes = Math.floor(audioRef.current.duration / 60)
+    let totalSeconds = Math.floor(audioRef.current.duration % 60)
+    let totalLength = `${
+      totalMinutes < 10 ? `0${totalMinutes}` : totalMinutes
+    } : ${totalSeconds < 10 ? `0${totalSeconds}` : totalSeconds}`
     setDuration(totalLength)
 
-    let currentMin = Math.floor(audioRef.current.currentTime / 60);
-    let currentSec = Math.floor(audioRef.current.currentTime % 60);
+    let currentMin = Math.floor(audioRef.current.currentTime / 60)
+    let currentSec = Math.floor(audioRef.current.currentTime % 60)
     let currentPlay = `${currentMin < 10 ? `0${currentMin}` : currentMin} : ${
       currentSec < 10 ? `0${currentSec}` : currentSec
-    }`;
+    }`
     setCurrentTime(currentPlay)
 
     const progress = parseInt(
@@ -45,14 +45,29 @@ export function Bar({ isLoading, track }) {
     setAudioProgress(isNaN(progress) ? 0 : progress)
   }
 
+  const handleStart = () => {
+    audioRef.current.play()
+    setIsPlaying(true)
+  }
+
+  useEffect(handleStart, [track])
+
   return (
     <S.Bar>
-      <div className="musicTimerDiv" style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 20px 0 20px'}}>
+      <div
+        className="musicTimerDiv"
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          padding: '0 20px 0 20px',
+        }}
+      >
         <p className="musicCurrentTime">{currentTime}</p>
         <p className="musicTotalLength">{`/ ${duration}`}</p>
       </div>
       <audio
         controls
+        src={track.track_file}
         ref={audioRef}
         style={{ display: 'none' }}
         onTimeUpdate={handleAudioUpdate}
@@ -64,14 +79,11 @@ export function Bar({ isLoading, track }) {
           audioRef={audioRef}
           currentTime={currentTime}
           setCurrentTime={setCurrentTime}
-          // duration={duration}
-          // setDuration={setDuration}
           setAudioProgress={setAudioProgress}
           audioProgress={audioProgress}
         />
-        {/* <S.BarPlayerProgress></S.BarPlayerProgress> */}
         <S.BarPlayerBlock>
-          <S.BarPlayer className="player">
+          <S.BarPlayer className="player" >
             <PlayerControls
               isLoading={isLoading}
               isPlaying={isPlaying}
@@ -79,6 +91,7 @@ export function Bar({ isLoading, track }) {
               audioRef={audioRef}
               isLoop={isLoop}
               setIsLoop={setIsLoop}
+              handleStart={handleStart}
             />
             <TrackPlayer isLoading={isLoading} track={track} />
           </S.BarPlayer>
