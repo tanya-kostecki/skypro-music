@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { SkeletonSidebarList } from '../skeleton/skeleton-sidebar'
 import * as S from './sidebar.styles'
 import { PLAYLISTS } from '../../sidebar-constants'
 import { Link } from 'react-router-dom'
+import { userContext } from '../../context/userContext'
 
 const CategoryItems = ({ playlists }) => {
   return (
