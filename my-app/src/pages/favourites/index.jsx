@@ -4,7 +4,7 @@ import { userContext } from '../../context/userContext'
 
 export const Favourites = ({ setToken }) => {
   const token = useContext(userContext) 
-  if (localStorage.getItem('token', token.username)) {
+  if (localStorage.getItem('token', token)) {
     return (
       <div>
         <h1>Favourites page</h1>

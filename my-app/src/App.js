@@ -5,9 +5,9 @@ import { useState } from 'react'
 import { userContext } from './context/userContext'
 
 function App() {
-  // const initialToken = localStorage.getItem('token', '')
+  const initialToken = localStorage.getItem('token', '')
   // const [token, setToken] = useState(initialToken)
-  const [token, setToken] = useState()
+  const [token, setToken] = useState(initialToken)
   
   return (
     <userContext.Provider value={token}>

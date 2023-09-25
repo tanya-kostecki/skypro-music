@@ -8,7 +8,7 @@ export const Category = ({ setToken }) => {
     const params = useParams()
     const token = useContext(userContext)
 
-    if (localStorage.getItem('token', token.username)) {
+    if (localStorage.getItem('token', token)) {
       const playlist = PLAYLISTS.find(
         (playlist) => playlist.id === Number(params.id),
       )

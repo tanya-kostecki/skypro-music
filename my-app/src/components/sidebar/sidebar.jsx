@@ -4,6 +4,7 @@ import * as S from './sidebar.styles'
 import { PLAYLISTS } from '../../sidebar-constants'
 import { Link } from 'react-router-dom'
 import { userContext } from '../../context/userContext'
+import { useNavigate } from 'react-router-dom'
 
 const CategoryItems = ({ playlists }) => {
   return (
@@ -27,14 +28,20 @@ const SidebarListLoaded = () => {
 
 export function Sidebar({ isLoading }) {
   const token = useContext(userContext)
+  const navigate = useNavigate()
+  const handleLogoutBtn = () => {
+    localStorage.clear()
+    navigate('/login')
+  }
+
   return (
     <S.MainSidebar>
       <S.SideBarPersonal>
         <S.SidebarPersonalName>
-          {isLoading ? '' : token.username}
+          {isLoading ? '' : token}
         </S.SidebarPersonalName>
         <S.SideBarIcon>
-          <svg alt="logout">
+          <svg alt="logout" onClick={handleLogoutBtn}>
             <use xlinkHref="img/icon/sprite.svg#logout"></use>
           </svg>
         </S.SideBarIcon>

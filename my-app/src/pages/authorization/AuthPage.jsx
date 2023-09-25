@@ -17,7 +17,7 @@ export function AuthPage({ isLoginMode = false, setToken }) {
     try {
       const userInfo = await loginApi({ email, password })
       localStorage.setItem('token', JSON.stringify(userInfo.username))
-      setToken(userInfo)
+      setToken(userInfo.username)
       navigate('/')
     } catch (error) {
       setError(error.message)
@@ -28,7 +28,7 @@ export function AuthPage({ isLoginMode = false, setToken }) {
     try {
       const userInfo = await registrationApi({ email, password, username})
       localStorage.setItem('token', JSON.stringify(userInfo.username))
-      setToken(userInfo)
+      setToken(userInfo.username)
       navigate('/')
     } catch (error) {
       setError(error.message)
