@@ -26,11 +26,12 @@ const SidebarListLoaded = () => {
 }
 
 export function Sidebar({ isLoading }) {
+  const token = useContext(userContext)
   return (
     <S.MainSidebar>
       <S.SideBarPersonal>
         <S.SidebarPersonalName>
-          {isLoading ? '' : 'Sergey.Ivanov'}
+          {isLoading ? '' : token.username}
         </S.SidebarPersonalName>
         <S.SideBarIcon>
           <svg alt="logout">

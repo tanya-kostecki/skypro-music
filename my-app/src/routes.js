@@ -10,7 +10,7 @@ export const AppRoutes = ({ token, setToken }) => {
   return (
     <Routes>
       <Route path="/login" element={<AuthPage setToken={setToken} isLoginMode={true}/>}></Route>
-      <Route path="/register" element={<AuthPage isLoginMode={false}/>}></Route>
+      <Route path="/register" element={<AuthPage setToken={setToken} isLoginMode={false}/>}></Route>
       <Route
         path="/"
         element={

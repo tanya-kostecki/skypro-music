@@ -26,7 +26,10 @@ export function AuthPage({ isLoginMode = false, setToken }) {
 
   const handleRegister = async () => {
     try {
-      await registrationApi({ email, password, username})
+      const userInfo = await registrationApi({ email, password, username})
+      localStorage.setItem('token', JSON.stringify(userInfo.username))
+      setToken(userInfo)
+      navigate('/')
     } catch (error) {
       setError(error.message)
     }
