@@ -14,38 +14,51 @@ export function AuthPage({ isLoginMode = false, setToken }) {
   const navigate = useNavigate()
 
   const handleLogin = async ({ email, password }) => {
-    try {
-      const userInfo = await loginApi({ email, password })
-      localStorage.setItem('token', JSON.stringify(userInfo.username))
-      setToken(userInfo.username)
-      navigate('/')
-    } catch (error) {
-      setError(error.message)
+    if(!email) {
+      setError('Введите почту')
+      return
+    } else if(!password) {
+      setError('Введите пароль')
+    } else {
+      try {
+        const userInfo = await loginApi({ email, password })
+        localStorage.setItem('token', userInfo.username)
+        setToken(userInfo.username)
+        navigate('/')
+      } catch (error) {
+        setError(error.message)
+      }
     }
   };
 
   const handleRegister = async () => {
-    try {
-      const userInfo = await registrationApi({ email, password, username})
-      localStorage.setItem('token', JSON.stringify(userInfo.username))
-      setToken(userInfo.username)
-      navigate('/')
-    } catch (error) {
-      setError(error.message)
-    }
-    
     if(!username) {
       setError('Введите имя пользователя')
+      return
     } else if(!email) {
       setError('Введите почту')
+      return
     } else if(!password) {
       setError('Введите пароль')
+      return
     } else if(!repeatPassword) {
       setError('Ввелите пароль повторно')
+      return
     } else if (repeatPassword !== password) {
       setError('Указанные пароли не совпадают')
+      return
     } else if (password.length < 8) {
       setError('Пароль должен быть не менее 8-ми символов')
+      return
+    } else {
+      try {
+        const userInfo = await registrationApi({ email, password, username})
+        localStorage.setItem('token', userInfo.username)
+        setToken(userInfo.username)
+        navigate('/')
+      } catch (error) {
+        setError(error.message)
+      }
     }
   };
 

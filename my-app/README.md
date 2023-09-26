@@ -1,3 +1,10 @@
+# Project Timeline
+Запланированное время (общее) - 10 часов
+
+Затраченное время на проект:
+
+25.09.2023 - 4 часа 23 минуты
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

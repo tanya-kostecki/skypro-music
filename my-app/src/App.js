@@ -6,11 +6,10 @@ import { userContext } from './context/userContext'
 
 function App() {
   const initialToken = localStorage.getItem('token', '')
-  // const [token, setToken] = useState(initialToken)
   const [token, setToken] = useState(initialToken)
   
   return (
-    <userContext.Provider value={token}>
+    <userContext.Provider value={[token, setToken]}>
       <AppRoutes token={token} setToken={setToken} />
       <GlobalStyle />
     </userContext.Provider>

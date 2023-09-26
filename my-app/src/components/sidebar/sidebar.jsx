@@ -27,10 +27,12 @@ const SidebarListLoaded = () => {
 }
 
 export function Sidebar({ isLoading }) {
-  const token = useContext(userContext)
+  const [token, setToken] = useContext(userContext)
   const navigate = useNavigate()
+  
   const handleLogoutBtn = () => {
     localStorage.clear()
+    setToken(false)
     navigate('/login')
   }
 
