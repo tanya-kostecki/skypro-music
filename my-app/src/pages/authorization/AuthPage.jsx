@@ -11,6 +11,8 @@ export function AuthPage({ isLoginMode = false, setToken }) {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [username, setUsername] = useState('')
 
+  const [isAuthProcess, setIsAuthProcess] = useState(false)
+
   const navigate = useNavigate()
 
   const handleLogin = async ({ email, password }) => {
@@ -21,12 +23,15 @@ export function AuthPage({ isLoginMode = false, setToken }) {
       setError('Введите пароль')
     } else {
       try {
+        setIsAuthProcess(true)
         const userInfo = await loginApi({ email, password })
         localStorage.setItem('token', userInfo.username)
         setToken(userInfo.username)
         navigate('/')
       } catch (error) {
         setError(error.message)
+      } finally {
+        setIsAuthProcess(false)
       }
     }
   };
@@ -52,12 +57,15 @@ export function AuthPage({ isLoginMode = false, setToken }) {
       return
     } else {
       try {
+        setIsAuthProcess(true)
         const userInfo = await registrationApi({ email, password, username})
         localStorage.setItem('token', userInfo.username)
         setToken(userInfo.username)
         navigate('/')
       } catch (error) {
         setError(error.message)
+      } finally {
+        setIsAuthProcess(false)
       }
     }
   };
@@ -99,8 +107,8 @@ export function AuthPage({ isLoginMode = false, setToken }) {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-              <S.PrimaryButton onClick={() => handleLogin({ email, password })}>
-                Войти
+              <S.PrimaryButton disabled={isAuthProcess} onClick={() => handleLogin({ email, password })}>
+                {isAuthProcess ? 'Выполняется вход...' : 'Войти'}
               </S.PrimaryButton>
               <Link to="/register">
                 <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
@@ -149,8 +157,8 @@ export function AuthPage({ isLoginMode = false, setToken }) {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-              <S.PrimaryButton onClick={handleRegister}>
-                Зарегистрироваться
+              <S.PrimaryButton disabled={isAuthProcess} onClick={handleRegister}>
+                {isAuthProcess ? 'Выполняется регистрация...' : 'Зарегистрироваться'}
               </S.PrimaryButton>
             </S.Buttons>
           </>

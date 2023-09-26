@@ -6,6 +6,12 @@ export function PlaylistItem({ getTracks, setTrack }) {
     setTrack(track)
   }
 
+  const secondsToMinutes = (sec) => {
+    const min = Math.trunc(sec / 60) + ''
+    sec = (sec % 60) + ''
+    return min.padStart(2, 0) + ':' + sec.padStart(2, 0)
+  }
+
   return (
     <>
       {getTracks?.map((track) => (
@@ -39,7 +45,7 @@ export function PlaylistItem({ getTracks, setTrack }) {
                 <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
               </S.TrackTimeSvg>
               <S.TrackTimeText className="track__time-text">
-                {track.duration_in_seconds}
+                {secondsToMinutes(track.duration_in_seconds)}
               </S.TrackTimeText>
             </div>
           </S.PlaylistTrack>
