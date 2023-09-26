@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 import { useState, useContext } from 'react'
 import { userContext } from '../../context/userContext'
 
-export const CreateNavigation = ({ setToken }) => {
+export const CreateNavigation = () => {
   const [visible, setVisibility] = useState(false)
   const toggleVisibility = () => setVisibility(!visible)
 
-  const token = useContext(userContext)
+  const {token, setToken} = useContext(userContext)
 
   const handleLogOut = () => {
     localStorage.removeItem('token', token)

@@ -5,7 +5,7 @@ import { Footer } from '../../components/footer'
 import { useState, useEffect } from 'react'
 import { getAllTracks } from '../../api'
 
-export const MainPage = ({ setToken }) => {
+export const MainPage = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [getTracks, setGetTracks] = useState()
   const [error, setError] = useState(null)
@@ -31,7 +31,6 @@ export const MainPage = ({ setToken }) => {
       <Container>
         <Main
           isLoading={isLoading}
-          setToken={setToken}
           getTracks={getTracks}
           error={error}
           setTrack={setTrack}

@@ -5,8 +5,11 @@ import { NotFound } from "./pages/page-not-found";
 import { Category } from "./pages/categories";
 import { ProtectedRoute } from './components/protected-route'
 import { AuthPage } from "./pages/authorization/AuthPage";
+import { useContext } from "react";
+import { userContext } from "./context/userContext";
 
-export const AppRoutes = ({ token, setToken }) => {
+export const AppRoutes = () => {
+  const {token, setToken} = useContext(userContext)
   return (
     <Routes>
       <Route path="/login" element={<AuthPage setToken={setToken} isLoginMode={true}/>}></Route>

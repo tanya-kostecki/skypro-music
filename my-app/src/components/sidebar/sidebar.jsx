@@ -27,7 +27,7 @@ const SidebarListLoaded = () => {
 }
 
 export function Sidebar({ isLoading }) {
-  const [token, setToken] = useContext(userContext)
+  const {token, setToken} = useContext(userContext)
   const navigate = useNavigate()
   
   const handleLogoutBtn = () => {

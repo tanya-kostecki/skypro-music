@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect, useContext } from "react"
 import { userContext } from '../../context/userContext'
 
-export const Category = ({ setToken }) => {
+export const Category = () => {
     const params = useParams()
-    const token = useContext(userContext)
+    const {token, setToken} = useContext(userContext)
 
     if (localStorage.getItem('token', token)) {
       const playlist = PLAYLISTS.find(

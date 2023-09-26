@@ -9,8 +9,8 @@ function App() {
   const [token, setToken] = useState(initialToken)
   
   return (
-    <userContext.Provider value={[token, setToken]}>
-      <AppRoutes token={token} setToken={setToken} />
+    <userContext.Provider value={{token, setToken}}>
+      <AppRoutes />
       <GlobalStyle />
     </userContext.Provider>
   )
