@@ -1,16 +1,6 @@
-export async function getAllTracks() {
-    const response = await fetch('https://skypro-music-api.skyeng.tech/catalog/track/all/')
-
-    if (!response.ok) {
-        throw new Error('server error')
-    }
-
-    const data = await response.json()
-    return data
-}
-
+import { baseUrl } from "./trackApi"
 export async function registrationApi({ email, password, username }) {
-    const response = await fetch('https://skypro-music-api.skyeng.tech/user/signup/', {
+    const response = await fetch(baseUrl + '/user/signup/', {
         method: 'POST',
         body: JSON.stringify({
             email: email,
@@ -32,7 +22,7 @@ export async function registrationApi({ email, password, username }) {
 }
 
 export async function loginApi({ email, password }) {
-    const response = await fetch('https://skypro-music-api.skyeng.tech/user/login/', {
+    const response = await fetch(baseUrl + '/user/login/', {
         method: 'POST',
         body: JSON.stringify({
             email: email,

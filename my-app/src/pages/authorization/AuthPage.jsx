@@ -1,8 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./AuthPage.styles";
 import { useEffect, useState, useContext } from "react";
-import { loginApi, registrationApi } from "../../api";
-import { userContext } from "../../context/userContext";
+import { loginApi, registrationApi } from "../../api/userApi";
 
 export function AuthPage({ isLoginMode = false, setToken }) {
   const [error, setError] = useState(null);

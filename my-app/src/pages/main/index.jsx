@@ -3,7 +3,7 @@ import { Main } from '../../components/main/main'
 import { Bar } from '../../components/bar/bar'
 import { Footer } from '../../components/footer'
 import { useState, useEffect } from 'react'
-import { getAllTracks } from '../../api'
+import { getAllTracks } from '../../api/trackApi'
 
 export const MainPage = () => {
   const [isLoading, setIsLoading] = useState(true)
