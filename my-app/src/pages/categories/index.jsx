@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom"
 import { PLAYLISTS } from "../../sidebar-constants"
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from "react"
+import { useEffect, useContext } from "react"
+import { userContext } from '../../context/userContext'
 
-export const Category = ({ setToken }) => {
+export const Category = () => {
     const params = useParams()
+    const {token, setToken} = useContext(userContext)
 
-    if (localStorage.getItem('token', 'token')) {
+    if (localStorage.getItem('token', token)) {
       const playlist = PLAYLISTS.find(
         (playlist) => playlist.id === Number(params.id),
       )

@@ -2,16 +2,17 @@ import React from 'react'
 import GlobalStyle from './app.styles'
 import { AppRoutes } from './routes'
 import { useState } from 'react'
+import { userContext } from './context/userContext'
 
 function App() {
   const initialToken = localStorage.getItem('token', '')
   const [token, setToken] = useState(initialToken)
   
   return (
-    <div>
-      <AppRoutes token={token} setToken={setToken} />
+    <userContext.Provider value={{token, setToken}}>
+      <AppRoutes />
       <GlobalStyle />
-    </div>
+    </userContext.Provider>
   )
 }
 

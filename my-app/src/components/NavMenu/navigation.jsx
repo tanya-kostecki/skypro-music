@@ -1,14 +1,17 @@
 import React from 'react'
 import * as S from './NavMenu.styles'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { userContext } from '../../context/userContext'
 
-export const CreateNavigation = ({ setToken }) => {
+export const CreateNavigation = () => {
   const [visible, setVisibility] = useState(false)
   const toggleVisibility = () => setVisibility(!visible)
 
+  const {token, setToken} = useContext(userContext)
+
   const handleLogOut = () => {
-    localStorage.removeItem('token', 'token')
+    localStorage.removeItem('token', token)
     setToken(false)
    
   }

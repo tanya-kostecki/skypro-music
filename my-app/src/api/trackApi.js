@@ -1,5 +1,7 @@
+export const baseUrl = 'https://skypro-music-api.skyeng.tech'
+
 export async function getAllTracks() {
-    const response = await fetch('https://skypro-music-api.skyeng.tech/catalog/track/all/')
+    const response = await fetch(baseUrl + '/catalog/track/all/')
 
     if (!response.ok) {
         throw new Error('server error')
