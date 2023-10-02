@@ -1,10 +1,14 @@
 import React from 'react'
 import * as S from './playlist.styles'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentTrack } from '../../store/actions/creators/currentTrack'
+import { currentIsPlaying, currentTrackPlayer } from '../../store/selectors/currentTrack'
 
 export function PlaylistItem({ getTracks, setTrack }) {
   const dispatch = useDispatch()
+
+  const isPlaying = useSelector(currentIsPlaying)
+  const currentTrack = useSelector(currentTrackPlayer)
 
   const showPlayer = (track) => {
     dispatch(selectCurrentTrack(track))
@@ -24,6 +28,10 @@ export function PlaylistItem({ getTracks, setTrack }) {
           <S.PlaylistTrack onClick={() => showPlayer(track)}>
             <S.TrackTitle>
               <S.TrackTitleImage>
+                {currentTrack.id === track.id && (
+                  <S.TrackTitleAnimation $isPlaying={isPlaying}>
+                  </S.TrackTitleAnimation>
+                )}
                 <S.TrackTitleSvg alt="music">
                   <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
                 </S.TrackTitleSvg>

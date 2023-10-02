@@ -4,11 +4,14 @@ import { PlayerControls } from '../player-controls/player-controls'
 import * as S from './bar.styles'
 import { useRef, useState } from 'react'
 import ProgressBar from './progress-bar'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { currentTrackPlayer } from '../../store/selectors/currentTrack'
+import { selectIsPlaying } from '../../store/actions/creators/currentTrack'
 
 export function Bar({ isLoading }) {
   const track = useSelector(currentTrackPlayer)
+  const dispatch = useDispatch(selectIsPlaying)
+
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLoop, setIsLoop] = useState(false)
 
@@ -49,6 +52,7 @@ export function Bar({ isLoading }) {
   const handleStart = () => {
     audioRef.current.play()
     setIsPlaying(true)
+    dispatch(selectIsPlaying(true)) //added
   }
 
   useEffect(handleStart, [track])

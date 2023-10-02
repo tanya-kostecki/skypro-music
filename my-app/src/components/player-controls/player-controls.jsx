@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import * as S from './player-controls.styles'
+import { useDispatch } from 'react-redux'
+import { selectIsPlaying } from '../../store/actions/creators/currentTrack'
 
 export function PlayerControls({
   isPlaying,
@@ -10,8 +12,10 @@ export function PlayerControls({
   handleStart
 }) {
 
+  const dispatch = useDispatch()
   const handleStop = () => {
     audioRef.current.pause()
+    dispatch(selectIsPlaying(false)) //added
     setIsPlaying(false)
   }
 
