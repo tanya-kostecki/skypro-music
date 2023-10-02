@@ -2,7 +2,9 @@ import React from 'react'
 import { SkeletonTrackPlayer } from '../skeleton/skeleton-trackplayer'
 import *as S from './track-player.styles'
 
+
 const TrackPlayerLoaded = ({ track }) => {
+  
   return (
     <S.TrackPlayContain>
       <S.TrackPlayImage>
@@ -24,7 +26,8 @@ const TrackPlayerLoaded = ({ track }) => {
   )
 }
 
-export function TrackPlayer({ isLoading, track }) {
+export function TrackPlayer({ isLoading, track}) {
+  
   return (
     <S.PlayerTrackPlay className="track-play">
       {isLoading ? <SkeletonTrackPlayer /> : <TrackPlayerLoaded track={track}/>}

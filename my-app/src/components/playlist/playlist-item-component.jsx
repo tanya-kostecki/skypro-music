@@ -1,8 +1,13 @@
 import React from 'react'
 import * as S from './playlist.styles'
+import { useDispatch } from 'react-redux'
+import { selectCurrentTrack } from '../../store/actions/creators/currentTrack'
 
 export function PlaylistItem({ getTracks, setTrack }) {
+  const dispatch = useDispatch()
+
   const showPlayer = (track) => {
+    dispatch(selectCurrentTrack(track))
     setTrack(track)
   }
 

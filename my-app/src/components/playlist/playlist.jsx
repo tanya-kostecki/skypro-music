@@ -6,7 +6,7 @@ import * as S from './playlist.styles'
 const PLaylistAllItems = ({ getTracks, setTrack }) => {
   return (
     <div className="content__playlist-items">
-      <PlaylistItem getTracks={getTracks} setTrack={setTrack} />
+      <PlaylistItem getTracks={getTracks} setTrack={setTrack}  />
     </div>
   )
 }
@@ -24,7 +24,7 @@ export const Playlist = ({ isLoading, getTracks, error, setTrack }) => {
       {isLoading ? (
         <SkeletonPlaylistItems />
       ) : (
-        <PLaylistAllItems getTracks={getTracks} setTrack={setTrack} />
+        <PLaylistAllItems getTracks={getTracks} setTrack={setTrack}/>
       )}
     </S.ContentPlaylist>
   )

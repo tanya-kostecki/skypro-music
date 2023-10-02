@@ -4,8 +4,11 @@ import { PlayerControls } from '../player-controls/player-controls'
 import * as S from './bar.styles'
 import { useRef, useState } from 'react'
 import ProgressBar from './progress-bar'
+import { useSelector } from 'react-redux'
+import { currentTrackPlayer } from '../../store/selectors/currentTrack'
 
-export function Bar({ isLoading, track }) {
+export function Bar({ isLoading }) {
+  const track = useSelector(currentTrackPlayer)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLoop, setIsLoop] = useState(false)
 
