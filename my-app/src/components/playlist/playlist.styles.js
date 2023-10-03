@@ -78,10 +78,10 @@ const animationActive = css`
 
 export const TrackTitleAnimation = styled.div`
   position: absolute;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   background-color: #b672ff;
-  border-radius: 8px;
+  border-radius: 9px;
   display: block;
 
   ${(props) =>

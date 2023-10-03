@@ -2,7 +2,7 @@ import { SET_CURRENT_TRACK, SET_IS_PLAYING } from '../actions/types/currentTrack
 
 const initialState = {
   track: {},
-  isPlaying: true
+  isPlaying: false
 }
 
 export default function currentTrackReducer(state = initialState, action) {
@@ -10,7 +10,6 @@ export default function currentTrackReducer(state = initialState, action) {
     case SET_CURRENT_TRACK: {
       return {
         ...state,
-        isPlaying: !state.isPlaying,
         track: action.payload,
       }
     }
