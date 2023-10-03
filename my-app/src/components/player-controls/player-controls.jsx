@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as S from './player-controls.styles'
 import { useDispatch } from 'react-redux'
 import { selectIsPlaying } from '../../store/actions/creators/currentTrack'
 
 export function PlayerControls({
   isPlaying,
-  setIsPlaying,
   audioRef,
   isLoop,
   setIsLoop,
@@ -15,8 +14,7 @@ export function PlayerControls({
   const dispatch = useDispatch()
   const handleStop = () => {
     audioRef.current.pause()
-    dispatch(selectIsPlaying(false)) //added
-    setIsPlaying(false)
+    dispatch(selectIsPlaying(false))
   }
 
   const togglePlay = isPlaying ? handleStop : handleStart
@@ -35,7 +33,7 @@ export function PlayerControls({
 
   const notReady = () => {
     audioRef.current.pause()
-    setIsPlaying(false)
+    dispatch(selectIsPlaying(false))
     alert('Еще не реализовано')
   }
 
