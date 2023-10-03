@@ -3,15 +3,15 @@ import { PlaylistItem } from './playlist-item-component'
 import { SkeletonPlaylistItems } from '../skeleton/skeleton-component' 
 import * as S from './playlist.styles'
 
-const PLaylistAllItems = ({ setTrack }) => { //getTracks
+const PLaylistAllItems = () => {//setTrack
   return (
     <div className="content__playlist-items">
-      <PlaylistItem setTrack={setTrack}/>
-    </div> //getTracks={getTracks}
+      <PlaylistItem/>
+    </div> //setTrack={setTrack}
   )
 }
 
-export const Playlist = ({ isLoading, error, setTrack }) => { //getTracks
+export const Playlist = ({ isLoading, error }) => { //setTrack
   if (error) {
     return (
       <p style={{ 'font-size': '24px' }}>
@@ -24,7 +24,7 @@ export const Playlist = ({ isLoading, error, setTrack }) => { //getTracks
       {isLoading ? (
         <SkeletonPlaylistItems />
       ) : (
-        <PLaylistAllItems setTrack={setTrack}/> //getTracks={getTracks}
+        <PLaylistAllItems /> //setTrack={setTrack}
       )}
     </S.ContentPlaylist>
   )

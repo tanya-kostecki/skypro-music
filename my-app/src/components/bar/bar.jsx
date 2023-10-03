@@ -6,7 +6,10 @@ import { useRef, useState } from 'react'
 import ProgressBar from './progress-bar'
 import { useSelector, useDispatch } from 'react-redux'
 import { currentTrackPlayer, currentIsPlaying } from '../../store/selectors/currentTrack'
-import { selectIsPlaying } from '../../store/actions/creators/currentTrack'
+import {
+  selectCurrentTrack,
+  selectIsPlaying,
+} from '../../store/actions/creators/currentTrack'
 
 export function Bar({ isLoading }) {
   const track = useSelector(currentTrackPlayer)
@@ -50,9 +53,8 @@ export function Bar({ isLoading }) {
   }
 
   const handleStart = () => {
-
     dispatch(selectIsPlaying(true))
-    audioRef.current.play()
+    audioRef.current?.play() //
   }
 
   useEffect(handleStart, [track])
@@ -64,71 +66,73 @@ export function Bar({ isLoading }) {
   }
 
   return (
-    <S.Bar>
-      <div
-        className="musicTimerDiv"
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          padding: '0 20px 0 20px',
-        }}
-      >
-        <p className="musicCurrentTime">{currentTime}</p>
-        <p className="musicTotalLength">{`/ ${duration}`}</p>
-      </div>
-      <audio
-        controls
-        src={track.track_file}
-        ref={audioRef}
-        style={{ display: 'none' }}
-        onTimeUpdate={handleAudioUpdate}
-        onEnded={endTrack}
-      >
-        <source src={track.track_file} type="audio/mpeg" />
-      </audio>
-      <S.BarContent>
-        <ProgressBar
-          audioRef={audioRef}
-          currentTime={currentTime}
-          setCurrentTime={setCurrentTime}
-          setAudioProgress={setAudioProgress}
-          audioProgress={audioProgress}
-        />
-        <S.BarPlayerBlock>
-          <S.BarPlayer className="player" >
-            <PlayerControls
-              isLoading={isLoading}
-              isPlaying={isPlaying}
-              audioRef={audioRef}
-              isLoop={isLoop}
-              setIsLoop={setIsLoop}
-              handleStart={handleStart}
-            />
-            <TrackPlayer isLoading={isLoading} track={track} />
-          </S.BarPlayer>
-          <S.BarVolumeBlock className="volume">
-            <S.VolumeContent>
-              <S.VolumeImage>
-                <S.VolumeSvg alt="volume">
-                  <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
-                </S.VolumeSvg>
-              </S.VolumeImage>
-              <S.VolumeProgress className="_btn">
-                <S.VolumeProgressLine
-                  className="_btn"
-                  type="range"
-                  name="range"
-                  min={0}
-                  max={1}
-                  value={currentVolume}
-                  step={0.1}
-                  onChange={handleVolume}
-                />
-              </S.VolumeProgress>
-            </S.VolumeContent>
-          </S.BarVolumeBlock>
-        </S.BarPlayerBlock>
-      </S.BarContent>
-    </S.Bar>
+    track.id && (
+      <S.Bar>
+        <div
+          className="musicTimerDiv"
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            padding: '0 20px 0 20px',
+          }}
+        >
+          <p className="musicCurrentTime">{currentTime}</p>
+          <p className="musicTotalLength">{`/ ${duration}`}</p>
+        </div>
+        <audio
+          controls
+          src={track.track_file}
+          ref={audioRef}
+          style={{ display: 'none' }}
+          onTimeUpdate={handleAudioUpdate}
+          onEnded={endTrack}
+        >
+          <source src={track.track_file} type="audio/mpeg" />
+        </audio>
+        <S.BarContent>
+          <ProgressBar
+            audioRef={audioRef}
+            currentTime={currentTime}
+            setCurrentTime={setCurrentTime}
+            setAudioProgress={setAudioProgress}
+            audioProgress={audioProgress}
+          />
+          <S.BarPlayerBlock>
+            <S.BarPlayer className="player">
+              <PlayerControls
+                isLoading={isLoading}
+                isPlaying={isPlaying}
+                audioRef={audioRef}
+                isLoop={isLoop}
+                setIsLoop={setIsLoop}
+                handleStart={handleStart}
+              />
+              <TrackPlayer isLoading={isLoading} track={track} />
+            </S.BarPlayer>
+            <S.BarVolumeBlock className="volume">
+              <S.VolumeContent>
+                <S.VolumeImage>
+                  <S.VolumeSvg alt="volume">
+                    <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
+                  </S.VolumeSvg>
+                </S.VolumeImage>
+                <S.VolumeProgress className="_btn">
+                  <S.VolumeProgressLine
+                    className="_btn"
+                    type="range"
+                    name="range"
+                    min={0}
+                    max={1}
+                    value={currentVolume}
+                    step={0.1}
+                    onChange={handleVolume}
+                  />
+                </S.VolumeProgress>
+              </S.VolumeContent>
+            </S.BarVolumeBlock>
+          </S.BarPlayerBlock>
+        </S.BarContent>
+      </S.Bar>
+    )
   )
 }

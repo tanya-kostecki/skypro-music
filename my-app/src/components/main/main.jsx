@@ -7,7 +7,7 @@ import { Sidebar } from '../sidebar/sidebar'
 import * as S from './main.styles'
 import { useNavigate } from "react-router-dom"
 
-export function Main({ isLoading, setToken, error, setTrack }) { //getTracks
+export function Main({ isLoading, setToken, error }) {//setTrack
   if (localStorage.getItem('token', 'token')) {
     return (
       <S.MainMain>
@@ -25,9 +25,8 @@ export function Main({ isLoading, setToken, error, setTrack }) { //getTracks
             <ContentTitlePlaylist isLoading={isLoading} />
             <Playlist
               isLoading={isLoading}
-              // getTracks={getTracks}
               error={error}
-              setTrack={setTrack}
+              // setTrack={setTrack}
             />
           </S.CenterblockContent>
         </S.MainCenterblock>

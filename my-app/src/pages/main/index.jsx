@@ -5,26 +5,24 @@ import { Footer } from '../../components/footer'
 import { useState, useEffect } from 'react'
 import { getAllTracks } from '../../api/trackApi'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentTracklist } from '../../store/actions/creators/currentTrack'
-import { useSelector } from 'react-redux'
-import { currentTracklistPlayer } from '../../store/selectors/currentTrack'
+import { currentTrackPlayer } from '../../store/selectors/currentTrack'
 
 export const MainPage = () => {
   const [isLoading, setIsLoading] = useState(true)
-  // const [getTracks, setGetTracks] = useState() //
+
   const dispatch = useDispatch()
 
-  // const tracklist = useSelector(currentTracklistPlayer)
   const [error, setError] = useState(null)
 
-  const [track, setTrack] = useState(null)
+  // const [track, setTrack] = useState(null)
+  const track = useSelector(currentTrackPlayer) //
 
   useEffect(() => {
     setIsLoading(true)
     getAllTracks()
-      .then((tracklist) => {//tracks
-        // setGetTracks(tracks)
+      .then((tracklist) => {
         dispatch(selectCurrentTracklist(tracklist))
         setIsLoading(false)
         setError(null)
@@ -40,9 +38,8 @@ export const MainPage = () => {
       <Container>
         <Main
           isLoading={isLoading}
-          // getTracks={getTracks} //delete getTracks
           error={error}
-          setTrack={setTrack}
+          // setTrack={setTrack}
         />
         {track ? <Bar isLoading={isLoading} /> : null}
         <Footer />
