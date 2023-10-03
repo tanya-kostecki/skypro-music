@@ -3,6 +3,6 @@ import currentTrackReducer from './reducers/currentTrack'
 
 export const store = configureStore({
     reducer: {
-        currentTrack: currentTrackReducer,
+        currentPlay: currentTrackReducer,
     }
 })

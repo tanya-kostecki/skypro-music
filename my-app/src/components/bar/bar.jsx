@@ -50,15 +50,16 @@ export function Bar({ isLoading }) {
   }
 
   const handleStart = () => {
-    audioRef.current.play()
+
     dispatch(selectIsPlaying(true))
+    audioRef.current.play()
   }
 
   useEffect(handleStart, [track])
 
   const endTrack = () => {
     if (!isLoop) {
-      dispatch(selectIsPlaying(true))
+      dispatch(selectIsPlaying(false))
     }
   }
 

@@ -1,5 +1,7 @@
-const currentTrackSelector = (store) => store.currentTrack 
+const currentPlaySelector = (store) => store.currentPlay
 
-export const currentTrackPlayer = (store) => currentTrackSelector(store)?.track || []
+export const currentTrackPlayer = (store) => currentPlaySelector(store)?.track || []
 
-export const currentIsPlaying = (store) => currentTrackSelector(store)?.isPlaying
+export const currentIsPlaying = (store) => currentPlaySelector(store)?.isPlaying
+
+export const currentTracklistPlayer = (store) => currentPlaySelector(store)?.tracklist

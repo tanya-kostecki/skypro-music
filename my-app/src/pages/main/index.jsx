@@ -35,7 +35,7 @@ export const MainPage = () => {
           error={error}
           setTrack={setTrack}
         />
-        {track ? <Bar isLoading={isLoading}/> : null}
+        {track ? <Bar isLoading={isLoading} /> : null}
         <Footer />
       </Container>
     </Wrapper>

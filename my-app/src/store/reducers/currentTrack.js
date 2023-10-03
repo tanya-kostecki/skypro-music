@@ -1,7 +1,8 @@
-import { SET_CURRENT_TRACK, SET_IS_PLAYING } from '../actions/types/currentTrack'
+import { SET_CURRENT_TRACK, SET_IS_PLAYING, SET_CURRENT_TRACKLIST } from '../actions/types/currentTrack'
 
 const initialState = {
   track: {},
+  tracklist: [],
   isPlaying: false
 }
 
@@ -17,6 +18,12 @@ export default function currentTrackReducer(state = initialState, action) {
       return {
         ...state,
         isPlaying: action.payload,
+      }
+    }
+    case SET_CURRENT_TRACKLIST: {
+      return {
+        ...state,
+        tracklist: action.payload,
       }
     }
     default: return state

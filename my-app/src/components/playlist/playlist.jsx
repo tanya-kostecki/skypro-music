@@ -3,10 +3,10 @@ import { PlaylistItem } from './playlist-item-component'
 import { SkeletonPlaylistItems } from '../skeleton/skeleton-component' 
 import * as S from './playlist.styles'
 
-const PLaylistAllItems = ({ getTracks, setTrack }) => {
+const PLaylistAllItems = ({ getTracks, setTrack }) => { 
   return (
     <div className="content__playlist-items">
-      <PlaylistItem getTracks={getTracks} setTrack={setTrack}  />
+      <PlaylistItem getTracks={getTracks} setTrack={setTrack}/>
     </div>
   )
 }
