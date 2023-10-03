@@ -2,10 +2,12 @@ import React from 'react'
 import * as S from './playlist.styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentTrack } from '../../store/actions/creators/currentTrack'
-import { currentIsPlaying, currentTrackPlayer } from '../../store/selectors/currentTrack'
+import { currentIsPlaying, currentTrackPlayer, currentTracklistPlayer } from '../../store/selectors/currentTrack'
 
-export function PlaylistItem({ getTracks, setTrack }) {
+export function PlaylistItem({ setTrack }) { //getTracks
   const dispatch = useDispatch()
+
+  const tracklist = useSelector(currentTracklistPlayer)
 
   const isPlaying = useSelector(currentIsPlaying)
   const currentTrack = useSelector(currentTrackPlayer)
@@ -22,8 +24,8 @@ export function PlaylistItem({ getTracks, setTrack }) {
   }
 
   return (
-    <>
-      {getTracks?.map((track) => (
+    <div>
+      {tracklist?.map((track) => ( //getTracks
         <S.PlaylistItem key={track.id}>
           <S.PlaylistTrack onClick={() => showPlayer(track)}>
             <S.TrackTitle>
@@ -64,6 +66,6 @@ export function PlaylistItem({ getTracks, setTrack }) {
           </S.PlaylistTrack>
         </S.PlaylistItem>
       ))}
-    </>
+    </div>
   )
 }
