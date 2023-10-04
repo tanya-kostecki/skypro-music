@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentTrack } from '../../store/actions/creators/currentTrack'
 import { currentIsPlaying, currentTrackPlayer, currentTracklistPlayer } from '../../store/selectors/currentTrack'
 
-export function PlaylistItem({ setTrack }) { //setTrack
+export function PlaylistItem() { 
   const dispatch = useDispatch()
 
   const tracklist = useSelector(currentTracklistPlayer)
@@ -12,10 +12,9 @@ export function PlaylistItem({ setTrack }) { //setTrack
   const isPlaying = useSelector(currentIsPlaying)
   const currentTrack = useSelector(currentTrackPlayer)
 
-  const track = useSelector(currentTrackPlayer) //
+  const track = useSelector(currentTrackPlayer) 
   const showPlayer = (track) => {
     dispatch(selectCurrentTrack(track))
-    // setTrack(track)
   }
 
   const secondsToMinutes = (sec) => {

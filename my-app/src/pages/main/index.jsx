@@ -16,7 +16,6 @@ export const MainPage = () => {
 
   const [error, setError] = useState(null)
 
-  // const [track, setTrack] = useState(null)
   const track = useSelector(currentTrackPlayer) //
 
   useEffect(() => {
@@ -39,7 +38,6 @@ export const MainPage = () => {
         <Main
           isLoading={isLoading}
           error={error}
-          // setTrack={setTrack}
         />
         {track ? <Bar isLoading={isLoading} /> : null}
         <Footer />
