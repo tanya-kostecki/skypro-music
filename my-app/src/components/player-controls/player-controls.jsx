@@ -53,10 +53,22 @@ export function PlayerControls({
     }
   }
 
+  const handlePrevTrack = (prevTrack) => {
+    if(track) {
+      const trackIndex = tracklist.indexOf(track)
+      if(trackIndex < tracklist.length - 1 && trackIndex > 0) {
+        prevTrack = tracklist[trackIndex - 1]
+        dispatch(selectCurrentTrack(prevTrack))
+      } else {
+        return
+      }
+    }
+  }
+
   return (
     <S.PlayerControls>
       <S.PlayerBtnPrev>
-        <S.PlayerBtnPrevSvg alt="prev" onClick={notReady}>
+        <S.PlayerBtnPrevSvg alt="prev" onClick={handlePrevTrack}>
           <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
         </S.PlayerBtnPrevSvg>
       </S.PlayerBtnPrev>
