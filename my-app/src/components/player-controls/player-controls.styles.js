@@ -20,6 +20,7 @@ export const PlayerBtnPrev = styled.div`
   -ms-flex-align: center;
   align-items: center;
   margin-right: 23px;
+  cursor: pointer;
 `
 
 export const PlayerBtnPrevSvg = styled.svg`
@@ -54,6 +55,7 @@ export const PlayerBtnNext = styled.div`
   align-items: center;
   margin-right: 28px;
   fill: #a53939;
+  cursor: pointer;
 `
 
 export const PlayerBtnNextSvg = styled.svg`

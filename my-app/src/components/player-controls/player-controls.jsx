@@ -1,7 +1,8 @@
 import React from 'react'
 import * as S from './player-controls.styles'
-import { useDispatch } from 'react-redux'
-import { selectIsPlaying } from '../../store/actions/creators/currentTrack'
+import { ReactReduxContext, useDispatch, useSelector } from 'react-redux'
+import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
+import { currentTrackPlayer, currentTracklistPlayer } from '../../store/selectors/currentTrack'
 
 export function PlayerControls({
   isPlaying,
@@ -37,6 +38,21 @@ export function PlayerControls({
     alert('Еще не реализовано')
   }
 
+  const track = useSelector(currentTrackPlayer)
+  const tracklist = useSelector(currentTracklistPlayer)
+
+  const handleNextTrack = (nextTrack) => {
+    if(track) {
+      const trackIndex = tracklist.indexOf(track)
+      if(trackIndex < tracklist.length - 1) {
+        nextTrack = tracklist[trackIndex + 1]
+        dispatch(selectCurrentTrack(nextTrack))
+      } else {
+        return
+      }
+    }
+  }
+
   return (
     <S.PlayerControls>
       <S.PlayerBtnPrev>
@@ -62,7 +78,7 @@ export function PlayerControls({
           )}
         </S.PlayerBtnPlaySvg>
       </S.PlayerBtnPlay>
-      <S.PlayerBtnNext onClick={notReady}>
+      <S.PlayerBtnNext onClick={handleNextTrack}>
         <S.PlayerBtnNextSvg alt="next">
           <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
         </S.PlayerBtnNextSvg>
