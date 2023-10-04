@@ -27,6 +27,7 @@ export function Bar({ isLoading }) {
 
   const [currentVolume, setCurrentVolume] = useState(1)
 
+  const [shuffle, setShuffle] = useState(false)
 
   const handleVolume = (event) => {
     audioRef.current.volume = event.target.value
@@ -61,15 +62,26 @@ export function Bar({ isLoading }) {
 
   const tracklist = useSelector(currentTracklistPlayer)
 
+  const handleShuffle = () => {
+    let randomIndex = Math.floor(Math.random() * (tracklist.length - 1))
+    return randomIndex
+  }
+
+
   const handleNextTrack = () => {
     if(track) {
       const trackIndex = tracklist.indexOf(track)
-      if(trackIndex < tracklist.length - 1) {
+      if(trackIndex < tracklist.length - 1 && !shuffle) {
         const nextTrack = tracklist[trackIndex + 1]
         dispatch(selectCurrentTrack(nextTrack))
-      } else {
-        return
       }
+
+      if(shuffle) {
+        let randomTrackIndex = handleShuffle()
+        let randomTrack = tracklist[randomTrackIndex]
+        dispatch(selectCurrentTrack(randomTrack))
+      }
+      
     }
   }
 
@@ -121,6 +133,9 @@ export function Bar({ isLoading }) {
                 setIsLoop={setIsLoop}
                 handleStart={handleStart}
                 handleNextTrack={handleNextTrack}
+                handleShuffle={handleShuffle}
+                shuffle={shuffle}
+                setShuffle={setShuffle}
               />
               <TrackPlayer isLoading={isLoading} track={track} />
             </S.BarPlayer>
