@@ -76,6 +76,10 @@ export function Bar({ isLoading }) {
         dispatch(selectCurrentTrack(nextTrack))
       }
 
+      if(trackIndex === tracklist.length - 1) {
+        dispatch(selectIsPlaying(false))
+      }
+
       if(shuffle) {
         let randomTrackIndex = handleShuffle()
         let randomTrack = tracklist[randomTrackIndex]
