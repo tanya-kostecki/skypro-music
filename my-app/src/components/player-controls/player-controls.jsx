@@ -9,7 +9,8 @@ export function PlayerControls({
   audioRef,
   isLoop,
   setIsLoop,
-  handleStart
+  handleStart,
+  handleNextTrack
 }) {
 
   const dispatch = useDispatch()
@@ -40,18 +41,6 @@ export function PlayerControls({
 
   const track = useSelector(currentTrackPlayer)
   const tracklist = useSelector(currentTracklistPlayer)
-
-  const handleNextTrack = (nextTrack) => {
-    if(track) {
-      const trackIndex = tracklist.indexOf(track)
-      if(trackIndex < tracklist.length - 1) {
-        nextTrack = tracklist[trackIndex + 1]
-        dispatch(selectCurrentTrack(nextTrack))
-      } else {
-        return
-      }
-    }
-  }
 
   const handlePrevTrack = (prevTrack) => {
     if(track) {

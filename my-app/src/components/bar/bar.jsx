@@ -5,7 +5,7 @@ import * as S from './bar.styles'
 import { useRef, useState } from 'react'
 import ProgressBar from './progress-bar'
 import { useSelector, useDispatch } from 'react-redux'
-import { currentTrackPlayer, currentIsPlaying } from '../../store/selectors/currentTrack'
+import { currentTrackPlayer, currentIsPlaying, currentTracklistPlayer } from '../../store/selectors/currentTrack'
 import {
   selectCurrentTrack,
   selectIsPlaying,
@@ -59,9 +59,23 @@ export function Bar({ isLoading }) {
 
   useEffect(handleStart, [track])
 
+  const tracklist = useSelector(currentTracklistPlayer)
+
+  const handleNextTrack = () => {
+    if(track) {
+      const trackIndex = tracklist.indexOf(track)
+      if(trackIndex < tracklist.length - 1) {
+        const nextTrack = tracklist[trackIndex + 1]
+        dispatch(selectCurrentTrack(nextTrack))
+      } else {
+        return
+      }
+    }
+  }
+
   const endTrack = () => {
     if (!isLoop) {
-      dispatch(selectIsPlaying(false))
+      handleNextTrack()
     }
   }
 
@@ -106,6 +120,7 @@ export function Bar({ isLoading }) {
                 isLoop={isLoop}
                 setIsLoop={setIsLoop}
                 handleStart={handleStart}
+                handleNextTrack={handleNextTrack}
               />
               <TrackPlayer isLoading={isLoading} track={track} />
             </S.BarPlayer>
