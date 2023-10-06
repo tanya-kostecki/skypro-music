@@ -1,4 +1,4 @@
-import { styled } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ContentPlaylist = styled.div`
   display: -webkit-box;
@@ -62,6 +62,33 @@ export const TrackTitleImage = styled.div`
   -ms-flex-pack: center;
   justify-content: center;
   margin-right: 17px;
+`
+const animationActive = css`
+  @keyframes active {
+    0%,
+    to {
+      transform: scale(0.5);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }
+  animation: active 0.6s ease-in-out infinite both;
+`
+
+export const TrackTitleAnimation = styled.div`
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background-color: #b672ff;
+  border-radius: 9px;
+  display: block;
+
+  ${(props) =>
+    props.$isPlaying &&
+    css`
+      ${animationActive}
+    `}
 `
 
 export const TrackTitleSvg = styled.svg`

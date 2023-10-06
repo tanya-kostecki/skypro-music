@@ -1,9 +1,20 @@
 import React from 'react'
 import * as S from './playlist.styles'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCurrentTrack } from '../../store/actions/creators/currentTrack'
+import { currentIsPlaying, currentTrackPlayer, currentTracklistPlayer } from '../../store/selectors/currentTrack'
 
-export function PlaylistItem({ getTracks, setTrack }) {
+export function PlaylistItem() { 
+  const dispatch = useDispatch()
+
+  const tracklist = useSelector(currentTracklistPlayer)
+
+  const isPlaying = useSelector(currentIsPlaying)
+  const currentTrack = useSelector(currentTrackPlayer)
+
+  const track = useSelector(currentTrackPlayer) 
   const showPlayer = (track) => {
-    setTrack(track)
+    dispatch(selectCurrentTrack(track))
   }
 
   const secondsToMinutes = (sec) => {
@@ -13,12 +24,16 @@ export function PlaylistItem({ getTracks, setTrack }) {
   }
 
   return (
-    <>
-      {getTracks?.map((track) => (
+    <div>
+      {tracklist?.map((track) => ( 
         <S.PlaylistItem key={track.id}>
           <S.PlaylistTrack onClick={() => showPlayer(track)}>
             <S.TrackTitle>
               <S.TrackTitleImage>
+                {currentTrack.id === track.id && (
+                  <S.TrackTitleAnimation $isPlaying={isPlaying}>
+                  </S.TrackTitleAnimation>
+                )}
                 <S.TrackTitleSvg alt="music">
                   <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
                 </S.TrackTitleSvg>
@@ -51,6 +66,6 @@ export function PlaylistItem({ getTracks, setTrack }) {
           </S.PlaylistTrack>
         </S.PlaylistItem>
       ))}
-    </>
+    </div>
   )
 }
