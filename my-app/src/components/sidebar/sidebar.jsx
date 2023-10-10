@@ -5,6 +5,8 @@ import { PLAYLISTS } from '../../sidebar-constants'
 import { Link } from 'react-router-dom'
 import { userContext } from '../../context/userContext'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
 
 const CategoryItems = ({ playlists }) => {
   return (
@@ -29,10 +31,13 @@ const SidebarListLoaded = () => {
 export function Sidebar({ isLoading }) {
   const {token, setToken} = useContext(userContext)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   
   const handleLogoutBtn = () => {
     localStorage.clear()
     setToken(false)
+    dispatch(selectCurrentTrack({}))
+    dispatch(selectIsPlaying(false))
     navigate('/login')
   }
 
