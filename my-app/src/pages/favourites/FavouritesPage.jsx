@@ -4,9 +4,12 @@ import { Playlist } from '../../components/playlist/playlist'
 import * as S from '../main/layout.styles'
 import { userContext } from '../../context/userContext'
 import { useNavigate } from 'react-router-dom'
+import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
+import { useDispatch } from 'react-redux'
 
 export const FavouritesPage = ({ isLoading, error }) => {
   const {token, setToken} = useContext(userContext)
+  const dispatch = useDispatch()
 
   if (localStorage.getItem('token', token)) {
     return (
@@ -24,6 +27,8 @@ export const FavouritesPage = ({ isLoading, error }) => {
 
     useEffect(() => {
       setToken(false)
+      dispatch(selectCurrentTrack({}))
+      dispatch(selectIsPlaying(false))
       // navigate('/login', { replace: true })
     }, [])
   }
