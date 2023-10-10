@@ -19,7 +19,7 @@ export const CreateNavigation = () => {
     localStorage.removeItem('token', token)
     setToken(false)
     dispatch(selectCurrentTrack({}))
-    dispatch(selectIsPlaying(false))
+    // dispatch(selectIsPlaying(false))
    
   }
 

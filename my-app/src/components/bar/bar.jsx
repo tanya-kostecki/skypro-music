@@ -1,20 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { TrackPlayer } from '../track-player/track-player'
 import { PlayerControls } from '../player-controls/player-controls'
 import * as S from './bar.styles'
 import { useRef, useState } from 'react'
 import ProgressBar from './progress-bar'
 import { useSelector, useDispatch } from 'react-redux'
-import { currentTrackPlayer, currentIsPlaying, currentTracklistPlayer } from '../../store/selectors/currentTrack'
+import {
+  currentTrackPlayer,
+  currentIsPlaying,
+  currentTracklistPlayer,
+} from '../../store/selectors/currentTrack'
 import {
   selectCurrentTrack,
   selectIsPlaying,
 } from '../../store/actions/creators/currentTrack'
+import { userContext } from '../../context/userContext'
 
 export function Bar({ isLoading }) {
   const track = useSelector(currentTrackPlayer)
   const isPlaying = useSelector(currentIsPlaying)
   const dispatch = useDispatch(selectIsPlaying)
+
 
   const [isLoop, setIsLoop] = useState(false)
 
@@ -49,13 +55,16 @@ export function Bar({ isLoading }) {
     }`
     setCurrentTime(currentPlay)
 
-    const progress = (audioRef.current.currentTime / audioRef.current.duration) * 100
+    const progress =
+      (audioRef.current.currentTime / audioRef.current.duration) * 100
     setAudioProgress(isNaN(progress) ? 0 : progress)
   }
 
+  const token = useContext(userContext)
+
   const handleStart = () => {
     dispatch(selectIsPlaying(true))
-    audioRef.current?.play() //
+    audioRef.current?.play()
   }
 
   useEffect(handleStart, [track])
@@ -67,25 +76,23 @@ export function Bar({ isLoading }) {
     return randomIndex
   }
 
-
   const handleNextTrack = () => {
-    if(track) {
+    if (track) {
       const trackIndex = tracklist.indexOf(track)
-      if(trackIndex < tracklist.length - 1 && !shuffle) {
+      if (trackIndex < tracklist.length - 1 && !shuffle) {
         const nextTrack = tracklist[trackIndex + 1]
         dispatch(selectCurrentTrack(nextTrack))
       }
 
-      if(trackIndex === tracklist.length - 1) {
+      if (trackIndex === tracklist.length - 1) {
         dispatch(selectIsPlaying(false))
       }
 
-      if(shuffle) {
+      if (shuffle) {
         let randomTrackIndex = handleShuffle()
         let randomTrack = tracklist[randomTrackIndex]
         dispatch(selectCurrentTrack(randomTrack))
       }
-      
     }
   }
 

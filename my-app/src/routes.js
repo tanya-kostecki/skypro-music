@@ -1,17 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-// import { Favourites } from "./pages/favourites";
-// import { MainPage } from "./pages/main";
-
-import { MainPage } from "./pages/main/MainPage";
+import { MainPage } from "./pages/main";
 import { NotFound } from "./pages/page-not-found";
-// import { Category } from "./pages/categories";
 import { ProtectedRoute } from './components/protected-route'
 import { AuthPage } from "./pages/authorization/AuthPage";
 import { useContext } from "react";
 import { userContext } from "./context/userContext";
-import { PageLayout } from './pages/main/PageLayout'
 import { FavouritesPage } from './pages/favourites/FavouritesPage'
 import { CategoryPage } from './pages/categories/CategoryPage'
+import { Main } from "./components/main/main";
 
 export const AppRoutes = () => {
   const { token, setToken } = useContext(userContext)
@@ -26,13 +22,13 @@ export const AppRoutes = () => {
         element={<AuthPage setToken={setToken} isLoginMode={false} />}
       ></Route>
 
-      <Route element={<PageLayout />}>
+      <Route element={<MainPage />}>
         <Route
           path="/"
           index
           element={
             <ProtectedRoute isAllowed={token}>
-              <MainPage setToken={setToken} />
+              <Main setToken={setToken} />
             </ProtectedRoute>
           }
         ></Route>
