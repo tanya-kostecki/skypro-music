@@ -25,7 +25,6 @@ export const AppRoutes = () => {
       <Route element={<MainPage />}>
         <Route
           path="/"
-          index
           element={
             <ProtectedRoute isAllowed={token}>
               <Main setToken={setToken} />

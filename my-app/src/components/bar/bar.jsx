@@ -63,8 +63,10 @@ export function Bar({ isLoading }) {
   const token = useContext(userContext)
 
   const handleStart = () => {
-    dispatch(selectIsPlaying(true))
-    audioRef.current?.play()
+    if (localStorage.getItem('token', token)) {
+      dispatch(selectIsPlaying(true))
+      audioRef.current?.play()
+    }
   }
 
   useEffect(handleStart, [track])

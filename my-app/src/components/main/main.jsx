@@ -29,7 +29,7 @@ export const Main = ({ isLoading, error }) => {
     useEffect(() => {
       setToken(false)
       dispatch(selectCurrentTrack({}))
-    //   dispatch(selectIsPlaying(false))
+      dispatch(selectIsPlaying(false))
       // navigate('/login', { replace: true })
 
     }, [])
