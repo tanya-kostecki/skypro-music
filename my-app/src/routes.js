@@ -22,12 +22,12 @@ export const AppRoutes = () => {
         element={<AuthPage setToken={setToken} isLoginMode={false} />}
       ></Route>
 
-      <Route element={<MainPage />}>
+      <Route element={<MainPage/>}>
         <Route
           path="/"
           element={
             <ProtectedRoute isAllowed={token}>
-              <Main setToken={setToken} />
+              <Main setToken={setToken}/>
             </ProtectedRoute>
           }
         ></Route>

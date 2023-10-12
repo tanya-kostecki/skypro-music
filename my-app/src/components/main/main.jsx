@@ -5,12 +5,16 @@ import * as S from './main.styles'
 import { useContext, useEffect } from 'react'
 import { userContext } from '../../context/userContext'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
 
-export const Main = ({ isLoading, error }) => {
+import { currentIsLoading } from '../../store/selectors/currentTrack'
+
+export const Main = ({ error }) => { //isLoading
   const {token, setToken} = useContext(userContext)
   const dispatch = useDispatch()
+
+  const isLoading = useSelector(currentIsLoading) //
 
   if (localStorage.getItem('token', token)) {
     return (

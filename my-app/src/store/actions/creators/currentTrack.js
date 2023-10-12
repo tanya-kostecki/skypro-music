@@ -1,4 +1,9 @@
-import { SET_CURRENT_TRACK, SET_IS_PLAYING, SET_CURRENT_TRACKLIST } from '../types/currentTrack'
+import {
+  SET_CURRENT_TRACK,
+  SET_IS_PLAYING,
+  SET_CURRENT_TRACKLIST,
+  SET_IS_LOADING,
+} from '../types/currentTrack'
 
 export const selectCurrentTrack = (track) => ({
   type: SET_CURRENT_TRACK,
@@ -7,7 +12,7 @@ export const selectCurrentTrack = (track) => ({
 
 export const selectIsPlaying = (isPlaying) => ({
   type: SET_IS_PLAYING,
-  payload: isPlaying, 
+  payload: isPlaying,
 })
 
 export const selectCurrentTracklist = (tracklist) => ({
@@ -15,4 +20,7 @@ export const selectCurrentTracklist = (tracklist) => ({
   payload: tracklist,
 })
 
-
+export const selectIsLoading = (isLoading) => ({
+  type: SET_IS_LOADING,
+  payload: isLoading,
+})
