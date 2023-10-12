@@ -4,17 +4,15 @@ import { CenterBlockFilter } from '../../components/centerblock-filter/centerblo
 import * as S from './main.styles'
 import { useContext, useEffect } from 'react'
 import { userContext } from '../../context/userContext'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
 
 import { currentIsLoading } from '../../store/selectors/currentTrack'
 
-export const Main = ({ error }) => { //isLoading
+export const Main = ({ error }) => {
   const {token, setToken} = useContext(userContext)
   const dispatch = useDispatch()
-
-  const isLoading = useSelector(currentIsLoading) //
+  const isLoading = useSelector(currentIsLoading)
 
   if (localStorage.getItem('token', token)) {
     return (
@@ -28,14 +26,10 @@ export const Main = ({ error }) => { //isLoading
       </div>
     )
   } else {
-    const navigate = useNavigate()
-
     useEffect(() => {
       setToken(false)
       dispatch(selectCurrentTrack({}))
       dispatch(selectIsPlaying(false))
-      // navigate('/login', { replace: true })
-
     }, [])
   }
 }

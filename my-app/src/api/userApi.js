@@ -43,3 +43,26 @@ export async function loginApi({ email, password }) {
         throw new Error ('Пользователь с таким email или паролем не найден')
     }
 }
+
+export async function getAccessToken({ email, password}) {
+    const response = await fetch(baseUrl + '/user/token', {
+        method: 'POST',
+        body: JSON.stringify({
+            email: email,
+            password: password,
+        }),
+        headers: {
+            "content-type": "application/json",
+        },
+    })
+
+    if(response.ok) {
+        return response.json()
+    } else if (response.status === 400) {
+        throw new Error('Не передан пароль')
+    } else if (response.status === 500) {
+        throw new Error ('Сервер сломался')
+    } else if (response.status === 401) {
+        throw new Error ('Пользователь с таким email или паролем не найден')
+    }
+}

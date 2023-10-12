@@ -81,15 +81,10 @@ export function Bar({ isLoading }) {
   const trackIndex = tracklist.indexOf(track)
   const handleNextTrack = () => {
     if (track) {
-      // const trackIndex = tracklist.indexOf(track)
       if (trackIndex < tracklist.length - 1 && !shuffle) {
         const nextTrack = tracklist[trackIndex + 1]
         dispatch(selectCurrentTrack(nextTrack))
       }
-
-      // if (trackIndex === tracklist.length - 1) {
-      //   dispatch(selectIsPlaying(false))
-      // }
 
       if (shuffle) {
         let randomTrackIndex = handleShuffle()

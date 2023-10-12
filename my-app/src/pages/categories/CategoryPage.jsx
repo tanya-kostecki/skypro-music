@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom'
 import { PLAYLISTS } from '../../sidebar-constants'
 import { useContext, useEffect } from 'react'
 import { userContext } from '../../context/userContext'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
 
@@ -29,13 +28,10 @@ export const CategoryPage = ({ isLoading, error }) => {
       </div>
     )
   } else {
-    const navigate = useNavigate()
-
     useEffect(() => {
       setToken(false)
       dispatch(selectCurrentTrack({}))
       dispatch(selectIsPlaying(false))
-      // navigate('/login', { replace: true })
     }, [])
   }
 }

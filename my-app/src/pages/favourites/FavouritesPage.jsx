@@ -3,7 +3,6 @@ import { ContentTitlePlaylist } from '../../components/content-title-playlist/co
 import { Playlist } from '../../components/playlist/playlist'
 import * as S from '../main/layout.styles'
 import { userContext } from '../../context/userContext'
-import { useNavigate } from 'react-router-dom'
 import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
 import { useDispatch } from 'react-redux'
 
@@ -23,13 +22,10 @@ export const FavouritesPage = ({ isLoading, error }) => {
       </div>
     )
   } else {
-    const navigate = useNavigate()
-
     useEffect(() => {
       setToken(false)
       dispatch(selectCurrentTrack({}))
       dispatch(selectIsPlaying(false))
-      // navigate('/login', { replace: true })
     }, [])
   }
 }

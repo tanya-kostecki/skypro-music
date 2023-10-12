@@ -15,32 +15,23 @@ import { currentIsLoading, currentTrackPlayer } from '../../store/selectors/curr
 import { Outlet } from 'react-router-dom'
 
 export const MainPage = () => {
-  // const [isLoading, setIsLoading] = useState(true)
-
   const isLoading = useSelector(currentIsLoading)
-
   const dispatch = useDispatch()
-
   const [error, setError] = useState(null)
-
   const track = useSelector(currentTrackPlayer)
-
   const { token, setToken } = useContext(userContext)
 
   useEffect(() => {
     if (token) {
-      // setIsLoading(true)
       dispatch(selectIsLoading(true))
       getAllTracks()
         .then((tracklist) => {
           dispatch(selectCurrentTracklist(tracklist))
-          // setIsLoading(false)
           dispatch(selectIsLoading(false))
           setError(null)
         })
         .catch((error) => {
           setError(error.message)
-          // setIsLoading(false)
           dispatch(selectIsLoading(false))
         })
     }
