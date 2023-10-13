@@ -18,6 +18,12 @@ export const PlaylistItem = ({ title, titleSpan, link, author, album, time, trac
     dispatch(selectCurrentTrack(track))
   }
 
+  // const secondsToMinutes = (sec) => {
+  //   const min = Math.trunc(sec / 60) + ''
+  //   sec = (sec % 60) + ''
+  //   return min.padStart(2, 0) + ':' + sec.padStart(2, 0)
+  // }
+
   return (
     <S.PlaylistItem key={track.id}>
       <S.PlaylistTrack onClick={() => showPlayer(track)}>

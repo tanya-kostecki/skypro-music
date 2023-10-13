@@ -45,7 +45,7 @@ export function Sidebar({ isLoading }) {
     <S.MainSidebar>
       <S.SideBarPersonal>
         <S.SidebarPersonalName>
-          {isLoading ? '' : token}
+          {/* {isLoading ? '' : token} */}
         </S.SidebarPersonalName>
         <S.SideBarIcon>
           <svg alt="logout" onClick={handleLogoutBtn}>
