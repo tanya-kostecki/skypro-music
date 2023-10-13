@@ -1,8 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { baseUrl } from '../api/trackApi'
+import { useContext } from 'react'
+import { userContext } from '../context/userContext'
 
-const accessToken = localStorage.getItem('token')
-console.log(accessToken)
+const accessToken = () => {
+  const accessToken = JSON.parse(localStorage.getItem('token'))
+  return accessToken.token.access
+}
 
 export const playlistApi = createApi({
     reducerPath: 'playlistApi',
@@ -15,8 +19,7 @@ export const playlistApi = createApi({
                 url: 'catalog/track/favorite/all/',
                 method: 'GET',
                 headers: {
-                    Authorization: `Bearer ${accessToken}`,
-
+                    Authorization: `Bearer ${accessToken()}`,
                 }
             })
         })

@@ -14,7 +14,6 @@ export const FavouritesPage = ({ isLoading, error }) => {
   const dispatch = useDispatch()
 
   const { data } = useGetFavouriteTracksQuery()
-  console.log(data)
 
   if (localStorage.getItem('token', token)) {
     return (

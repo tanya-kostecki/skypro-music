@@ -29,7 +29,8 @@ const SidebarListLoaded = () => {
 }
 
 export function Sidebar({ isLoading }) {
-  const {token, setToken} = useContext(userContext)
+  const { setToken } = useContext(userContext)
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   
@@ -41,11 +42,14 @@ export function Sidebar({ isLoading }) {
     navigate('/login')
   }
 
+  const validToken = JSON.parse(localStorage.getItem('token'))
+  const userName = validToken.username
+
   return (
     <S.MainSidebar>
       <S.SideBarPersonal>
         <S.SidebarPersonalName>
-          {/* {isLoading ? '' : token} */}
+          {isLoading ? '' : userName}
         </S.SidebarPersonalName>
         <S.SideBarIcon>
           <svg alt="logout" onClick={handleLogoutBtn}>
