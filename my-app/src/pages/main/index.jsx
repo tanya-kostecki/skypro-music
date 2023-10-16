@@ -10,29 +10,32 @@ import * as S from '../../components/main/main.styles'
 import { useContext } from 'react'
 import { userContext } from '../../context/userContext'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCurrentTracklist, selectIsLoading } from '../../store/actions/creators/currentTrack'
-import { currentIsLoading, currentTrackPlayer } from '../../store/selectors/currentTrack'
+import { setAllTracks, setIsLoading } from '../../store/slices/trackSlice'
+import {
+  selectIsLoading,
+  currentTrackSelector,
+} from '../../store/selectors/selectors'
 import { Outlet } from 'react-router-dom'
 
 export const MainPage = () => {
-  const isLoading = useSelector(currentIsLoading)
+  const isLoading = useSelector(selectIsLoading)
   const dispatch = useDispatch()
   const [error, setError] = useState(null)
-  const track = useSelector(currentTrackPlayer)
+  const track = useSelector(currentTrackSelector)
   const { token, setToken } = useContext(userContext)
 
   useEffect(() => {
     if (token) {
-      dispatch(selectIsLoading(true))
+      dispatch(setIsLoading(true))
       getAllTracks()
         .then((tracklist) => {
-          dispatch(selectCurrentTracklist(tracklist))
-          dispatch(selectIsLoading(false))
+          dispatch(setAllTracks(tracklist))
+          dispatch(setIsLoading(false))
           setError(null)
         })
         .catch((error) => {
           setError(error.message)
-          dispatch(selectIsLoading(false))
+          dispatch(setIsLoading(false))
         })
     }
   }, [])

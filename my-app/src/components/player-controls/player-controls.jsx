@@ -2,13 +2,14 @@ import React from 'react'
 import * as S from './player-controls.styles'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  selectCurrentTrack,
-  selectIsPlaying,
-} from '../../store/actions/creators/currentTrack'
+  setCurrentTrack,
+  setIsPlaying,
+} from '../../store/slices/trackSlice'
 import {
-  currentTrackPlayer,
-  currentTracklistPlayer,
-} from '../../store/selectors/currentTrack'
+  currentTrackSelector,
+  currentPlaylistSelector,
+  allTracksSelector,
+} from '../../store/selectors/selectors'
 
 export function PlayerControls({
   isPlaying,
@@ -26,7 +27,7 @@ export function PlayerControls({
 
   const handleStop = () => {
     audioRef.current.pause()
-    dispatch(selectIsPlaying(false))
+    dispatch(setIsPlaying(false))
   }
 
   const togglePlay = isPlaying ? handleStop : handleStart
@@ -43,20 +44,22 @@ export function PlayerControls({
 
   const toggleLoop = isLoop ? handleStopLoop : handleLoop
 
-  const track = useSelector(currentTrackPlayer)
-  const tracklist = useSelector(currentTracklistPlayer)
+  const track = useSelector(currentTrackSelector)
+  // const tracklist = useSelector(currentPlaylistSelector)
+
+  const tracklist = useSelector(allTracksSelector)
 
   const handlePrevTrack = (prevTrack) => {
     if (track) {
       const trackIndex = tracklist.indexOf(track)
       if (trackIndex < tracklist.length - 1 && trackIndex > 0 && !shuffle) {
         prevTrack = tracklist[trackIndex - 1]
-        dispatch(selectCurrentTrack(prevTrack))
+        dispatch(setCurrentTrack(prevTrack))
       } 
       if(shuffle) {
         let randomTrackIndex = handleShuffle()
         let randomTrack = tracklist[randomTrackIndex]
-        dispatch(selectCurrentTrack(randomTrack))
+        dispatch(setCurrentTrack(randomTrack))
       }
     }
   }

@@ -5,7 +5,7 @@ import * as S from './playlist.styles'
 import { PlaylistItem } from './playlist-item'
 
 import { useSelector } from 'react-redux'
-import { currentTracklistPlayer } from '../../store/selectors/currentTrack'
+import { currentTracklistPlayer } from '../../store/selectors/selectors'
 
 export const Playlist = ({ isLoading, error, tracks }) => {
   //TODO: один компонент для всех плейлистов

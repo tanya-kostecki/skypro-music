@@ -5,15 +5,15 @@ import * as S from './main.styles'
 import { useContext, useEffect } from 'react'
 import { userContext } from '../../context/userContext'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
+import { setCurrentTrack, setIsPlaying } from '../../store/slices/trackSlice'
 
-import { currentIsLoading } from '../../store/selectors/currentTrack'
+import { selectIsLoading } from '../../store/selectors/selectors'
 import { useGetAllTracksQuery } from '../../services/playlists'
 
 export const Main = ({ error }) => {
   const {token, setToken} = useContext(userContext)
   const dispatch = useDispatch()
-  const isLoading = useSelector(currentIsLoading)
+  const isLoading = useSelector(selectIsLoading)
 
   const { data } = useGetAllTracksQuery()
 
@@ -31,8 +31,8 @@ export const Main = ({ error }) => {
   } else {
     useEffect(() => {
       setToken(false)
-      dispatch(selectCurrentTrack({}))
-      dispatch(selectIsPlaying(false))
+      dispatch(setCurrentTrack({}))
+      dispatch(setIsPlaying(false))
     }, [])
   }
 }

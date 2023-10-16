@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom'
 import { useState, useContext } from 'react'
 import { userContext } from '../../context/userContext'
 import { useDispatch, useSelector } from 'react-redux'
-import { currentIsPlaying, currentTrackPlayer } from '../../store/selectors/currentTrack'
-import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
+import {
+  currentIsPlaying,
+  currentTrackPlayer,
+} from '../../store/selectors/selectors'
+import { setCurrentTrack, setIsPlaying } from '../../store/slices/trackSlice'
 
 export const CreateNavigation = () => {
   const [visible, setVisibility] = useState(false)
@@ -18,8 +21,8 @@ export const CreateNavigation = () => {
   const handleLogOut = () => {
     localStorage.removeItem('token', token)
     setToken(false)
-    dispatch(selectCurrentTrack({}))
-    dispatch(selectIsPlaying(false))
+    dispatch(setCurrentTrack({}))
+    dispatch(setIsPlaying(false))
   }
 
   return (

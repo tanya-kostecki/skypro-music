@@ -3,7 +3,7 @@ import { ContentTitlePlaylist } from '../../components/content-title-playlist/co
 import { Playlist } from '../../components/playlist/playlist'
 import * as S from '../main/layout.styles'
 import { userContext } from '../../context/userContext'
-import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
+import { setCurrentTrack, setIsPlaying } from '../../store/slices/trackSlice'
 import { useDispatch } from 'react-redux'
 import { useGetFavouriteTracksQuery } from '../../services/playlists'
 
@@ -26,8 +26,8 @@ export const FavouritesPage = ({ isLoading, error }) => {
   } else {
     useEffect(() => {
       setToken(false)
-      dispatch(selectCurrentTrack({}))
-      dispatch(selectIsPlaying(false))
+      dispatch(setCurrentTrack({}))
+      dispatch(setIsPlaying(false))
     }, [])
   }
 }
