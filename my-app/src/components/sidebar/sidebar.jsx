@@ -42,14 +42,14 @@ export function Sidebar({ isLoading }) {
     navigate('/login')
   }
 
-  const validToken = JSON.parse(localStorage.getItem('token'))
-  const userName = validToken.username
+  // const validToken = JSON.parse(localStorage.getItem('token'))
+  // const userName = validToken.username
 
   return (
     <S.MainSidebar>
       <S.SideBarPersonal>
         <S.SidebarPersonalName>
-          {isLoading ? '' : userName}
+          {/* {isLoading ? '' : userName} */}
         </S.SidebarPersonalName>
         <S.SideBarIcon>
           <svg alt="logout" onClick={handleLogoutBtn}>
