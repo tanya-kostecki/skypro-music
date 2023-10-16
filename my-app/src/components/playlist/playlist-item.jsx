@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   currentIsPlaying,
   currentTrackPlayer,
+  currentTracklistPlayer,
 } from '../../store/selectors/currentTrack'
 import { selectCurrentTrack } from '../../store/actions/creators/currentTrack'
 

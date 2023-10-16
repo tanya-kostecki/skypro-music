@@ -7,9 +7,9 @@ import { PlaylistItem } from './playlist-item'
 import { useSelector } from 'react-redux'
 import { currentTracklistPlayer } from '../../store/selectors/currentTrack'
 
-export const Playlist = ({ isLoading, error }) => {
+export const Playlist = ({ isLoading, error, tracks }) => {
   //TODO: один компонент для всех плейлистов
-  const tracklist = useSelector(currentTracklistPlayer)
+  // const tracklist = useSelector(currentTracklistPlayer)
 
   const secondsToMinutes = (sec) => {
     const min = Math.trunc(sec / 60) + ''
@@ -31,7 +31,7 @@ export const Playlist = ({ isLoading, error }) => {
         {isLoading ? (
           <SkeletonPlaylistItems />
         ) : (
-          tracklist?.map((track) => (
+          tracks?.map((track) => (
             <PlaylistItem
               track={track}
               key={track.id}

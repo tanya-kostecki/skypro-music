@@ -21,7 +21,6 @@ export function Bar({ isLoading }) {
   const isPlaying = useSelector(currentIsPlaying)
   const dispatch = useDispatch(selectIsPlaying)
 
-
   const [isLoop, setIsLoop] = useState(false)
 
   const [audioProgress, setAudioProgress] = useState(0)

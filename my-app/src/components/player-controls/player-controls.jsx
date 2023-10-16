@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import * as S from './player-controls.styles'
-import { ReactReduxContext, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   selectCurrentTrack,
   selectIsPlaying,
@@ -21,8 +21,7 @@ export function PlayerControls({
   shuffle,
   setShuffle,
 }) {
-  // const [shuffle, setShuffle] = useState(false)
-
+  
   const dispatch = useDispatch()
 
   const handleStop = () => {
@@ -63,7 +62,6 @@ export function PlayerControls({
   }
 
   const toggleShuffle = () => shuffle ? setShuffle(false) : setShuffle(true)
-  
 
   return (
     <S.PlayerControls>
