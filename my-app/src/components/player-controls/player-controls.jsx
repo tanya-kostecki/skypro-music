@@ -51,7 +51,7 @@ export function PlayerControls({
 
   const handlePrevTrack = (prevTrack) => {
     if (track) {
-      const trackIndex = tracklist.indexOf(track)
+      const trackIndex = tracklist.findIndex(el => el.id === track.id)
       if (trackIndex < tracklist.length - 1 && trackIndex > 0 && !shuffle) {
         prevTrack = tracklist[trackIndex - 1]
         dispatch(setCurrentTrack(prevTrack))

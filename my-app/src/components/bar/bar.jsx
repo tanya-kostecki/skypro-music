@@ -78,8 +78,9 @@ export function Bar({ isLoading }) {
     return randomIndex
   }
 
-  const trackIndex = tracklist.indexOf(track)
+  // const trackIndex = tracklist.indexOf(track)
   const handleNextTrack = () => {
+    const trackIndex = tracklist.findIndex(el => el.id === track.id)
     if (track) {
       if (trackIndex < tracklist.length - 1 && !shuffle) {
         const nextTrack = tracklist[trackIndex + 1]

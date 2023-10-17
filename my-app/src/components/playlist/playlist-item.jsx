@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   selectIsPlaying,
   currentPlaylistSelector,
+  currentTrackSelector,
 } from '../../store/selectors/selectors'
 import { setCurrentTrack } from '../../store/slices/trackSlice'
 
@@ -12,7 +13,7 @@ export const PlaylistItem = ({ title, titleSpan, link, author, album, time, trac
   const dispatch = useDispatch()
 
   const isPlaying = useSelector(selectIsPlaying)
-  const currentTrack = useSelector(currentPlaylistSelector)
+  const currentTrack = useSelector(currentTrackSelector)
 
   const showPlayer = (track) => {
     dispatch(setCurrentTrack(track))
