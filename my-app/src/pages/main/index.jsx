@@ -20,25 +20,25 @@ import { Outlet } from 'react-router-dom'
 export const MainPage = () => {
   const isLoading = useSelector(selectIsLoading)
   const dispatch = useDispatch()
-  const [error, setError] = useState(null)
+  // const [error, setError] = useState(null)
   const track = useSelector(currentTrackSelector)
   const { token, setToken } = useContext(userContext)
 
-  useEffect(() => {
-    if (token) {
-      dispatch(setIsLoading(true))
-      getAllTracks()
-        .then((tracklist) => {
-          dispatch(setAllTracks(tracklist))
-          dispatch(setIsLoading(false))
-          setError(null)
-        })
-        .catch((error) => {
-          setError(error.message)
-          dispatch(setIsLoading(false))
-        })
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (token) {
+  //     dispatch(setIsLoading(true))
+  //     getAllTracks()
+  //       .then((tracklist) => {
+  //         dispatch(setAllTracks(tracklist))
+  //         dispatch(setIsLoading(false))
+  //         setError(null)
+  //       })
+  //       .catch((error) => {
+  //         setError(error.message)
+  //         dispatch(setIsLoading(false))
+  //       })
+  //   }
+  // }, [])
 
   return (
     <Wrapper>

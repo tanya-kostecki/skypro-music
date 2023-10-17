@@ -35,6 +35,6 @@ export const trackSlice = createSlice({
   }
 })
 
-export const { setAllTracks, setCurrentTrack, setIsLoading, setIsPlaying, setFavourites } = trackSlice.actions
+export const { setAllTracks, setCurrentTrack, setIsLoading, setIsPlaying, setFavourites, setCurrentPlaylist } = trackSlice.actions
 export default trackSlice.reducer
 

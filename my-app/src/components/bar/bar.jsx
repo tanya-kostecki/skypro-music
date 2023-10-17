@@ -22,6 +22,8 @@ export function Bar({ isLoading }) {
   const isPlaying = useSelector(selectIsPlaying)
   const dispatch = useDispatch(setIsPlaying)
 
+  const currentPlaylist = useSelector(currentPlaylistSelector)
+
   const [isLoop, setIsLoop] = useState(false)
 
   const [audioProgress, setAudioProgress] = useState(0)
@@ -71,18 +73,18 @@ export function Bar({ isLoading }) {
 
   useEffect(handleStart, [track])
 
-  const tracklist = useSelector(allTracksSelector) //
+  // const tracklist = useSelector(allTracksSelector)
+  const tracklist = useSelector(currentPlaylistSelector)
   
   const handleShuffle = () => {
     let randomIndex = Math.floor(Math.random() * (tracklist.length - 1))
     return randomIndex
   }
 
-  // const trackIndex = tracklist.indexOf(track)
   const handleNextTrack = () => {
     const trackIndex = tracklist.findIndex(el => el.id === track.id)
     if (track) {
-      if (trackIndex < tracklist.length - 1 && !shuffle) {
+      if (trackIndex < tracklist.length && !shuffle) {
         const nextTrack = tracklist[trackIndex + 1]
         dispatch(setCurrentTrack(nextTrack))
       }
@@ -96,6 +98,7 @@ export function Bar({ isLoading }) {
   }
 
   const endTrack = () => {
+    const trackIndex = tracklist.findIndex(el => el.id === track.id)
     if (!isLoop) {
       handleNextTrack()
     }
@@ -105,7 +108,7 @@ export function Bar({ isLoading }) {
   }
 
   return (
-    track.id && (
+     track.id && (
       <S.Bar>
         <div
           className="musicTimerDiv"

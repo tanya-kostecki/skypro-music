@@ -45,18 +45,19 @@ export function PlayerControls({
   const toggleLoop = isLoop ? handleStopLoop : handleLoop
 
   const track = useSelector(currentTrackSelector)
-  // const tracklist = useSelector(currentPlaylistSelector)
+  const tracklist = useSelector(currentPlaylistSelector) //
 
-  const tracklist = useSelector(allTracksSelector)
+  // const tracklist = useSelector(allTracksSelector)
 
-  const handlePrevTrack = (prevTrack) => {
+  const handlePrevTrack = () => {
     if (track) {
       const trackIndex = tracklist.findIndex(el => el.id === track.id)
-      if (trackIndex < tracklist.length - 1 && trackIndex > 0 && !shuffle) {
-        prevTrack = tracklist[trackIndex - 1]
+      console.log(trackIndex)
+      if (trackIndex < tracklist.length && trackIndex > 0 && !shuffle) {
+        const prevTrack = tracklist[trackIndex - 1]
         dispatch(setCurrentTrack(prevTrack))
       } 
-      if(shuffle) {
+      if (shuffle) {
         let randomTrackIndex = handleShuffle()
         let randomTrack = tracklist[randomTrackIndex]
         dispatch(setCurrentTrack(randomTrack))
