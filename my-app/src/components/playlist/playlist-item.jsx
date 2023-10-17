@@ -9,11 +9,11 @@ import {
 } from '../../store/selectors/selectors'
 import { setCurrentTrack } from '../../store/slices/trackSlice'
 
-export const PlaylistItem = ({ title, titleSpan, link, author, album, time, track, authorLink, albumLink }) => {
+export const PlaylistItem = ({ track, album, author, link, title, albumLink, authorLink, titleSpan, time }) => {
   const dispatch = useDispatch()
 
   const isPlaying = useSelector(selectIsPlaying)
-  const currentTrack = useSelector(currentTrackSelector)
+  const currentTrack  = useSelector(currentTrackSelector)
 
   const showPlayer = (track) => {
     dispatch(setCurrentTrack(track))

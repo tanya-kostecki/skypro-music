@@ -5,11 +5,13 @@ import * as S from './playlist.styles'
 import { PlaylistItem } from './playlist-item'
 
 import { useSelector } from 'react-redux'
-import { currentTracklistPlayer } from '../../store/selectors/selectors'
+import { currentTracklistPlayer, selectIsLoading } from '../../store/selectors/selectors'
 
-export const Playlist = ({ isLoading, error, tracks }) => {
+export const Playlist = ({ error, tracks }) => { //isLoading
   //TODO: один компонент для всех плейлистов
   // const tracklist = useSelector(currentTracklistPlayer)
+
+  const isLoading =useSelector(selectIsLoading)
 
   const secondsToMinutes = (sec) => {
     const min = Math.trunc(sec / 60) + ''

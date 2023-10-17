@@ -84,7 +84,7 @@ export function Bar({ isLoading }) {
   const handleNextTrack = () => {
     const trackIndex = tracklist.findIndex(el => el.id === track.id)
     if (track) {
-      if (trackIndex < tracklist.length && !shuffle) {
+      if (trackIndex < tracklist.length - 1 && !shuffle) { //
         const nextTrack = tracklist[trackIndex + 1]
         dispatch(setCurrentTrack(nextTrack))
       }
