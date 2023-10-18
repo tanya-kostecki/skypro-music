@@ -7,6 +7,7 @@ import { userContext } from '../../context/userContext'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
+import { useGetAllTracksQuery } from '../../services/playlists'
 
 const CategoryItems = ({ playlists }) => {
   return (
@@ -33,6 +34,8 @@ export function Sidebar({ isLoading }) {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const { isFetching } = useGetAllTracksQuery()
   
   const handleLogoutBtn = () => {
     localStorage.clear()
@@ -42,14 +45,11 @@ export function Sidebar({ isLoading }) {
     navigate('/login')
   }
 
-  // const validToken = JSON.parse(localStorage.getItem('token'))
-  // const userName = validToken.username
-
   return (
     <S.MainSidebar>
       <S.SideBarPersonal>
         <S.SidebarPersonalName>
-          {/* {isLoading ? '' : userName} */}
+          {isFetching ? '' : null}
         </S.SidebarPersonalName>
         <S.SideBarIcon>
           <svg alt="logout" onClick={handleLogoutBtn}>
@@ -58,7 +58,7 @@ export function Sidebar({ isLoading }) {
         </S.SideBarIcon>
       </S.SideBarPersonal>
       <S.SidebarBlock>
-        {isLoading ? <SkeletonSidebarList /> : <SidebarListLoaded />}
+        {isFetching ? <SkeletonSidebarList /> : <SidebarListLoaded />}
       </S.SidebarBlock>
     </S.MainSidebar>
   )

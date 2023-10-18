@@ -5,7 +5,7 @@ import * as S from './main.styles'
 import { useContext, useEffect, useState } from 'react'
 import { userContext } from '../../context/userContext'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentPlaylist, setCurrentTrack, setIsPlaying } from '../../store/slices/trackSlice'
+import { setCurrentPlaylist, setCurrentTrack, setIsLoading, setIsPlaying } from '../../store/slices/trackSlice'
 
 import { selectIsLoading } from '../../store/selectors/selectors'
 import { useGetAllTracksQuery } from '../../services/playlists'
@@ -15,13 +15,15 @@ export const Main = () => {
   const dispatch = useDispatch()
   const isLoading = useSelector(selectIsLoading)
 
-  const { data, error } = useGetAllTracksQuery()
-  console.log({ data, error })
+  const { data, error, isFetching } = useGetAllTracksQuery()
+  console.log({ data, error, isFetching })
 
+  
   useEffect(() => {
     dispatch(setCurrentPlaylist(data))
     console.log(data)
   }, [data])
+
 
   if (localStorage.getItem('token', token)) {
     return (
@@ -33,7 +35,7 @@ export const Main = () => {
           {error ? (
             <p>Не удалось заргузить плейлист: {error.error}</p>
           ) : (
-            <Playlist isLoading={isLoading} tracks={data} />
+            <Playlist tracks={data} />
           )}
         </S.CenterblockContent>
       </div>

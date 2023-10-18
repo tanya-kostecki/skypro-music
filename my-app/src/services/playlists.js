@@ -3,6 +3,9 @@ import { baseUrl } from '../api/trackApi'
 
 const accessToken = () => {
   const accessToken = JSON.parse(localStorage.getItem('token'))
+  if(!accessToken) {
+    return
+  }
   return accessToken.token.access
 }
 
