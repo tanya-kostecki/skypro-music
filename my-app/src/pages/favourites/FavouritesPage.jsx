@@ -7,15 +7,15 @@ import { setCurrentTrack, setIsPlaying, setCurrentPlaylist } from '../../store/s
 import { useDispatch } from 'react-redux'
 import { useGetFavouriteTracksQuery } from '../../services/playlists'
 
-export const FavouritesPage = ({ isLoading, error }) => {
-  const {token, setToken} = useContext(userContext)
+export const FavouritesPage = ({ isLoading }) => {
+  const { token, setToken } = useContext(userContext)
   const dispatch = useDispatch()
 
-  const { data } = useGetFavouriteTracksQuery()
+  const { data, error } = useGetFavouriteTracksQuery()
 
   useEffect(() => {
     dispatch(setCurrentPlaylist(data))
-    console.log(data);
+    console.log(data)
   }, [data])
 
   if (localStorage.getItem('token', token)) {
@@ -24,7 +24,11 @@ export const FavouritesPage = ({ isLoading, error }) => {
         <S.CenterblockH2>Мои Треки</S.CenterblockH2>
         <S.CenterblockContent>
           <ContentTitlePlaylist isLoading={isLoading} />
-          <Playlist tracks={data} />
+          {error ? (
+            <p>Не удалось заргузить плейлист: {error.error}</p>
+          ) : (
+            <Playlist tracks={data} />
+          )}
         </S.CenterblockContent>
       </div>
     )

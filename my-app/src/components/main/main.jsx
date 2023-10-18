@@ -10,30 +10,13 @@ import { setCurrentPlaylist, setCurrentTrack, setIsPlaying } from '../../store/s
 import { selectIsLoading } from '../../store/selectors/selectors'
 import { useGetAllTracksQuery } from '../../services/playlists'
 
-export const Main = () => { //error
+export const Main = () => { 
   const {token, setToken} = useContext(userContext)
   const dispatch = useDispatch()
   const isLoading = useSelector(selectIsLoading)
 
-  const [error, setError] = useState(null) //
-
-  const { data } = useGetAllTracksQuery()
-
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(setIsLoading(true))
-  //     getAllTracks()
-  //       .then((tracklist) => {
-  //         dispatch(setAllTracks(tracklist))
-  //         dispatch(setIsLoading(false))
-  //         setError(null)
-  //       })
-  //       .catch((error) => {
-  //         setError(error.message)
-  //         dispatch(setIsLoading(false))
-  //       })
-  //   }
-  // }, [])
+  const { data, error } = useGetAllTracksQuery()
+  console.log({ data, error })
 
   useEffect(() => {
     dispatch(setCurrentPlaylist(data))
@@ -47,7 +30,11 @@ export const Main = () => { //error
         <CenterBlockFilter isLoading={isLoading} />
         <S.CenterblockContent>
           <ContentTitlePlaylist isLoading={isLoading} />
-          <Playlist isLoading={isLoading} error={error} tracks={data} />
+          {error ? (
+            <p>Не удалось заргузить плейлист: {error.error}</p>
+          ) : (
+            <Playlist isLoading={isLoading} tracks={data} />
+          )}
         </S.CenterblockContent>
       </div>
     )
