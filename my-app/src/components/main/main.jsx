@@ -16,12 +16,10 @@ export const Main = () => {
   const isLoading = useSelector(selectIsLoading)
 
   const { data, error, isFetching } = useGetAllTracksQuery()
-  console.log({ data, error, isFetching })
 
-  
   useEffect(() => {
     dispatch(setCurrentPlaylist(data))
-    console.log(data)
+    dispatch(setIsLoading(false))
   }, [data])
 
 

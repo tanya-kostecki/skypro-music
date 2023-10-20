@@ -3,7 +3,7 @@ import { ContentTitlePlaylist } from '../../components/content-title-playlist/co
 import { Playlist } from '../../components/playlist/playlist'
 import * as S from '../main/layout.styles'
 import { userContext } from '../../context/userContext'
-import { setCurrentTrack, setIsPlaying, setCurrentPlaylist } from '../../store/slices/trackSlice'
+import { setCurrentTrack, setIsPlaying, setCurrentPlaylist, setIsLoading } from '../../store/slices/trackSlice'
 import { useDispatch } from 'react-redux'
 import { useGetFavouriteTracksQuery } from '../../services/playlists'
 
@@ -12,10 +12,12 @@ export const FavouritesPage = ({ isLoading }) => {
   const dispatch = useDispatch()
 
   const { data, error } = useGetFavouriteTracksQuery()
+  console.log(data)
+
 
   useEffect(() => {
     dispatch(setCurrentPlaylist(data))
-    console.log(data)
+    dispatch(setIsLoading(false))
   }, [data])
 
   if (localStorage.getItem('token', token)) {

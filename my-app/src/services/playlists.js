@@ -9,32 +9,71 @@ const accessToken = () => {
   return accessToken.token.access
 }
 
-export const playlistApi = createApi({
-    reducerPath: 'playlistApi',
-    baseQuery: fetchBaseQuery ({
-        baseUrl: baseUrl
-    }),
-    endpoints: (builder) => ({
-        getAllTracks: builder.query({
-            query:() => ({
-                url: 'catalog/track/all/',
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${accessToken()}`,
-                }
-            })
-        }),
+const DATA_TAG = { type: 'Tracks', id: 'LIST' }
+const user= [JSON.parse(localStorage.getItem('token'))]
 
-        getFavouriteTracks: builder.query({
-            query:() => ({
-                url: 'catalog/track/favorite/all/',
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${accessToken()}`,
-                }
-            })
+export const playlistApi = createApi({
+  reducerPath: 'playlistApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: baseUrl,
+    tagTypes: ['Tracks'],
+  }),
+  endpoints: (builder) => ({
+    getAllTracks: builder.query({
+      query: () => ({
+        url: 'catalog/track/all/',
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken()}`,
+        },
+      }),
+      providesTags: (result = []) => [DATA_TAG],
+    }),
+
+    getFavouriteTracks: builder.query({
+      query: () => ({
+        url: 'catalog/track/favorite/all/',
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken()}`,
+        },
+      }),
+      transformResponse: (res) => {
+        const tracks = res.map((track) => {
+          return ({...track, stared_user: user})
         })
-    })
+        return tracks
+      },
+      providesTags: (result = []) => [DATA_TAG],
+    }),
+
+    addFavouriteTracks: builder.mutation({
+      query: (id) => ({
+        url: `catalog/track/${id}/favorite/`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken()}`,
+        },
+      }),
+      invalidatesTags: [DATA_TAG],
+    }),
+
+    deleteFavouriteTracks: builder.mutation({
+      query: (id) => ({
+        url: `catalog/track/${id}/favorite/`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${accessToken()}`,
+        },
+      }),
+      invalidatesTags: [DATA_TAG],
+    }),
+  }),
 })
 
-export const { useGetFavouriteTracksQuery, useGetAllTracksQuery } = playlistApi
+export const {
+  useGetFavouriteTracksQuery,
+  useGetAllTracksQuery,
+  useAddFavouriteTracksMutation,
+  useDeleteFavouriteTracksMutation,
+} = playlistApi

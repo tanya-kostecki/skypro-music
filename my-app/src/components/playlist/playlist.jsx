@@ -5,11 +5,12 @@ import * as S from './playlist.styles'
 import { PlaylistItem } from './playlist-item'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { selectIsLoading } from '../../store/selectors/selectors'
+import { currentPlaylistSelector, selectIsLoading } from '../../store/selectors/selectors'
 import { useGetAllTracksQuery } from '../../services/playlists'
 
 export const Playlist = ({ tracks }) => {
-  const { isFetching } = useGetAllTracksQuery()
+  const { isFetching } = useGetAllTracksQuery()//
+  const isLoading = useSelector(selectIsLoading)
 
   const secondsToMinutes = (sec) => {
     const min = Math.trunc(sec / 60) + ''
@@ -20,7 +21,7 @@ export const Playlist = ({ tracks }) => {
   return (
     <S.ContentPlaylist className="playlist">
       <div className="content__playlist-items">
-        {isFetching ? (
+        {isLoading && isFetching ? (
           <SkeletonPlaylistItems />
         ) : (
           tracks?.map((track) => (

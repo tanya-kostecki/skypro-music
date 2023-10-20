@@ -5,7 +5,7 @@ const initialState = {
   currentTrack: {},
   currentPlaylist: [],
   isPlaying: false,
-  isLoading: false,
+  isLoading: true,
 }
 
 export const trackSlice = createSlice({

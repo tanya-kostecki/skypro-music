@@ -9,7 +9,6 @@ import {
   currentTrackSelector,
   selectIsPlaying,
   currentPlaylistSelector,
-  allTracksSelector,
 } from '../../store/selectors/selectors'
 import {
   setCurrentTrack,
@@ -73,7 +72,6 @@ export function Bar({ isLoading }) {
 
   useEffect(handleStart, [track])
 
-  // const tracklist = useSelector(allTracksSelector)
   const tracklist = useSelector(currentPlaylistSelector)
   
   const handleShuffle = () => {
@@ -84,7 +82,7 @@ export function Bar({ isLoading }) {
   const handleNextTrack = () => {
     const trackIndex = tracklist.findIndex(el => el.id === track.id)
     if (track) {
-      if (trackIndex < tracklist.length - 1 && !shuffle) { //
+      if (trackIndex < tracklist.length - 1 && !shuffle) {
         const nextTrack = tracklist[trackIndex + 1]
         dispatch(setCurrentTrack(nextTrack))
       }
