@@ -3,17 +3,29 @@ import { ContentTitlePlaylist } from '../../components/content-title-playlist/co
 import { Playlist } from '../../components/playlist/playlist'
 import * as S from '../main/layout.styles'
 import { userContext } from '../../context/userContext'
-import { setCurrentTrack, setIsPlaying, setCurrentPlaylist, setIsLoading } from '../../store/slices/trackSlice'
-import { useDispatch } from 'react-redux'
-import { useGetFavouriteTracksQuery } from '../../services/playlists'
+import {
+  setCurrentTrack,
+  setIsPlaying,
+  setCurrentPlaylist,
+  setIsLoading,
+} from '../../store/slices/trackSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  useGetFavouriteTracksQuery,
+} from '../../services/playlists'
+import { useNavigate } from 'react-router-dom'
 
 export const FavouritesPage = ({ isLoading }) => {
   const { token, setToken } = useContext(userContext)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const { data, error } = useGetFavouriteTracksQuery()
-  console.log(data)
-
+  if (error) {
+    localStorage.removeItem('token')
+    setToken(false)
+    navigate('/login')
+  }
 
   useEffect(() => {
     dispatch(setCurrentPlaylist(data))
@@ -42,3 +54,4 @@ export const FavouritesPage = ({ isLoading }) => {
     }, [])
   }
 }
+

@@ -10,7 +10,6 @@ const accessToken = () => {
 }
 
 const DATA_TAG = { type: 'Tracks', id: 'LIST' }
-const user= [JSON.parse(localStorage.getItem('token'))]
 
 export const playlistApi = createApi({
   reducerPath: 'playlistApi',
@@ -38,12 +37,6 @@ export const playlistApi = createApi({
           Authorization: `Bearer ${accessToken()}`,
         },
       }),
-      transformResponse: (res) => {
-        const tracks = res.map((track) => {
-          return ({...track, stared_user: user})
-        })
-        return tracks
-      },
       providesTags: (result = []) => [DATA_TAG],
     }),
 

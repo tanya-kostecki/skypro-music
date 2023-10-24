@@ -16,10 +16,10 @@ import {
 import { userContext } from '../../context/userContext'
 
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const PlaylistItem = ({
   track,
-  id,
   album,
   author,
   link,
@@ -40,16 +40,27 @@ export const PlaylistItem = ({
 
   const [isLiked, setIsLiked] = useState(false)
 
-  const [addFavouriteTrack, { isError }] = useAddFavouriteTracksMutation()
+  const [addFavouriteTrack] = useAddFavouriteTracksMutation()
   const [deleteFavouriteTrack] = useDeleteFavouriteTracksMutation() 
 
+  const navigate = useNavigate()
+  const { token, setToken } = useContext(userContext)
+
   const addLike = async (id) => {
-    await addFavouriteTrack(id) // TODO://handle errors
+    await addFavouriteTrack(id).unwrap().catch((error) => {
+      localStorage.removeItem('token')
+      setToken(false)
+      navigate('/login')
+    })
     setIsLiked(true)
   }
 
   const deleteLike = async (id) => {
-    deleteFavouriteTrack(id) // TODO://handle errors
+    deleteFavouriteTrack(id).unwrap().catch((error) => {
+      localStorage.removeItem('token')
+      setToken(false)
+      navigate('/login')
+    })
     setIsLiked(false)
   }
 
@@ -63,6 +74,11 @@ export const PlaylistItem = ({
 
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem('token'))
+    if (!track.stared_user) {
+      setIsLiked(true)
+      return
+    }
+
     if (track?.stared_user?.find((user) => user.id === currentUser.id)) {
       setIsLiked(true)
     }
