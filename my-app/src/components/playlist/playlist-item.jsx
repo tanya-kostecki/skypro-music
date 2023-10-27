@@ -8,10 +8,12 @@ import {
   currentPlaylistSelector,
   currentTrackSelector,
 } from '../../store/selectors/selectors'
-import { setCurrentTrack } from '../../store/slices/trackSlice'
+import { setCurrentPlaylist, setCurrentTrack, setIsLoading } from '../../store/slices/trackSlice'
 import {
   useAddFavouriteTracksMutation,
   useDeleteFavouriteTracksMutation,
+  useGetAllTracksQuery,
+  useGetFavouriteTracksQuery,
 } from '../../services/playlists'
 import { userContext } from '../../context/userContext'
 

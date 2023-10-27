@@ -24,17 +24,12 @@ export const trackSlice = createSlice({
     setIsLoading: (state, action) => {
       state.isLoading = action.payload
     },
-
-
     setCurrentPlaylist : (state, action) => {
-      state.currentPlaylist = action.payload
-    },
-    setFavourites: (state, action) => {
       state.currentPlaylist = action.payload
     },
   }
 })
 
-export const { setAllTracks, setCurrentTrack, setIsLoading, setIsPlaying, setFavourites, setCurrentPlaylist } = trackSlice.actions
+export const { setAllTracks, setCurrentTrack, setIsLoading, setIsPlaying, setCurrentPlaylist } = trackSlice.actions
 export default trackSlice.reducer
 

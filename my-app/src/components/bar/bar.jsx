@@ -11,6 +11,7 @@ import {
   currentPlaylistSelector,
 } from '../../store/selectors/selectors'
 import {
+  setCurrentPlaylist,
   setCurrentTrack,
   setIsPlaying,
 } from '../../store/slices/trackSlice'
@@ -20,8 +21,6 @@ export function Bar({ isLoading }) {
   const track = useSelector(currentTrackSelector)
   const isPlaying = useSelector(selectIsPlaying)
   const dispatch = useDispatch(setIsPlaying)
-
-  const currentPlaylist = useSelector(currentPlaylistSelector)
 
   const [isLoop, setIsLoop] = useState(false)
 
@@ -63,6 +62,9 @@ export function Bar({ isLoading }) {
 
   const token = useContext(userContext)
 
+  const tracklist = useSelector(currentPlaylistSelector)
+  console.log(tracklist)
+
   const handleStart = () => {
     if (localStorage.getItem('token', token)) {
       dispatch(setIsPlaying(true))
@@ -72,7 +74,6 @@ export function Bar({ isLoading }) {
 
   useEffect(handleStart, [track])
 
-  const tracklist = useSelector(currentPlaylistSelector)
   
   const handleShuffle = () => {
     let randomIndex = Math.floor(Math.random() * (tracklist.length - 1))

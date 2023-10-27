@@ -47,8 +47,6 @@ export function PlayerControls({
   const track = useSelector(currentTrackSelector)
   const tracklist = useSelector(currentPlaylistSelector) //
 
-  // const tracklist = useSelector(allTracksSelector)
-
   const handlePrevTrack = () => {
     if (track) {
       const trackIndex = tracklist.findIndex(el => el.id === track.id)

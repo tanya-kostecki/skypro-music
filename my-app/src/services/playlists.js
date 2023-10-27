@@ -22,9 +22,6 @@ export const playlistApi = createApi({
       query: () => ({
         url: 'catalog/track/all/',
         method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken()}`,
-        },
       }),
       providesTags: (result = []) => [DATA_TAG],
     }),
