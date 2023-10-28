@@ -4,6 +4,7 @@ const initialState = {
   allTracks: [],
   currentTrack: {},
   currentPlaylist: [],
+  activePlaylist: [], //
   isPlaying: false,
   isLoading: true,
 }
@@ -27,9 +28,12 @@ export const trackSlice = createSlice({
     setCurrentPlaylist : (state, action) => {
       state.currentPlaylist = action.payload
     },
+    setActivePlaylist : (state, action) => {
+      state.activePlaylist = action.payload
+    },
   }
 })
 
-export const { setAllTracks, setCurrentTrack, setIsLoading, setIsPlaying, setCurrentPlaylist } = trackSlice.actions
+export const { setAllTracks, setCurrentTrack, setIsLoading, setIsPlaying, setCurrentPlaylist, setActivePlaylist } = trackSlice.actions
 export default trackSlice.reducer
 

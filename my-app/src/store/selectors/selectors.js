@@ -6,3 +6,5 @@ export const currentTrackIndexSelector = (store) =>
   store.currentPlay.currentTrack.id
 
 export const currentPlaylistSelector = (store) => store.currentPlay.currentPlaylist
+
+export const activePlaylistSelector = (store) => store.currentPlay.activePlaylist

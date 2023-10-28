@@ -9,6 +9,7 @@ import {
   currentTrackSelector,
   currentPlaylistSelector,
   allTracksSelector,
+  activePlaylistSelector,
 } from '../../store/selectors/selectors'
 
 export function PlayerControls({
@@ -45,7 +46,8 @@ export function PlayerControls({
   const toggleLoop = isLoop ? handleStopLoop : handleLoop
 
   const track = useSelector(currentTrackSelector)
-  const tracklist = useSelector(currentPlaylistSelector) //
+  // const tracklist = useSelector(currentPlaylistSelector)
+  const tracklist = useSelector(activePlaylistSelector)
 
   const handlePrevTrack = () => {
     if (track) {

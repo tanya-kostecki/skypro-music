@@ -8,7 +8,7 @@ import {
   currentPlaylistSelector,
   currentTrackSelector,
 } from '../../store/selectors/selectors'
-import { setCurrentPlaylist, setCurrentTrack, setIsLoading } from '../../store/slices/trackSlice'
+import { setActivePlaylist, setCurrentPlaylist, setCurrentTrack, setIsLoading } from '../../store/slices/trackSlice'
 import {
   useAddFavouriteTracksMutation,
   useDeleteFavouriteTracksMutation,
@@ -36,8 +36,11 @@ export const PlaylistItem = ({
   const isPlaying = useSelector(selectIsPlaying)
   const currentTrack = useSelector(currentTrackSelector)
 
+  const tracklist = useSelector(currentPlaylistSelector) //
+
   const showPlayer = (track) => {
     dispatch(setCurrentTrack(track))
+    dispatch(setActivePlaylist(tracklist))
   }
 
   const [isLiked, setIsLiked] = useState(false)

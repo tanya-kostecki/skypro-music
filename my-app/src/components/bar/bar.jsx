@@ -9,6 +9,7 @@ import {
   currentTrackSelector,
   selectIsPlaying,
   currentPlaylistSelector,
+  activePlaylistSelector,
 } from '../../store/selectors/selectors'
 import {
   setCurrentPlaylist,
@@ -62,8 +63,7 @@ export function Bar({ isLoading }) {
 
   const token = useContext(userContext)
 
-  const tracklist = useSelector(currentPlaylistSelector)
-  console.log(tracklist)
+  const tracklist = useSelector(activePlaylistSelector)
 
   const handleStart = () => {
     if (localStorage.getItem('token', token)) {
