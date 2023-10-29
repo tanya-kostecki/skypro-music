@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as S from "./AuthPage.styles";
 import { useEffect, useState, useContext } from "react";
-import { loginApi, registrationApi } from "../../api/userApi";
+import { getAccessToken, loginApi, refreshToken, registrationApi } from "../../api/userApi";
+import { userContext } from "../../context/userContext";
 
-export function AuthPage({ isLoginMode = false, setToken }) {
+export function AuthPage({ isLoginMode = false }) { //setToken
   const [error, setError] = useState(null);
 
   const [email, setEmail] = useState("");
@@ -15,6 +16,8 @@ export function AuthPage({ isLoginMode = false, setToken }) {
 
   const navigate = useNavigate()
 
+  const { token, setToken } = useContext(userContext) //
+
   const handleLogin = async ({ email, password }) => {
     if(!email) {
       setError('Введите почту')
@@ -25,8 +28,9 @@ export function AuthPage({ isLoginMode = false, setToken }) {
       try {
         setIsAuthProcess(true)
         const userInfo = await loginApi({ email, password })
-        localStorage.setItem('token', userInfo.username)
-        setToken(userInfo.username)
+        userInfo.token = await getAccessToken({ email, password })
+        localStorage.setItem('token', JSON.stringify(userInfo))
+        setToken(userInfo)
         navigate('/')
       } catch (error) {
         setError(error.message)

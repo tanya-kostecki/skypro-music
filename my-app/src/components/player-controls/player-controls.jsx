@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import * as S from './player-controls.styles'
-import { ReactReduxContext, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
-  selectCurrentTrack,
-  selectIsPlaying,
-} from '../../store/actions/creators/currentTrack'
+  setCurrentTrack,
+  setIsPlaying,
+} from '../../store/slices/trackSlice'
 import {
-  currentTrackPlayer,
-  currentTracklistPlayer,
-} from '../../store/selectors/currentTrack'
+  currentTrackSelector,
+  currentPlaylistSelector,
+  allTracksSelector,
+  activePlaylistSelector,
+} from '../../store/selectors/selectors'
 
 export function PlayerControls({
   isPlaying,
@@ -21,13 +23,12 @@ export function PlayerControls({
   shuffle,
   setShuffle,
 }) {
-  // const [shuffle, setShuffle] = useState(false)
-
+  
   const dispatch = useDispatch()
 
   const handleStop = () => {
     audioRef.current.pause()
-    dispatch(selectIsPlaying(false))
+    dispatch(setIsPlaying(false))
   }
 
   const togglePlay = isPlaying ? handleStop : handleStart
@@ -44,26 +45,27 @@ export function PlayerControls({
 
   const toggleLoop = isLoop ? handleStopLoop : handleLoop
 
-  const track = useSelector(currentTrackPlayer)
-  const tracklist = useSelector(currentTracklistPlayer)
+  const track = useSelector(currentTrackSelector)
+  // const tracklist = useSelector(currentPlaylistSelector)
+  const tracklist = useSelector(activePlaylistSelector)
 
-  const handlePrevTrack = (prevTrack) => {
+  const handlePrevTrack = () => {
     if (track) {
-      const trackIndex = tracklist.indexOf(track)
-      if (trackIndex < tracklist.length - 1 && trackIndex > 0 && !shuffle) {
-        prevTrack = tracklist[trackIndex - 1]
-        dispatch(selectCurrentTrack(prevTrack))
+      const trackIndex = tracklist.findIndex(el => el.id === track.id)
+      console.log(trackIndex)
+      if (trackIndex < tracklist.length && trackIndex > 0 && !shuffle) {
+        const prevTrack = tracklist[trackIndex - 1]
+        dispatch(setCurrentTrack(prevTrack))
       } 
-      if(shuffle) {
+      if (shuffle) {
         let randomTrackIndex = handleShuffle()
         let randomTrack = tracklist[randomTrackIndex]
-        dispatch(selectCurrentTrack(randomTrack))
+        dispatch(setCurrentTrack(randomTrack))
       }
     }
   }
 
   const toggleShuffle = () => shuffle ? setShuffle(false) : setShuffle(true)
-  
 
   return (
     <S.PlayerControls>

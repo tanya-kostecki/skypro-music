@@ -1,21 +1,39 @@
+import { useContext, useEffect } from 'react'
 import { ContentTitlePlaylist } from '../../components/content-title-playlist/content-title-playlist'
 import { Playlist } from '../../components/playlist/playlist'
-import { CenterBlockFilter } from '../../components/centerblock-filter/centerblock-filter'
-import * as S from './main.styles'
-import { useContext, useEffect, useState } from 'react'
+import * as S from '../main/layout.styles'
 import { userContext } from '../../context/userContext'
+import {
+  setCurrentTrack,
+  setIsPlaying,
+  setCurrentPlaylist,
+  setIsLoading,
+} from '../../store/slices/trackSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { setActivePlaylist, setCurrentPlaylist, setCurrentTrack, setIsLoading, setIsPlaying } from '../../store/slices/trackSlice'
+import { useGetFavouriteTracksQuery } from '../../services/playlists'
+import { useNavigate } from 'react-router-dom'
+import {
+  currentPlaylistSelector,
+  favouritePlaylistSelector,
+} from '../../store/selectors/selectors'
 
-import { selectIsLoading } from '../../store/selectors/selectors'
-import { useGetAllTracksQuery } from '../../services/playlists'
-
-export const Main = () => { 
-  const {token, setToken} = useContext(userContext)
+export const FavouritesPage = ({ isLoading }) => {
+  const { token, setToken } = useContext(userContext)
   const dispatch = useDispatch()
-  const isLoading = useSelector(selectIsLoading)
+  const navigate = useNavigate()
 
-  const { data, error, isFetching } = useGetAllTracksQuery()
+  // const tracklist = useSelector(currentPlaylistSelector)
+  // console.log(tracklist)
+
+  const { data, error } = useGetFavouriteTracksQuery()
+
+  useEffect(() => {
+    if (error) {
+      localStorage.removeItem('token')
+      setToken(false)
+      navigate('/login')
+    }
+  }, [error])
 
   useEffect(() => {
     dispatch(setCurrentPlaylist(data))
@@ -23,11 +41,11 @@ export const Main = () => {
   }, [data])
 
 
+
   if (localStorage.getItem('token', token)) {
     return (
       <div>
-        <S.CenterblockH2>Треки</S.CenterblockH2>
-        <CenterBlockFilter isLoading={isLoading} />
+        <S.CenterblockH2>Мои Треки</S.CenterblockH2>
         <S.CenterblockContent>
           <ContentTitlePlaylist isLoading={isLoading} />
           {error ? (
@@ -46,3 +64,4 @@ export const Main = () => {
     }, [])
   }
 }
+

@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import currentTrackReducer from './reducers/currentTrack'
+import trackSliceReducer from './slices/trackSlice'
+import { playlistApi } from '../services/playlists'
 
 export const store = configureStore({
     reducer: {
-        currentPlay: currentTrackReducer,
-    }
+        currentPlay: trackSliceReducer,
+        [playlistApi.reducerPath]: playlistApi.reducer,
+    },
+
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(playlistApi.middleware),
 })

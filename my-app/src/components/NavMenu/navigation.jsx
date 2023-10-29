@@ -3,6 +3,12 @@ import * as S from './NavMenu.styles'
 import { Link } from 'react-router-dom'
 import { useState, useContext } from 'react'
 import { userContext } from '../../context/userContext'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  currentIsPlaying,
+  currentTrackPlayer,
+} from '../../store/selectors/selectors'
+import { setCurrentTrack, setIsPlaying } from '../../store/slices/trackSlice'
 
 export const CreateNavigation = () => {
   const [visible, setVisibility] = useState(false)
@@ -10,10 +16,13 @@ export const CreateNavigation = () => {
 
   const {token, setToken} = useContext(userContext)
 
+  const dispatch = useDispatch()
+
   const handleLogOut = () => {
     localStorage.removeItem('token', token)
     setToken(false)
-   
+    dispatch(setCurrentTrack({}))
+    dispatch(setIsPlaying(false))
   }
 
   return (

@@ -155,6 +155,15 @@ export const TrackTimeSvg = styled.svg`
   fill: transparent;
   stroke: #696969;
 `
+
+export const TrackTimeSvgLiked = styled.svg`
+  width: 14px;
+  height: 12px;
+  margin-right: 17px;
+  fill: #B672FF;
+  stroke: #696969;
+`
+
 export const TrackTimeText = styled.span`
   font-style: normal;
   font-weight: 400;
