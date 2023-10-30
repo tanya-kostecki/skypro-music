@@ -59,7 +59,7 @@ export function Sidebar() {
         </S.SidebarPersonalName>
         <S.SideBarIcon>
           <svg alt="logout" onClick={handleLogoutBtn}>
-            <use xlinkHref="img/icon/sprite.svg#logout"></use>
+            <use xlinkHref="/img/icon/sprite.svg#logout"></use>
           </svg>
         </S.SideBarIcon>
       </S.SideBarPersonal>

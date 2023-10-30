@@ -100,7 +100,7 @@ export const PlaylistItem = ({
               ></S.TrackTitleAnimation>
             )}
             <S.TrackTitleSvg alt="music">
-              <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+              <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
             </S.TrackTitleSvg>
           </S.TrackTitleImage>
           <div className="track__title-text">
@@ -139,7 +139,7 @@ export const PlaylistItem = ({
                 />
               </svg>
             ) : (
-              <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+              <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
             )}
           </S.TrackTimeSvg>
           <S.TrackTimeText className="track__time-text">{time}</S.TrackTimeText>
