@@ -8,6 +8,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   currentPlaylistSelector,
+  filteredPlaylistSelector,
+  filtersSelector,
   selectIsLoading,
 } from '../../store/selectors/selectors'
 import {
@@ -15,7 +17,11 @@ import {
   useGetFavouriteTracksQuery,
 } from '../../services/playlists'
 
-import { setIsLoading, setCurrentPlaylist } from '../../store/slices/trackSlice' //
+import {
+  setIsLoading,
+  setCurrentPlaylist,
+  setFilteredPlaylist,
+} from '../../store/slices/trackSlice' //
 
 export const Playlist = ({ tracks }) => {
   const { isFetching } = useGetAllTracksQuery()
@@ -29,28 +35,66 @@ export const Playlist = ({ tracks }) => {
     return min.padStart(2, 0) + ':' + sec.padStart(2, 0)
   }
 
+  const filteredPlaylist = useSelector(filteredPlaylistSelector)
+  const filters = useSelector(filtersSelector)
+
+  useEffect(() => {
+    if (tracks) {
+      let newFilteredPlaylist = [...tracks]
+      if (filters.searchValue.length) {
+        newFilteredPlaylist = [
+          ...tracks.filter(
+            (track) =>
+              track.name
+                .toLowerCase()
+                .includes(filters.searchValue.toLowerCase()) ||
+              track.author
+                .toLowerCase()
+                .includes(filters.searchValue.toLowerCase()),
+          ),
+        ]
+      }
+      dispatch(setFilteredPlaylist(newFilteredPlaylist))
+    }
+  }, [filters, tracks])
 
   return (
     <S.ContentPlaylist className="playlist">
-      <div className="content__playlist-items">
-        {isLoading && isFetching ? (
-          <SkeletonPlaylistItems />
-        ) : (
-          tracks?.map((track) => (
-            <PlaylistItem
-              track={track}
-              key={track.id}
-              title={track.name}
-              link={track.track_file}
-              author={track.author}
-              authorLink={track.authorLink}
-              album={track.album}
-              albumLink={track.albumLink}
-              time={secondsToMinutes(track.duration_in_seconds)}
-            />
-          ))
-        )}
-      </div>
+      {filters.status ? (
+        filteredPlaylist?.map((track) => (
+          <PlaylistItem
+            track={track}
+            key={track.id}
+            title={track.name}
+            link={track.track_file}
+            author={track.author}
+            authorLink={track.authorLink}
+            album={track.album}
+            albumLink={track.albumLink}
+            time={secondsToMinutes(track.duration_in_seconds)}
+          />
+        ))
+      ) : (
+        <div className="content__playlist-items">
+          {isLoading && isFetching ? (
+            <SkeletonPlaylistItems />
+          ) : (
+            tracks?.map((track) => (
+              <PlaylistItem
+                track={track}
+                key={track.id}
+                title={track.name}
+                link={track.track_file}
+                author={track.author}
+                authorLink={track.authorLink}
+                album={track.album}
+                albumLink={track.albumLink}
+                time={secondsToMinutes(track.duration_in_seconds)}
+              />
+            ))
+          )}
+        </div>
+      )}
     </S.ContentPlaylist>
   )
 }
