@@ -11,7 +11,7 @@ const initialState = {
     status: false,
     authors: '',
     years: false,
-    genre: '',
+    genre: 'По умолчанию',
     searchValue: '',
   },
   filteredPlaylist: [], //

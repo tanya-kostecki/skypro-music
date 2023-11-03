@@ -38,9 +38,23 @@ export const Playlist = ({ tracks }) => {
   const filteredPlaylist = useSelector(filteredPlaylistSelector)
   const filters = useSelector(filtersSelector)
 
+  const sortReleaseDate = (a, b) => {
+    const firstDate = new Date(a)
+    const secondDate = new Date(b)
+
+    if (firstDate < secondDate) {
+      return -1
+    } else if (firstDate > secondDate) {
+      return 1
+    } else {
+      return 0
+    }
+  }
+
   useEffect(() => {
     if (tracks) {
       let newFilteredPlaylist = [...tracks]
+
       if (filters.searchValue.length) {
         newFilteredPlaylist = [
           ...tracks.filter(
@@ -54,6 +68,19 @@ export const Playlist = ({ tracks }) => {
           ),
         ]
       }
+
+      if (filters.years === 'Сначала новые') {
+        newFilteredPlaylist = newFilteredPlaylist.sort((a, b) =>
+         sortReleaseDate(a.release_date, b.release_date),
+        ).reverse()
+      }
+      
+      if (filters.years === 'Сначала старые') {
+        newFilteredPlaylist = newFilteredPlaylist.sort((a, b) =>
+          sortReleaseDate(a.release_date, b.release_date),
+        )
+      }
+
       dispatch(setFilteredPlaylist(newFilteredPlaylist))
     }
   }, [filters, tracks])

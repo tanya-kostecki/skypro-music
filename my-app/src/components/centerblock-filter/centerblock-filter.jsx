@@ -1,35 +1,47 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import * as S from './centerblock.styles'
+import { useGetAllTracksQuery } from '../../services/playlists'
+import { useDispatch, useSelector } from 'react-redux'
+import { filtersSelector } from '../../store/selectors/selectors'
+import { setFilteredPlaylist, setFilters } from '../../store/slices/trackSlice'
 
 const PerformerListFilter = () => {
+  const { data: playlist } = useGetAllTracksQuery()
+  console.log(playlist)
+  const allAuthorsSet = playlist?.map((track) => track.author)
+
   return (
     <S.FilterScroll>
       <S.FilterTextListUl>
-        <S.FilterText>Nero</S.FilterText>
-        <S.FilterText>Dynoro, Outwork, Mr. Gee</S.FilterText>
-        <S.FilterText>Ali Backgor</S.FilterText>
-        <S.FilterText>Стоункат, Psychopath</S.FilterText>
-        <S.FilterText>Jaded, Will Clarke, AR/CO</S.FilterText>
-        <S.FilterText>Blue Fountain, Zeds Dead</S.FilterText>
-        <S.FilterText>
-          HYBIT, Mr. Black, Offer Nissim, Hi Profile
-        </S.FilterText>
-        <S.FilterText>minthaze</S.FilterText>
-        <S.FilterText>Calvin Harris, Disciples</S.FilterText>
-        <S.FilterText>Tom Boxer</S.FilterText>
+        {allAuthorsSet?.map((author) => (
+          <S.FilterText key={author.id}>{author}</S.FilterText>
+        ))}
       </S.FilterTextListUl>
     </S.FilterScroll>
   )
 }
 
 const YearListFilter = () => {
+  const dispatch = useDispatch()
+  const filters = useSelector(filtersSelector)
+  
+  const filterYears = (yearFilter) => {
+    dispatch(setFilters({ ...filters, status: true, years: yearFilter }))
+  }
+
   return (
     <S.FilterScroll>
       <S.FilterTextListUl>
-        <S.FilterText>По умолчанию</S.FilterText>
-        <S.FilterText>Сначала новые</S.FilterText>
-        <S.FilterText>Сначала старые</S.FilterText>
+        <S.FilterText onClick={() => filterYears('По умолчанию')}>
+          По умолчанию
+        </S.FilterText>
+        <S.FilterText onClick={() => filterYears('Сначала новые')}>
+          Сначала новые
+        </S.FilterText>
+        <S.FilterText onClick={() => filterYears('Сначала старые')}>
+          Сначала старые
+        </S.FilterText>
       </S.FilterTextListUl>
     </S.FilterScroll>
   )
@@ -56,6 +68,16 @@ export function CenterBlockFilter() {
   const [performerFilter, setPerformerFilter] = useState(false)
   const [yearFilter, setYearFilter] = useState(false)
   const [genreFilter, setGenreFilter] = useState(false)
+
+  //
+  const filters = useSelector(filtersSelector)
+  const { data: playlist } = useGetAllTracksQuery()
+  const [authorsFilter, setAuthorsFilter] = useState('')
+
+  useEffect(() => {
+    setAuthorsFilter(playlist?.map((track) => track.author))
+  }, [playlist])
+  //
 
   const togglePerformerCategory = () => {
     setPerformerFilter((prev) => !prev)
