@@ -69,6 +69,14 @@ export const Playlist = ({ tracks }) => {
         ]
       }
 
+      // if (filters.authors) {
+      //   newFilteredPlaylist = [
+      //     ...newFilteredPlaylist.filter((track) =>
+      //       filters.authors.includes(track.author),
+      //     ),
+      //   ]
+      // }
+
       if (filters.years === 'Сначала новые') {
         newFilteredPlaylist = newFilteredPlaylist.sort((a, b) =>
          sortReleaseDate(a.release_date, b.release_date),
@@ -79,6 +87,14 @@ export const Playlist = ({ tracks }) => {
         newFilteredPlaylist = newFilteredPlaylist.sort((a, b) =>
           sortReleaseDate(a.release_date, b.release_date),
         )
+      }
+
+      if (filters.genre) {
+        newFilteredPlaylist = [
+          ...newFilteredPlaylist.filter((track) =>
+            filters.genre.includes(track.genre),
+          ),
+        ]
       }
 
       dispatch(setFilteredPlaylist(newFilteredPlaylist))

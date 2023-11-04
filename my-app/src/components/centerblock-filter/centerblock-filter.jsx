@@ -8,13 +8,15 @@ import { setFilteredPlaylist, setFilters } from '../../store/slices/trackSlice'
 
 const PerformerListFilter = () => {
   const { data: playlist } = useGetAllTracksQuery()
-  console.log(playlist)
-  const allAuthorsSet = playlist?.map((track) => track.author)
+  
+  const authors = playlist?.map((track) => track.author)
+  const authorsSet = new Set(authors)
+  const allAuthors = Array.from(authorsSet)
 
   return (
-    <S.FilterScroll>
+    <S.FilterScroll>    
       <S.FilterTextListUl>
-        {allAuthorsSet?.map((author) => (
+        {allAuthors?.map((author) => (
           <S.FilterText key={author.id}>{author}</S.FilterText>
         ))}
       </S.FilterTextListUl>
@@ -48,17 +50,20 @@ const YearListFilter = () => {
 }
 
 const GenreListFilter = () => {
+  const dispatch = useDispatch()
+  const filters = useSelector(filtersSelector)
+
+  const filterGenre = (genreFilter) => {
+    dispatch(setFilters({ ...filters, status: true, genre: genreFilter }))
+  }
+
   return (
     <S.FilterScroll>
       <S.FilterTextListUl>
-        <S.FilterText>Хип-хоп</S.FilterText>
-        <S.FilterText>Поп-музыка</S.FilterText>
-        <S.FilterText>Техно</S.FilterText>
-        <S.FilterText>Инди</S.FilterText>
-        <S.FilterText>Рок-музыка</S.FilterText>
-        <S.FilterText>Кантри</S.FilterText>
-        <S.FilterText>Джаз</S.FilterText>
-        <S.FilterText>Классическая</S.FilterText>
+        <S.FilterText onClick={() => filterGenre(false)}>По умолчанию</S.FilterText>
+        <S.FilterText onClick={() => filterGenre('Классическая музыка')}>Классическая музыка</S.FilterText>
+        <S.FilterText onClick={() => filterGenre('Электронная музыка')}>Электронная музыка</S.FilterText>
+        <S.FilterText onClick={() => filterGenre('Рок музыка')}>Рок музыка</S.FilterText>
       </S.FilterTextListUl>
     </S.FilterScroll>
   )

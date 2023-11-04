@@ -10,8 +10,8 @@ const initialState = {
   filters: {
     status: false,
     authors: '',
-    years: false,
-    genre: 'По умолчанию',
+    years: 'По умолчанию',
+    genre: '',
     searchValue: '',
   },
   filteredPlaylist: [], //
