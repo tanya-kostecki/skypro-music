@@ -19,12 +19,30 @@ const PerformerListFilter = () => {
   const filterAuthor = (authorFilter) => {
     dispatch(setFilters({...filters, status: true, authors: authorFilter}))
   }
+  
+  const removeFilter = () => {
+    dispatch(setFilters({...filters, status: false, authors: ''}))
+  }
+
+  const toggleAuthorFilter = (filter) => {
+    if (!filters.status) {
+      filterAuthor(filter)
+    } else {
+      removeFilter()
+    }
+    console.log(filter)
+  }
 
   return (
-    <S.FilterScroll>    
+    <S.FilterScroll>
       <S.FilterTextListUl>
         {allAuthors?.map((author, index) => (
-          <S.FilterText key={`author-${index}`} onClick={() => filterAuthor(author)}>{author}</S.FilterText>
+          <S.FilterText
+            key={`author-${index}`}
+            onClick={() => toggleAuthorFilter(author)}
+          >
+            {author}
+          </S.FilterText>
         ))}
       </S.FilterTextListUl>
     </S.FilterScroll>
