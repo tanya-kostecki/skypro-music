@@ -68,15 +68,7 @@ export const Playlist = ({ tracks }) => {
           ),
         ]
       }
-
-      // if (filters.authors) {
-      //   newFilteredPlaylist = [
-      //     ...newFilteredPlaylist.filter((track) =>
-      //       filters.authors.includes(track.author),
-      //     ),
-      //   ]
-      // }
-
+      
       if (filters.years === 'Сначала новые') {
         newFilteredPlaylist = newFilteredPlaylist.sort((a, b) =>
          sortReleaseDate(a.release_date, b.release_date),

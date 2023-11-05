@@ -16,8 +16,8 @@ const PerformerListFilter = () => {
   return (
     <S.FilterScroll>    
       <S.FilterTextListUl>
-        {allAuthors?.map((author) => (
-          <S.FilterText key={author.id}>{author}</S.FilterText>
+        {allAuthors?.map((author, index) => (
+          <S.FilterText key={`author-${index}`}>{author}</S.FilterText>
         ))}
       </S.FilterTextListUl>
     </S.FilterScroll>
