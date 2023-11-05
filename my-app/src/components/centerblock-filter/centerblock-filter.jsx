@@ -13,11 +13,18 @@ const PerformerListFilter = () => {
   const authorsSet = new Set(authors)
   const allAuthors = Array.from(authorsSet)
 
+  const dispatch = useDispatch()
+  const filters = useSelector(filtersSelector)
+
+  const filterAuthor = (authorFilter) => {
+    dispatch(setFilters({...filters, status: true, authors: authorFilter}))
+  }
+
   return (
     <S.FilterScroll>    
       <S.FilterTextListUl>
         {allAuthors?.map((author, index) => (
-          <S.FilterText key={`author-${index}`}>{author}</S.FilterText>
+          <S.FilterText key={`author-${index}`} onClick={() => filterAuthor(author)}>{author}</S.FilterText>
         ))}
       </S.FilterTextListUl>
     </S.FilterScroll>

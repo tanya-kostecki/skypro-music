@@ -89,6 +89,14 @@ export const Playlist = ({ tracks }) => {
         ]
       }
 
+      if (filters.authors) {
+        newFilteredPlaylist = [
+          ...newFilteredPlaylist.filter((track) =>
+            filters.authors.includes(track.author),
+          ),
+        ]
+      }
+
       dispatch(setFilteredPlaylist(newFilteredPlaylist))
     }
   }, [filters, tracks])
