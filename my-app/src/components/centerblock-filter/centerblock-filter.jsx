@@ -11,7 +11,6 @@ const PerformerListFilter = () => {
 
   const dispatch = useDispatch()
   const filters = useSelector(filtersSelector)
-  console.log(filters)
 
   const authors = playlist?.map((track) => track.author)
   const authorsSet = new Set(authors)
@@ -102,20 +101,67 @@ const YearListFilter = () => {
 }
 
 const GenreListFilter = () => {
+  const { data: playlist } = useGetAllTracksQuery()
+
   const dispatch = useDispatch()
   const filters = useSelector(filtersSelector)
 
-  const filterGenre = (genreFilter) => {
-    dispatch(setFilters({ ...filters, status: true, genre: genreFilter }))
+  const genre = playlist?.map((track) => track.genre)
+  const genresSet = new Set(genre)
+  const allGenres = Array.from(genresSet)
+
+  // const filterGenre = (genreFilter) => {
+  //   dispatch(setFilters({ ...filters, status: true, genre: genreFilter }))
+  // }
+
+  const filterGenre = (genre) => {
+    const filteredGenre = {
+      ...filters,
+      status: true,
+      genre: [...filters.genre, genre],
+    }
+    dispatch(setFilters(filteredGenre))
+  }
+
+  const removeFilterGenre = (genre) => {
+    const currentGenre = [...filters.genre]
+    const index = currentGenre.indexOf(genre)
+
+    currentGenre.splice(index, 1)
+
+    const deletedGenre = {
+      ...filters,
+      status: true,
+      genre: [...currentGenre],
+    }
+
+    dispatch(setFilters(deletedGenre))
+
+    if (!deletedGenre.genre.length) {
+      dispatch(setFilters({...filters, status: false, genre: ''}))
+    }
   }
 
   return (
     <S.FilterScroll>
       <S.FilterTextListUl>
-        <S.FilterText onClick={() => filterGenre(false)}>По умолчанию</S.FilterText>
-        <S.FilterText onClick={() => filterGenre('Классическая музыка')}>Классическая музыка</S.FilterText>
-        <S.FilterText onClick={() => filterGenre('Электронная музыка')}>Электронная музыка</S.FilterText>
-        <S.FilterText onClick={() => filterGenre('Рок музыка')}>Рок музыка</S.FilterText>
+        {allGenres?.map((genre, index) =>
+          !filters.genre.includes(genre) ? (
+            <S.FilterText
+              key={`genre-${index}`}
+              onClick={() => filterGenre(genre)}
+            >
+              {genre}
+            </S.FilterText>
+          ) : (
+            <S.FilterTextActive
+              key={`genre-${index}`}
+              onClick={() => removeFilterGenre(genre)}
+            >
+              {genre}
+            </S.FilterTextActive>
+          ),
+        )}
       </S.FilterTextListUl>
     </S.FilterScroll>
   )
