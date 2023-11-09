@@ -52,6 +52,14 @@ export const FilterText = styled.li`
   }
 `
 
+export const FilterTextActive = styled.li`
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #ad61ff;
+  text-decoration: underline;
+`
+
 export const CenterblockFilter = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;

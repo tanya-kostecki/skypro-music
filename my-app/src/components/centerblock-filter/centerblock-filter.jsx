@@ -8,42 +8,69 @@ import { setFilteredPlaylist, setFilters } from '../../store/slices/trackSlice'
 
 const PerformerListFilter = () => {
   const { data: playlist } = useGetAllTracksQuery()
-  
+
+  const dispatch = useDispatch()
+  const filters = useSelector(filtersSelector)
+  console.log(filters)
+
   const authors = playlist?.map((track) => track.author)
   const authorsSet = new Set(authors)
   const allAuthors = Array.from(authorsSet)
 
-  const dispatch = useDispatch()
-  const filters = useSelector(filtersSelector)
+  // const filterAuthor = (authorFilter) => {
+  //   dispatch(setFilters({...filters, status: true, authors: authorFilter}))
+  // }
 
-  const filterAuthor = (authorFilter) => {
-    dispatch(setFilters({...filters, status: true, authors: authorFilter}))
-  }
-  
-  const removeFilter = () => {
-    dispatch(setFilters({...filters, status: false, authors: ''}))
-  }
-
-  const toggleAuthorFilter = (filter) => {
-    if (!filters.status) {
-      filterAuthor(filter)
-    } else {
-      removeFilter()
+  const filterAuthors = (author) => {
+    const filteredAuthor = {
+      ...filters,
+      status: true,
+      authors: [...filters.authors, author],
     }
-    console.log(filter)
+    dispatch(setFilters(filteredAuthor))
+    console.log(filteredAuthor.authors)
+  }
+
+  const removeFilterAuthors = (author) => {
+    const currentAuthors = [...filters.authors]
+    const index = currentAuthors.indexOf(author)
+
+    currentAuthors.splice(index, 1)
+
+    const deletedAuthor = {
+      ...filters,
+      status: true,
+      authors: [...currentAuthors],
+    }
+
+    dispatch(setFilters(deletedAuthor))
+    console.log(deletedAuthor.authors)
+
+    if (!deletedAuthor.authors.length) {
+      dispatch(setFilters({...filters, status: false, authors: ''}))
+    }
   }
 
   return (
     <S.FilterScroll>
       <S.FilterTextListUl>
-        {allAuthors?.map((author, index) => (
-          <S.FilterText
-            key={`author-${index}`}
-            onClick={() => toggleAuthorFilter(author)}
-          >
-            {author}
-          </S.FilterText>
-        ))}
+        {allAuthors?.map((author, index) =>
+          !filters.authors.includes(author) ? (
+            <S.FilterText
+              key={`author-${index}`}
+              onClick={() => filterAuthors(author)}
+            >
+              {author}
+            </S.FilterText>
+          ) : (
+            <S.FilterTextActive
+              key={`author-${index}`}
+              onClick={() => removeFilterAuthors(author)}
+            >
+              {author}
+            </S.FilterTextActive>
+          ),
+        )}
       </S.FilterTextListUl>
     </S.FilterScroll>
   )
