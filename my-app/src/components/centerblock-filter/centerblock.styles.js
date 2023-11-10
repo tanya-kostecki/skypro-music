@@ -103,3 +103,21 @@ export const FilterButtonActive = styled(FilterButton)`
   color: #b672ff;
 }
 `
+
+export const CircleCount = styled.div`
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #ad61ff;
+  color: white;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  right: -8px;
+  top: -8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
+`

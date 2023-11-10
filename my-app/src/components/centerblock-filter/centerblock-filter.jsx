@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { filtersSelector } from '../../store/selectors/selectors'
 import { setFilteredPlaylist, setFilters } from '../../store/slices/trackSlice'
 
-const PerformerListFilter = () => {
+const PerformerListFilter = ({ countFilterAuthor, setCountFilterAuthor }) => {
   const { data: playlist } = useGetAllTracksQuery()
 
   const dispatch = useDispatch()
@@ -16,10 +16,6 @@ const PerformerListFilter = () => {
   const authorsSet = new Set(authors)
   const allAuthors = Array.from(authorsSet)
 
-  // const filterAuthor = (authorFilter) => {
-  //   dispatch(setFilters({...filters, status: true, authors: authorFilter}))
-  // }
-
   const filterAuthors = (author) => {
     const filteredAuthor = {
       ...filters,
@@ -27,7 +23,7 @@ const PerformerListFilter = () => {
       authors: [...filters.authors, author],
     }
     dispatch(setFilters(filteredAuthor))
-    console.log(filteredAuthor.authors)
+    setCountFilterAuthor(++countFilterAuthor)
   }
 
   const removeFilterAuthors = (author) => {
@@ -43,10 +39,12 @@ const PerformerListFilter = () => {
     }
 
     dispatch(setFilters(deletedAuthor))
-    console.log(deletedAuthor.authors)
+    //
+    setCountFilterAuthor(--countFilterAuthor)
 
     if (!deletedAuthor.authors.length) {
-      dispatch(setFilters({...filters, status: false, authors: ''}))
+      dispatch(setFilters({ ...filters, status: false, authors: '' }))
+      setCountFilterAuthor(0)
     }
   }
 
@@ -78,7 +76,7 @@ const PerformerListFilter = () => {
 const YearListFilter = () => {
   const dispatch = useDispatch()
   const filters = useSelector(filtersSelector)
-  
+
   const filterYears = (yearFilter) => {
     dispatch(setFilters({ ...filters, status: true, years: yearFilter }))
   }
@@ -86,21 +84,41 @@ const YearListFilter = () => {
   return (
     <S.FilterScroll>
       <S.FilterTextListUl>
-        <S.FilterText onClick={() => filterYears('По умолчанию')}>
-          По умолчанию
-        </S.FilterText>
-        <S.FilterText onClick={() => filterYears('Сначала новые')}>
-          Сначала новые
-        </S.FilterText>
-        <S.FilterText onClick={() => filterYears('Сначала старые')}>
-          Сначала старые
-        </S.FilterText>
+        {filters.years === 'По умолчанию' ? (
+          <S.FilterTextActive onClick={() => filterYears('По умолчанию')}>
+            По умолчанию
+          </S.FilterTextActive>
+        ) : (
+          <S.FilterText onClick={() => filterYears('По умолчанию')}>
+            По умолчанию
+          </S.FilterText>
+        )}
+
+        {filters.status && filters.years === 'Сначала новые' ? (
+          <S.FilterTextActive onClick={() => filterYears('Сначала новые')}>
+            Сначала новые
+          </S.FilterTextActive>
+        ) : (
+          <S.FilterText onClick={() => filterYears('Сначала новые')}>
+            Сначала новые
+          </S.FilterText>
+        )}
+
+        {filters.status && filters.years === 'Сначала старые' ? (
+          <S.FilterTextActive onClick={() => filterYears('Сначала старые')}>
+            Сначала старые
+          </S.FilterTextActive>
+        ) : (
+          <S.FilterText onClick={() => filterYears('Сначала старые')}>
+            Сначала старые
+          </S.FilterText>
+        )}
       </S.FilterTextListUl>
     </S.FilterScroll>
   )
 }
 
-const GenreListFilter = () => {
+const GenreListFilter = ({ countFilterGenre, setCountFilterGenre }) => {
   const { data: playlist } = useGetAllTracksQuery()
 
   const dispatch = useDispatch()
@@ -110,10 +128,6 @@ const GenreListFilter = () => {
   const genresSet = new Set(genre)
   const allGenres = Array.from(genresSet)
 
-  // const filterGenre = (genreFilter) => {
-  //   dispatch(setFilters({ ...filters, status: true, genre: genreFilter }))
-  // }
-
   const filterGenre = (genre) => {
     const filteredGenre = {
       ...filters,
@@ -121,6 +135,7 @@ const GenreListFilter = () => {
       genre: [...filters.genre, genre],
     }
     dispatch(setFilters(filteredGenre))
+    setCountFilterGenre(++countFilterGenre)
   }
 
   const removeFilterGenre = (genre) => {
@@ -136,9 +151,11 @@ const GenreListFilter = () => {
     }
 
     dispatch(setFilters(deletedGenre))
+    setCountFilterGenre(--countFilterGenre)
 
     if (!deletedGenre.genre.length) {
-      dispatch(setFilters({...filters, status: false, genre: ''}))
+      dispatch(setFilters({ ...filters, status: false, genre: '' }))
+      setCountFilterGenre(0)
     }
   }
 
@@ -172,15 +189,8 @@ export function CenterBlockFilter() {
   const [yearFilter, setYearFilter] = useState(false)
   const [genreFilter, setGenreFilter] = useState(false)
 
-  //
-  const filters = useSelector(filtersSelector)
-  const { data: playlist } = useGetAllTracksQuery()
-  const [authorsFilter, setAuthorsFilter] = useState('')
-
-  useEffect(() => {
-    setAuthorsFilter(playlist?.map((track) => track.author))
-  }, [playlist])
-  //
+  const [countFilterAuthor, setCountFilterAuthor] = useState(0)
+  const [countFilterGenre, setCountFilterGenre] = useState(0)
 
   const togglePerformerCategory = () => {
     setPerformerFilter((prev) => !prev)
@@ -203,6 +213,7 @@ export function CenterBlockFilter() {
   return (
     <S.CenterblockFilter className="filter">
       <S.FilterTitle>Искать по:</S.FilterTitle>
+
       <S.FilterBlock>
         <div className="filter__items">
           {performerFilter ? (
@@ -211,6 +222,9 @@ export function CenterBlockFilter() {
               onClick={togglePerformerCategory}
             >
               исполнителю
+              <S.CircleCount $isVisible={countFilterAuthor !== 0}>
+                {countFilterAuthor}
+              </S.CircleCount>
             </S.FilterButtonActive>
           ) : (
             <S.FilterButton
@@ -218,9 +232,15 @@ export function CenterBlockFilter() {
               onClick={togglePerformerCategory}
             >
               исполнителю
+              <S.CircleCount></S.CircleCount>
             </S.FilterButton>
           )}
-          {performerFilter ? <PerformerListFilter /> : null}
+          {performerFilter ? (
+            <PerformerListFilter
+              setCountFilterAuthor={setCountFilterAuthor}
+              countFilterAuthor={countFilterAuthor}
+            />
+          ) : null}
         </div>
 
         <div className="filter__items">
@@ -249,6 +269,9 @@ export function CenterBlockFilter() {
               onClick={toggleGenreCategory}
             >
               жанру
+              <S.CircleCount $isVisible={countFilterGenre !== 0}>
+                {countFilterGenre}
+              </S.CircleCount>
             </S.FilterButtonActive>
           ) : (
             <S.FilterButton
@@ -256,9 +279,15 @@ export function CenterBlockFilter() {
               onClick={toggleGenreCategory}
             >
               жанру
+              <S.CircleCount></S.CircleCount>
             </S.FilterButton>
           )}
-          {genreFilter ? <GenreListFilter /> : null}
+          {genreFilter ? (
+            <GenreListFilter
+              setCountFilterGenre={setCountFilterGenre}
+              countFilterGenre={countFilterGenre}
+            />
+          ) : null}
         </div>
       </S.FilterBlock>
     </S.CenterblockFilter>
