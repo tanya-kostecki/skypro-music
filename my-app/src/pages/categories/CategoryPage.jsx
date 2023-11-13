@@ -7,7 +7,7 @@ import { PLAYLISTS } from '../../sidebar-constants'
 import { useContext, useEffect } from 'react'
 import { userContext } from '../../context/userContext'
 import { useDispatch } from 'react-redux'
-import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
+import { selectIsPlaying, currentTrackSelector } from '../../store/selectors/selectors'
 import {
   useGetSelectionByIdQuery,
   useGetSelectionsQuery,
@@ -39,7 +39,7 @@ export const CategoryPage = ({ isLoading, error }) => {
   } else {
     useEffect(() => {
       setToken(false)
-      dispatch(selectCurrentTrack({}))
+      dispatch(currentTrackSelector({}))
       dispatch(selectIsPlaying(false))
     }, [])
   }

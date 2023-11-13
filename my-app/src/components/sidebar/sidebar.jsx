@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { userContext } from '../../context/userContext'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCurrentTrack, selectIsPlaying } from '../../store/actions/creators/currentTrack'
+import { setCurrentTrack, setIsPlaying } from '../../store/slices/trackSlice'
 import { useGetAllTracksQuery } from '../../services/playlists'
 import { selectIsLoading } from '../../store/selectors/selectors'
 
@@ -43,12 +43,13 @@ export function Sidebar() {
   const handleLogoutBtn = () => {
     localStorage.clear()
     setToken(false)
-    dispatch(selectCurrentTrack({}))
-    dispatch(selectIsPlaying(false))
+    dispatch(setCurrentTrack({}))
+    dispatch(setIsPlaying(false))
     navigate('/login')
   }
 
   const userData = JSON.parse(localStorage.getItem('token'))
+  console.log(userData)
   const userName = userData.username
 
   return (

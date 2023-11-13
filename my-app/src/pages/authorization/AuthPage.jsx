@@ -30,6 +30,7 @@ export function AuthPage({ isLoginMode = false }) { //setToken
         const userInfo = await loginApi({ email, password })
         userInfo.token = await getAccessToken({ email, password })
         localStorage.setItem('token', JSON.stringify(userInfo))
+        console.log(userInfo)
         setToken(userInfo)
         navigate('/')
       } catch (error) {
@@ -63,8 +64,9 @@ export function AuthPage({ isLoginMode = false }) { //setToken
       try {
         setIsAuthProcess(true)
         const userInfo = await registrationApi({ email, password, username})
-        localStorage.setItem('token', userInfo.username)
-        setToken(userInfo.username)
+        console.log(userInfo)
+        localStorage.setItem('token', JSON.stringify(userInfo))
+        setToken(userInfo)
         navigate('/')
       } catch (error) {
         setError(error.message)

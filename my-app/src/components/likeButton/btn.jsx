@@ -3,7 +3,6 @@ import { userContext } from '../../context/userContext'
 import {
   useAddFavouriteTracksMutation,
   useDeleteFavouriteTracksMutation,
-  useGetFavouriteTracksQuery,
 } from '../../services/playlists'
 import { useNavigate } from 'react-router-dom'
 import { TrackTimeSvg } from '../playlist/playlist.styles'
@@ -15,7 +14,7 @@ export const Btn = ({ track }) => {
   const { token, setToken } = useContext(userContext)
   const [addFavouriteTrack] = useAddFavouriteTracksMutation()
   const [deleteFavouriteTrack] = useDeleteFavouriteTracksMutation()
-
+  
   const userId = JSON.parse(localStorage.getItem('token')).id
   const isLike = Boolean(
     track.stared_user ? track.stared_user.find(({ id }) => id === userId) : [],
@@ -23,7 +22,7 @@ export const Btn = ({ track }) => {
 
   useEffect(() => {
     setIsLiked(isLike)
-  }, [isLike, track])
+  }, [isLike])
 
   const addLike = async (id) => {
     await addFavouriteTrack(id)
@@ -54,27 +53,6 @@ export const Btn = ({ track }) => {
       deleteLike(id)
     }
   }
-
-  // useEffect(() => {
-  //   const currentUser = JSON.parse(localStorage.getItem('token'))
-  //   if (!track.stared_user) {
-  //     setIsLiked(true)
-  //     return
-  //   }
-
-  //   if (track?.stared_user?.find((user) => user.id === currentUser.id)) {
-  //     setIsLiked(true)
-  //   }
-  // }, [track])
-
-  // const userId = JSON.parse(localStorage.getItem('token')).id
-  // const isLike = Boolean(
-  //   track.stared_user ? track.stared_user.find(({ id }) => id === userId) : [],
-  // )
-
-  // useEffect(() => {
-  //   setIsLiked(isLike)
-  // }, [isLike])
 
   return (
     <TrackTimeSvg alt="time" onClick={() => toggleLikeDislike(track.id)}>
