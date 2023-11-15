@@ -16,13 +16,13 @@ export const Btn = ({ track }) => {
   const [deleteFavouriteTrack] = useDeleteFavouriteTracksMutation()
   
   const userId = JSON.parse(localStorage.getItem('token')).id
-  const isLike = Boolean(
-    track.stared_user ? track.stared_user.find(({ id }) => id === userId) : [],
-  )
 
   useEffect(() => {
+    const isLike = Boolean(
+      track.stared_user ? track.stared_user.find(({ id }) => id === userId) : [],
+    )
     setIsLiked(isLike)
-  }, [isLike])
+  }, [track])
 
   const addLike = async (id) => {
     await addFavouriteTrack(id)

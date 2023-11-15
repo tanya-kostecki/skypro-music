@@ -20,6 +20,10 @@ import { userContext } from '../../context/userContext'
 
 export function Bar({ isLoading }) {
   const track = useSelector(currentTrackSelector)
+
+  useEffect(() => {
+    console.log('==', track)
+  }, [track])
   const isPlaying = useSelector(selectIsPlaying)
   const dispatch = useDispatch(setIsPlaying)
 
