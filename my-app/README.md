@@ -21,6 +21,10 @@
 3. Redux Асинхронность (Запланированное время - 10 часов)
 Затраченное время: около 30 часов
 
+4. Курсовая работа:
+(Запланированное время - 10 часов)
+Затраченное время: около 60 часов
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
