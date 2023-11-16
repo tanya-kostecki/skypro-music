@@ -23,7 +23,6 @@ export const Main = () => {
   useEffect(() => {
     if (!currentPlaylist) return
     const track = currentPlaylist?.find((track) => track.id === currentTrack.id)
-    console.log('current', track)
     track && dispatch(setCurrentTrack(track))
   }, [currentPlaylist])
 

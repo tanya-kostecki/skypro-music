@@ -24,7 +24,8 @@ export const Btn = ({ track }) => {
     setIsLiked(isLike)
   }, [track])
 
-  const addLike = async (id) => {
+  const addLike = async (id, e) => {
+    e.stopPropagation()
     await addFavouriteTrack(id)
       .unwrap()
       .catch((error) => {
@@ -35,7 +36,8 @@ export const Btn = ({ track }) => {
     setIsLiked(true)
   }
 
-  const deleteLike = async (id) => {
+  const deleteLike = async (id, e) => {
+    e.stopPropagation()
     await deleteFavouriteTrack(id)
       .unwrap()
       .catch((error) => {
@@ -46,16 +48,16 @@ export const Btn = ({ track }) => {
     setIsLiked(false)
   }
 
-  const toggleLikeDislike = (id) => {
+  const toggleLikeDislike = (id, e) => {
     if (!isLiked) {
-      addLike(id)
+      addLike(id, e)
     } else {
-      deleteLike(id)
+      deleteLike(id, e)
     }
   }
 
   return (
-    <TrackTimeSvg alt="time" onClick={() => toggleLikeDislike(track.id)}>
+    <TrackTimeSvg alt="time" onClick={(e) => toggleLikeDislike(track.id, e)}>
       {isLiked ? (
         <svg
           width="16"

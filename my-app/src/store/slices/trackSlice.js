@@ -39,7 +39,6 @@ export const trackSlice = createSlice({
     setActivePlaylist : (state, action) => {
       state.activePlaylist = action.payload
     },
-    //
     setFilters: (state, action) => {
       state.filters = action.payload
     },

@@ -49,7 +49,6 @@ export function Sidebar() {
   }
 
   const userData = JSON.parse(localStorage.getItem('token'))
-  console.log(userData)
   const userName = userData.username
 
   return (
