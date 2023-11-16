@@ -64,6 +64,7 @@ export function AuthPage({ isLoginMode = false }) { //setToken
       try {
         setIsAuthProcess(true)
         const userInfo = await registrationApi({ email, password, username})
+        userInfo.token = await getAccessToken({ email, password })
         console.log(userInfo)
         localStorage.setItem('token', JSON.stringify(userInfo))
         setToken(userInfo)
