@@ -6,13 +6,13 @@ import { useParams } from 'react-router-dom'
 import { PLAYLISTS } from '../../sidebar-constants'
 import { useContext, useEffect } from 'react'
 import { userContext } from '../../context/userContext'
-import { useDispatch } from 'react-redux'
-import { selectIsPlaying, currentTrackSelector } from '../../store/selectors/selectors'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectIsPlaying, currentTrackSelector, currentPlaylistSelector } from '../../store/selectors/selectors'
 import {
   useGetSelectionByIdQuery,
   useGetSelectionsQuery,
 } from '../../services/playlists'
-import { setCurrentPlaylist, setIsLoading } from '../../store/slices/trackSlice'
+import { setCurrentPlaylist, setIsLoading, setCurrentTrack } from '../../store/slices/trackSlice'
 
 export const CategoryPage = ({ isLoading, error }) => {
   const params = useParams()
@@ -20,6 +20,16 @@ export const CategoryPage = ({ isLoading, error }) => {
   const dispatch = useDispatch()
 
   const { data: currentCategory } = useGetSelectionByIdQuery(Number(params.id))
+
+  const currentTrack = useSelector(currentTrackSelector)
+
+  const currentPlaylist = useSelector(currentPlaylistSelector)
+
+  useEffect(() => {
+    if (!currentPlaylist) return
+    const track = currentPlaylist?.find((track) => track.id === currentTrack.id)
+    track && dispatch(setCurrentTrack(track))
+  }, [currentPlaylist])
 
   useEffect(() => {
     dispatch(setCurrentPlaylist(currentCategory?.items))

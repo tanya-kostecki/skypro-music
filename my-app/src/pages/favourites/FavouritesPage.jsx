@@ -12,6 +12,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetFavouriteTracksQuery } from '../../services/playlists'
 import { useNavigate } from 'react-router-dom'
+import { currentPlaylistSelector, currentTrackSelector } from '../../store/selectors/selectors'
 
 export const FavouritesPage = ({ isLoading }) => {
   const { token, setToken } = useContext(userContext)
@@ -28,12 +29,20 @@ export const FavouritesPage = ({ isLoading }) => {
     }
   }, [error])
 
+  const currentTrack = useSelector(currentTrackSelector)
+
+  const currentPlaylist = useSelector(currentPlaylistSelector)
+
+  useEffect(() => {
+    if (!currentPlaylist) return
+    const track = currentPlaylist?.find((track) => track.id === currentTrack.id)
+    track && dispatch(setCurrentTrack(track))
+  }, [currentPlaylist])
+
   useEffect(() => {
     dispatch(setCurrentPlaylist(data))
     dispatch(setIsLoading(false))
   }, [data])
-
-
 
   if (localStorage.getItem('token', token)) {
     return (
