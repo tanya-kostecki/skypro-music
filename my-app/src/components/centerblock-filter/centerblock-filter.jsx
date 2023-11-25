@@ -39,7 +39,7 @@ const PerformerListFilter = ({ countFilterAuthor, setCountFilterAuthor }) => {
     }
 
     dispatch(setFilters(deletedAuthor))
-    //
+
     setCountFilterAuthor(--countFilterAuthor)
 
     if (!deletedAuthor.authors.length) {

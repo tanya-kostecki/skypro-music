@@ -19,7 +19,7 @@ export const Btn = ({ track }) => {
 
   useEffect(() => {
     const isLike = Boolean(
-      track.stared_user ? track.stared_user.find(({ id }) => id === userId) : [],
+      track && track.stared_user ? track.stared_user.find(({ id }) => id === userId) : [],
     )
     setIsLiked(isLike)
   }, [track])

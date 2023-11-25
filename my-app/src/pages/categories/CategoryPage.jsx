@@ -14,12 +14,12 @@ import {
 } from '../../services/playlists'
 import { setCurrentPlaylist, setIsLoading, setCurrentTrack } from '../../store/slices/trackSlice'
 
-export const CategoryPage = ({ isLoading, error }) => {
+export const CategoryPage = ({ isLoading }) => {
   const params = useParams()
   const { token, setToken } = useContext(userContext)
   const dispatch = useDispatch()
 
-  const { data: currentCategory } = useGetSelectionByIdQuery(Number(params.id))
+  const { data: currentCategory, error } = useGetSelectionByIdQuery(Number(params.id))
 
   const currentTrack = useSelector(currentTrackSelector)
 
@@ -42,7 +42,12 @@ export const CategoryPage = ({ isLoading, error }) => {
         <S.CenterblockH2>{currentCategory?.name}</S.CenterblockH2>
         <S.CenterblockContent>
           <ContentTitlePlaylist isLoading={isLoading} />
-          <Playlist tracks={currentCategory?.items} />
+          {error ? (
+            <p>Не удалось заргузить плейлист: {error.error}</p>
+          ) : (
+            <Playlist tracks={currentCategory?.items} />
+          )}
+          {/* <Playlist tracks={currentCategory?.items} /> */}
         </S.CenterblockContent>
       </div>
     )

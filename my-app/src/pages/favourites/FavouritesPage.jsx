@@ -10,9 +10,13 @@ import {
   setIsLoading,
 } from '../../store/slices/trackSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGetFavouriteTracksQuery } from '../../services/playlists'
+import { useGetAllTracksQuery, useGetFavouriteTracksQuery } from '../../services/playlists'
 import { useNavigate } from 'react-router-dom'
-import { currentPlaylistSelector, currentTrackSelector } from '../../store/selectors/selectors'
+import {
+  activePlaylistSelector,
+  currentPlaylistSelector,
+  currentTrackSelector,
+} from '../../store/selectors/selectors'
 
 export const FavouritesPage = ({ isLoading }) => {
   const { token, setToken } = useContext(userContext)
@@ -31,13 +35,14 @@ export const FavouritesPage = ({ isLoading }) => {
 
   const currentTrack = useSelector(currentTrackSelector)
 
-  const currentPlaylist = useSelector(currentPlaylistSelector)
+  const { data: allTracks } = useGetAllTracksQuery()
 
   useEffect(() => {
-    if (!currentPlaylist) return
-    const track = currentPlaylist?.find((track) => track.id === currentTrack.id)
+    if(!allTracks) return
+    const track = allTracks?.find((track) => track.id === currentTrack.id)
     track && dispatch(setCurrentTrack(track))
-  }, [currentPlaylist])
+    console.log('track', track)
+  }, [allTracks])
 
   useEffect(() => {
     dispatch(setCurrentPlaylist(data))
