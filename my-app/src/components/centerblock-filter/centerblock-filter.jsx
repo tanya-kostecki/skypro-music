@@ -43,7 +43,7 @@ const PerformerListFilter = ({ countFilterAuthor, setCountFilterAuthor }) => {
     setCountFilterAuthor(--countFilterAuthor)
 
     if (!deletedAuthor.authors.length) {
-      dispatch(setFilters({ ...filters, status: false, authors: '' }))
+      dispatch(setFilters({ ...filters, authors: '' }))
       setCountFilterAuthor(0)
     }
   }
@@ -154,7 +154,7 @@ const GenreListFilter = ({ countFilterGenre, setCountFilterGenre }) => {
     setCountFilterGenre(--countFilterGenre)
 
     if (!deletedGenre.genre.length) {
-      dispatch(setFilters({ ...filters, status: false, genre: '' }))
+      dispatch(setFilters({ ...filters, genre: '' }))
       setCountFilterGenre(0)
     }
   }
