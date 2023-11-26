@@ -41,7 +41,6 @@ export const FavouritesPage = ({ isLoading }) => {
     if(!allTracks) return
     const track = allTracks?.find((track) => track.id === currentTrack.id)
     track && dispatch(setCurrentTrack(track))
-    console.log('track', track)
   }, [allTracks])
 
   useEffect(() => {
